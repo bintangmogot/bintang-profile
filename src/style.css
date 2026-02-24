@@ -1,0 +1,60 @@
+@import "tailwindcss";
+@import "daisyui";
+/* images dummy */
+ /* https://yavuzceliker.github.io/sample-images/image-n.jpg */
+
+@theme {
+  --color-primary: #0EA5E9; /* Sky 500 - Matches the light blue accent */
+  /* --color-dark-bg: #0B1121; Very dark navy */
+  --color-dark-bg: #222831; /* Very dark navy */
+  --color-card-bg: #1E293B; /* Slate 800 */
+}
+
+:root {
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
+  color: rgba(255, 255, 255, 0.9);
+  background-color: var(--color-dark-bg);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--color-dark-bg);
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 100% 0%, rgba(14, 165, 233, 0.1) 0%, transparent 30%);
+}
+
+#app {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-dark-bg); 
+}
+::-webkit-scrollbar-thumb {
+  background: #334155; 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #475569; 
+}
