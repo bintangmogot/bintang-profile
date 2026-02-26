@@ -1,45 +1,33 @@
 <template>
-    <section id="scrollytelling" class="bg-base-100 py-12 md:py-24">
-        <div class="flex flex-col lg:flex-row items-start max-w-7xl mx-auto relative gap-12 lg:gap-16 px-6">
-            
-            <!-- SISI KIRI: Sticky Container -->
-            <div class="w-full lg:w-1/2 sticky top-20 lg:top-24 h-[40vh] lg:h-[85vh] flex flex-col justify-start py-6 z-20">
-                
-                <!-- 1. Teks Statis (Tetap Sama) -->
-                <div class="flex flex-row items-start">
-                    <div class="flex flex-col items-start">
-                        <h1 class="text-6xl font-extrabold text-white tracking-tight">Bintang S.</h1>
-                        <h2 class="text-2xl font-semibold text-slate-200 mt-3">Frontend Developer</h2>
-                        <p class="text-slate-400 mt-6 max-w-sm leading-relaxed">
-                            Saya membangun pengalaman digital yang fokus pada keindahan visual dan performa yang optimal.
-                        </p>
-                    </div>
+    <section id="scrollytelling" class="bg-dark-bg py-20 md:px-8 relative">
+        <!-- HEADING MOBILE (< md) -->
+        <div class="md:hidden px-6 mb-8">
+            <h2 class="text-4xl font-extrabold text-white tracking-tight leading-none">Featured</h2>
+            <h3 class="text-xl font-semibold text-primary mt-2">Projects & Experience</h3>
+        </div>
 
-                    <!-- 2. Navbar Interaktif -->
-                    <nav class="mt-2 space-y-1">
+        <div class="flex flex-col md:flex-row items-start max-w-7xl mx-auto relative md:gap-8 lg:gap-12">
+            <!-- SISI KIRI (Sticky): MD ke atas -->
+            <div class="hidden md:flex w-full md:w-1/2 sticky top-16 h-[80vh] flex-col justify-start py-6 z-20 px-6 md:px-0">
+                <div class="flex flex-col">
+                    <h2 class="text-5xl lg:text-7xl font-extrabold text-white tracking-tight leading-none">Featured</h2>
+                    <h3 class="text-xl lg:text-2xl font-semibold text-primary mt-3">Projects & Experience</h3>
+                    
+                    <!-- Line Nav -->
+                    <nav class="mt-4 space-y-1">
                         <button 
                             v-for="(step, index) in steps" 
                             :key="index"
                             @click="scrollToStep(index)"
                             class="group flex items-center py-2 outline-none cursor-pointer"
                         >
-                            <!-- Garis Animasi -->
                             <span 
                                 class="mr-4 h-px transition-all duration-300"
-                                :class="[
-                                    activeIndex === index 
-                                    ? 'w-16 bg-slate-200' // Aktif
-                                    : 'w-8 bg-slate-600 group-hover:w-16 group-hover:bg-slate-200' // Non-aktif & Hover
-                                ]"
+                                :class="activeIndex === index ? 'w-16 bg-white' : 'w-8 bg-slate-600 group-hover:w-16 group-hover:bg-slate-200'"
                             ></span>
-                            <!-- Teks Menu -->
                             <span 
                                 class="text-xs font-bold uppercase tracking-widest transition-colors duration-300"
-                                :class="[
-                                    activeIndex === index 
-                                    ? 'text-primary' // Aktif
-                                    : 'text-slate-500 group-hover:text-slate-200' // Non-aktif & Hover
-                                ]"
+                                :class="activeIndex === index ? 'text-primary' : 'text-slate-500 group-hover:text-slate-200'"
                             >
                                 {{ step.navTitle }}
                             </span>
@@ -47,60 +35,75 @@
                     </nav>
                 </div>
 
-                <!-- 3. Media Dinamis (Di bawah Navbar) -->
-                <div class="h-full max-h-[800px] w-full mt-5 overflow-hidden rounded-2xl bg-slate-900 shadow-2xl relative">
+                <!-- Sticky Media Container (5:4 Ratio) -->
+                <div class="aspect-5/4 w-full overflow-hidden rounded-4xl bg-slate-900 shadow-2xl relative group/media border border-white/5 mt-9">
                     <transition name="fade" mode="out-in">
                         <div :key="activeIndex" class="w-full h-full">
                             <video 
                                 v-if="steps[activeIndex].type === 'video'"
                                 :src="steps[activeIndex].media" 
                                 autoplay muted loop 
-                                class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-100">
+                                class="w-full h-full object-cover grayscale group-hover/media:grayscale-0 transition-all duration-500">
                             </video>
                             <img 
                                 v-else 
                                 :src="steps[activeIndex].media" 
-                                class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-100" 
-                                alt="Step preview"
+                                class="w-full h-full object-cover grayscale group-hover/media:grayscale-0 transition-all duration-500" 
+                                alt="Project Preview"
                             />
                         </div>
                     </transition>
-                    <!-- Overlay Tipis -->
                     <div class="absolute inset-0 bg-primary/10 pointer-events-none"></div>
                 </div>
             </div>
 
             <!-- SISI KANAN: Scrollable Content -->
-            <div class="w-full lg:w-1/2">
+            <!-- Mobile (<md): Horizontal Scroll | Tablet/Desktop (>=md): Vertical Stack -->
+            <div class="w-full md:w-1/2 flex md:block items-stretch overflow-x-auto md:overflow-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory md:snap-none px-6 md:px-0 gap-6">
                 <div 
                     v-for="(step, index) in steps" 
                     :key="index"
                     :id="'step-' + index"
                     :data-index="index"
-                    class="step-item min-h-[40vh] md:min-h-[50vh] flex flex-col justify-center pt-[80px] lg:pt-[200px] pb-10"
+                    class="step-item flex-none w-[85vw] sm:w-[70vw] md:w-full snap-center md:snap-align-none min-h-[40vh] md:min-h-screen flex flex-col justify-center py-6 md:pt-[200px] md:pb-[30vh]"
                 >
-                    <!-- CARD DENGAN GLASSMORPHISM -->
-                    <a 
-                        :href="step.link" 
-                        target="_blank"
-                        class="group/card relative block p-8 rounded-2xl transition-all duration-100 cursor-pointer 
-                               hover:bg-white/3 hover:backdrop-blur-md hover:shadow-2xl hover:ring-1 hover:ring-white/10"
-                >
+                    <!-- CARD PROJECT -->
+                    <div 
+                        @click="openModal(step)"
+                        class="group/card relative flex flex-col p-8 rounded-4xl transition-all duration-200 cursor-pointer 
+                               bg-white/3 border border-white/5 hover:border-primary/40 
+                               hover:bg-white/5 hover:backdrop-blur-md hover:shadow-2xl overflow-hidden h-full min-h-[580px] md:min-h-[400px]"
+                    >
+                        <!-- Mobile Media (Muncul hanya jika di bawah md) -->
+                        <div class="md:hidden aspect-5/4 w-full rounded-2xl overflow-hidden mb-6 border border-white/10 shadow-lg">
+                             <img :src="step.media" class="w-full h-full object-cover" :alt="step.title" />
+                        </div>
+
                         <div class="space-y-4">
-                            <!-- Judul Proyek dengan Panah -->
-                            <div class="flex items-center gap-2 group-hover/card:text-primary transition-colors">
-                                <h3 class="text-3xl font-bold text-white group-hover/card:text-primary transition-colors tracking-tight">{{ step.title }}</h3>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 transition-transform group-hover/card:-translate-y-1 group-hover/card:translate-x-1">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
-                                </svg>
+                            <div class="flex items-center justify-between">
+                                <div class="p-2.5 rounded-xl bg-primary/10 text-primary">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                                </div>
+                                <div class="flex items-center gap-4 text-slate-400">
+                                    <a v-if="step.githubLink" :href="step.githubLink" @click.stop target="_blank" class="hover:text-white transition-colors">
+                                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/></svg>
+                                    </a>
+                                    <a v-if="step.liveLink" :href="step.liveLink" @click.stop target="_blank" class="hover:text-white transition-colors">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                    </a>
+                                </div>
                             </div>
 
-                            <p class="text-slate-400 leading-relaxed text-lg">
-                            {{ step.description }}
-                        </p>
+                            <div class="pt-2">
+                                <h3 class="text-xs font-bold text-primary uppercase tracking-[0.2em] mb-2">{{ step.navTitle }}</h3>
+                                <h3 class="text-3xl font-bold text-white group-hover/card:text-primary transition-colors tracking-tight">{{ step.title }}</h3>
+                            </div>
+
+                            <p class="text-slate-400 leading-relaxed text-lg line-clamp-2 group-hover/card:text-white transition-colors">
+                                {{ step.description }}
+                            </p>
                         
-                            <!-- Tags Stack / Teknologi -->
-                            <div class="flex flex-wrap gap-2 mt-6">
+                            <div class="flex flex-wrap gap-3 mt-4">
                                 <span 
                                     v-for="tech in step.techStack" 
                                     :key="tech"
@@ -109,22 +112,68 @@
                                     {{ tech }}
                                 </span>
                             </div>
-
-                            <!-- Detail Tambahan (Fitur) -->
-                            <ul class="grid grid-cols-1 gap-2 mt-4">
-                                <li v-for="(feat, fIndex) in step.features" :key="fIndex" class="flex items-center gap-3 text-sm text-slate-500 group-hover/card:text-slate-400 transition-colors">
-                                    <div class="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover/card:bg-primary/50 transition-colors"></div>
-                                    <span>{{ feat }}</span>
-                            </li>
-                        </ul>
+                        </div>
                     </div>
-                    </a>
                 </div>
-                <!-- Spacer Bawah -->
-                <div class="h-[20vh]"></div>
             </div>
-
         </div>
+
+        <!-- MODAL DETAIL -->
+        <transition name="modal-fade">
+            <div v-if="isModalOpen" class="fixed inset-0 z-100 flex items-center justify-center p-4 md:p-8">
+                <div @click="closeModal" class="absolute inset-0 bg-dark-bg/95 backdrop-blur-2xl"></div>
+                
+                <div class="bg-slate-900 border border-white/10 rounded-4xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative z-10 shadow-2xl custom-scrollbar transition-all duration-500">
+                    <button @click="closeModal" class="fixed md:absolute top-6 right-6 p-3 rounded-full bg-white/5 hover:bg-white/10 text-white z-20 outline-none backdrop-blur-md">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+
+                    <div class="flex flex-col md:flex-row">
+                        <!-- Left: Media -->
+                        <div class="md:w-1/2 p-6 md:p-10">
+                            <div class="aspect-5/4 rounded-2xl overflow-hidden border border-white/5 shadow-2xl">
+                                <img :src="selectedProject.media" class="w-full h-full object-cover" :alt="selectedProject.title">
+                            </div>
+                        </div>
+
+                        <!-- Right: Details -->
+                        <div class="md:w-1/2 p-6 md:p-10 md:pl-0 flex flex-col justify-center">
+                            <h3 class="text-xs font-bold text-primary uppercase tracking-[0.2em] mb-2">{{ selectedProject.navTitle }}</h3>
+                            <h2 class="text-4xl font-extrabold text-white mb-6 leading-tight">{{ selectedProject.title }}</h2>
+                            
+                            <p class="text-slate-300 text-lg leading-relaxed mb-8">
+                                {{ selectedProject.longDescription }}
+                            </p>
+
+                            <div class="mb-8">
+                                <h4 class="text-white font-bold mb-4">Key Features</h4>
+                                <ul class="grid grid-cols-1 gap-3">
+                                    <li v-for="(feat, i) in selectedProject.features" :key="i" class="flex items-center gap-3 text-slate-400">
+                                        <div class="w-1.5 h-1.5 rounded-full bg-primary/50"></div>
+                                        <span>{{ feat }}</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="flex flex-wrap gap-4 mt-auto">
+                                <a v-if="selectedProject.liveLink" :href="selectedProject.liveLink" target="_blank" class="px-8 py-4 bg-primary text-slate-900 font-bold rounded-xl hover:scale-105 transition-transform flex items-center gap-2 text-sm uppercase tracking-wider">
+                                    Live Demo
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                </a>
+                                <a v-if="selectedProject.githubLink" :href="selectedProject.githubLink" target="_blank" class="px-8 py-4 bg-white/5 text-white font-bold border border-white/10 rounded-xl hover:bg-white/10 transition-colors flex items-center gap-2 text-sm uppercase tracking-wider">
+                                    GitHub
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </transition>
+        <a href="/projects" target="_blank" class="px-8 py-4 mt-8 mx-6 md:mx-0 bg-primary text-slate-900 font-bold rounded-xl hover:scale-105 transition-transform flex self-center items-center justify-center gap-2 text-sm uppercase tracking-wider">
+            More Projects
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+        </a>
     </section>
 </template>
 
@@ -135,65 +184,82 @@ const steps = [
     {
         navTitle: "Discovery",
         title: "Deep UX Analysis",
-        description: "Menganalisis kebutuhan pengguna secara mendalam untuk menciptakan fondasi produk yang solid dan berpusat pada solusi nyata.",
+        description: "Menganalisis kebutuhan pengguna secara mendalam untuk menciptakan fondasi produk yang solid.",
+        longDescription: "Analisis mendalam melalui riset pasar dan kebutuhan pengguna untuk memastikan produk memiliki fondasi yang kuat, strategis, dan tepat sasaran.",
         media: "https://yavuzceliker.github.io/sample-images/image-66.jpg",
         type: "image",
-        link: "https://github.com",
+        githubLink: "https://github.com",
+        liveLink: "https://demo.example.com",
         techStack: ["Figma", "User Research", "Miro"],
-        features: ["Stakeholder Interview", "Competitor Audit"]
+        features: ["Market Audit", "User Persona", "Journey Mapping"]
     },
     {
         navTitle: "Strategy",
         title: "Modern Interactive UI",
-        description: "Merancang antarmuka yang tidak hanya indah secara visual, tetapi juga memberikan pengalaman interaksi yang mulus dan cepat.",
-        media: "src/assets/videos/pizza.webm",
-        type: "video",
-        link: "https://github.com",
+        description: "Merancang antarmuka yang tidak hanya indah secara visual, tetapi juga memberikan interaksi yang mulus.",
+        longDescription: "Desain sistem yang fokus pada estetika minimalis dan kegunaan maksimal, dioptimalkan untuk berbagai perangkat dengan transisi yang halus.",
+        media: "https://yavuzceliker.github.io/sample-images/image-5.jpg",
+        type: "image",
+        githubLink: "https://github.com",
+        liveLink: "https://demo.example.com",
         techStack: ["Vue 3", "Tailwind CSS", "GSAP"],
-        features: ["Responsive Design", "Motion Graphics"]
+        features: ["Responsive Design", "Motion Graphics", "Accessibility"]
     },
     {
         navTitle: "Execution",
         title: "Scalable Frontend",
-        description: "Mengimplementasikan desain ke dalam kode yang bersih, efisien, dan siap hadapi traffic tinggi dengan performa maksimal.",
+        description: "Mengimplementasikan desain ke dalam kode yang bersih, efisien, dan siap hadapi traffic tinggi.",
+        longDescription: "Pengembangan sistem frontend dengan arsitektur yang modular (scalable), performa super cepat, dan optimasi SEO menyeluruh.",
         media: "https://yavuzceliker.github.io/sample-images/image-3.jpg",
         type: "image",
-        link: "https://github.com",
+        githubLink: "https://github.com",
+        liveLink: "https://demo.example.com",
         techStack: ["React", "TypeScript", "Next.js"],
-        features: ["Clean Code Standards", "Speed Optimization"]
+        features: ["Clean Architecture", "Speed Optimization", "Unit Testing"]
     }
 ];
 
 const activeIndex = ref(0);
 let observer = null;
+const isModalOpen = ref(false);
+const selectedProject = ref(null);
 
-// Fungsi untuk scroll otomatis saat menu diklik
+const openModal = (project) => {
+    selectedProject.value = project;
+    isModalOpen.value = true;
+    document.body.style.overflow = 'hidden';
+};
+
+const closeModal = () => {
+    isModalOpen.value = false;
+    document.body.style.overflow = 'auto';
+};
+
 const scrollToStep = (index) => {
     const el = document.getElementById('step-' + index);
     if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const offset = window.innerWidth < 768 ? 120 : 100;
+        const top = el.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
     }
 };
 
 onMounted(() => {
     const options = {
         root: null,
-        threshold: 0.6, // 50% elemen terlihat akan memicu perubahan
-        rootMargin: "-20% 0px -20% 0px", 
-        snapType: "y"
+        threshold: 0.5,
+        rootMargin: "-10% 0px -10% 0px"
     };
 
     observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                const index = parseInt(entry.target.getAttribute('data-index'));
-                activeIndex.value = index;
+                activeIndex.value = parseInt(entry.target.getAttribute('data-index'));
             }
         });
     }, options);
 
-    const items = document.querySelectorAll('.step-item');
-    items.forEach((item) => observer.observe(item));
+    document.querySelectorAll('.step-item').forEach((item) => observer.observe(item));
 });
 
 onUnmounted(() => {
@@ -202,21 +268,15 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
+.fade-enter-active, .fade-leave-active { transition: all 0.5s ease; }
+.fade-enter-from { opacity: 0; transform: scale(1.05); }
+.fade-leave-to { opacity: 0; transform: scale(0.95); }
 
-.fade-enter-from {
-  opacity: 0;
-  transform: translateY(50px);
-}
+.modal-fade-enter-active, .modal-fade-leave-active { transition: all 0.4s ease-out; }
+.modal-fade-enter-from, .modal-fade-leave-to { opacity: 0; }
+.modal-fade-enter-from .bg-slate-900 { transform: scale(0.9) translateY(20px); }
 
-.fade-leave-to {
-  opacity: 0;
-  transform: translateY(-50px);
-}
-
-/* Scroll Snap (Opsional untuk pengalaman yang lebih 'smooth') */
-.step-item { scroll-snap-align: center; }
+.custom-scrollbar::-webkit-scrollbar { width: 6px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
 </style>
