@@ -1,9 +1,9 @@
 <template>
-    <section id="scrollytelling" class="bg-base-100 py-24">
-        <div class="flex items-start max-w-7xl mx-auto relative gap-16 px-6">
+    <section id="scrollytelling" class="bg-base-100 py-12 md:py-24">
+        <div class="flex flex-col lg:flex-row items-start max-w-7xl mx-auto relative gap-12 lg:gap-16 px-6">
             
             <!-- SISI KIRI: Sticky Container -->
-            <div class="w-1/2 sticky top-24 h-[85vh] flex flex-col justify-between py-6">
+            <div class="w-full lg:w-1/2 sticky top-20 lg:top-24 h-[40vh] lg:h-[85vh] flex flex-col justify-start py-6 z-20">
                 
                 <!-- 1. Teks Statis (Tetap Sama) -->
                 <div class="flex flex-row items-start">
@@ -48,7 +48,7 @@
                 </div>
 
                 <!-- 3. Media Dinamis (Di bawah Navbar) -->
-                <div class="h-full w-full mt-5 overflow-hidden rounded-2xl bg-slate-900 shadow-2xl relative">
+                <div class="h-full max-h-[800px] w-full mt-5 overflow-hidden rounded-2xl bg-slate-900 shadow-2xl relative">
                     <transition name="fade" mode="out-in">
                         <div :key="activeIndex" class="w-full h-full">
                             <video 
@@ -71,25 +71,25 @@
             </div>
 
             <!-- SISI KANAN: Scrollable Content -->
-            <div class="w-1/2">
+            <div class="w-full lg:w-1/2">
                 <div 
                     v-for="(step, index) in steps" 
                     :key="index"
                     :id="'step-' + index"
                     :data-index="index"
-                    class="step-item min-h-[80vh] flex flex-col justify-center py-10"
+                    class="step-item min-h-[40vh] md:min-h-[50vh] flex flex-col justify-center pt-[80px] lg:pt-[200px] pb-10"
                 >
                     <!-- CARD DENGAN GLASSMORPHISM -->
                     <a 
                         :href="step.link" 
                         target="_blank"
                         class="group/card relative block p-8 rounded-2xl transition-all duration-100 cursor-pointer 
-                               hover:bg-white/[0.03] hover:backdrop-blur-md hover:shadow-2xl hover:ring-1 hover:ring-white/10"
+                               hover:bg-white/3 hover:backdrop-blur-md hover:shadow-2xl hover:ring-1 hover:ring-white/10"
                 >
                         <div class="space-y-4">
                             <!-- Judul Proyek dengan Panah -->
                             <div class="flex items-center gap-2 group-hover/card:text-primary transition-colors">
-                                <h3 class="text-3xl font-bold text-white tracking-tight">{{ step.title }}</h3>
+                                <h3 class="text-3xl font-bold text-white group-hover/card:text-primary transition-colors tracking-tight">{{ step.title }}</h3>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 transition-transform group-hover/card:-translate-y-1 group-hover/card:translate-x-1">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
                                 </svg>
@@ -179,7 +179,8 @@ onMounted(() => {
     const options = {
         root: null,
         threshold: 0.6, // 50% elemen terlihat akan memicu perubahan
-        rootMargin: "-20% 0px -20% 0px" 
+        rootMargin: "-20% 0px -20% 0px", 
+        snapType: "y"
     };
 
     observer = new IntersectionObserver((entries) => {
@@ -217,5 +218,5 @@ onUnmounted(() => {
 }
 
 /* Scroll Snap (Opsional untuk pengalaman yang lebih 'smooth') */
-/* .step-item { scroll-snap-align: center; } */
+.step-item { scroll-snap-align: center; }
 </style>

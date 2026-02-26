@@ -13,7 +13,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-[180px]">
         
         <!-- Box 1: Main Bio (Large) -->
-        <div class="md:col-span-2 md:row-span-2 rounded-3xl bg-[#1E293B] border border-white/5 p-8 relative overflow-hidden group hover:border-cyan-500/30 transition-colors reveal delay-100">
+        <div class="row-span-2 md:col-span-2 md:row-span-2 rounded-3xl bg-[#1E293B] border border-white/5 p-8 relative overflow-hidden group hover:border-cyan-500/30 transition-colors reveal delay-100">
           <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
             <svg class="w-24 h-24 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
           </div>
@@ -30,7 +30,7 @@
         </div>
 
         <!-- Box 2: Tech Stack (Tall) -->
-        <div class="md:col-span-1 md:row-span-2 rounded-3xl bg-[#1E293B] border border-white/5 p-6 flex flex-col hover:border-cyan-500/30 transition-colors">
+        <div class="row-span-2 md:col-span-1 md:row-span-2 rounded-3xl bg-[#1E293B] border border-white/5 p-6 flex flex-col hover:border-cyan-500/30 transition-colors">
           <h3 class="text-xl font-bold text-white mb-6">Tech Stack</h3>
           <div class="flex-1 grid grid-cols-2 gap-4">
              <!-- Icons (Using Text for now) -->

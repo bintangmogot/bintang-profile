@@ -1,12 +1,10 @@
 @import "tailwindcss";
-@import "daisyui";
 /* images dummy */
  /* https://yavuzceliker.github.io/sample-images/image-n.jpg */
 
 @theme {
   --color-primary: #0EA5E9; /* Sky 500 - Matches the light blue accent */
-  /* --color-dark-bg: #0B1121; Very dark navy */
-  --color-dark-bg: #222831; /* Very dark navy */
+  --color-dark-bg: #0F172A; /* Dark slate blue */
   --color-card-bg: #1E293B; /* Slate 800 */
 }
 
