@@ -42,7 +42,7 @@
                mastering modern frameworks, and
                building dynamic WordPress experiences.
             </p>
-            <a href="#projects" class="inline-flex items-center text-primary font-semibold text-lg hover:text-cyan-300  border-b border-transparent hover:border-cyan-400 pb-1 hover:-translate-y-1 transition-all duration-300">
+            <a href="#about" class="inline-flex items-center text-primary font-semibold text-lg hover:text-cyan-300  border-b border-transparent hover:border-cyan-400 pb-1 hover:-translate-y-1 transition-all duration-300">
                View My Work 
                <svg class="w-4 h-4 ml-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
             </a>
@@ -51,7 +51,7 @@
     </div>
 
     <!-- Bottom Line -->
-    <div class="flex items-center w-full mt-12 md:mt-24 mb-12">
+    <div class="flex items-center w-full mt-12 mb-12 lg:mt-24 xl:mb-24">
       <div class="h-[2px] bg-slate-600/50 w-full"></div>
     </div>
 
