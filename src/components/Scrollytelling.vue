@@ -37,7 +37,7 @@
 
                 <!-- Sticky Media Container (5:4 Ratio) -->
                 <div class="aspect-5/4 w-full overflow-hidden rounded-4xl bg-slate-900 shadow-2xl relative group/media border border-white/5 mt-9">
-                    <transition name="fade" mode="out-in">
+                    <transition name="fade" mode="out-in" style="transition-duration: 200ms;">
                         <div :key="activeIndex" class="w-full h-full">
                             <video 
                                 v-if="steps[activeIndex].type === 'video'"
@@ -65,7 +65,7 @@
                     :key="index"
                     :id="'step-' + index"
                     :data-index="index"
-                    class="step-item flex-none w-[85vw] sm:w-[70vw] md:w-full snap-center md:snap-align-none min-h-[40vh] md:min-h-screen flex flex-col justify-center py-6 md:pt-[200px] md:pb-[30vh]"
+                    class="step-item flex-none w-[85vw] sm:w-[70vw] md:w-full snap-center md:snap-align-none min-h-[40vh] md:min-h-[80vh] xl:min-h-screen flex flex-col justify-center py-6 xl:pt-[160px]"
                 >
                     <!-- CARD PROJECT -->
                     <div 
@@ -170,7 +170,7 @@
                 </div>
             </div>
         </transition>
-        <a href="/projects" target="_blank" class="px-8 py-4 mt-8 mx-6 md:mx-0 bg-primary text-slate-900 font-bold rounded-xl hover:scale-105 transition-transform flex self-center items-center justify-center gap-2 text-sm uppercase tracking-wider">
+        <a href="/projects" target="_blank" class="px-8 py-4 mt-8 md:-mt-[20vh] xl:mt-8 mx-6 md:mx-0 bg-primary text-slate-900 font-bold rounded-xl hover:scale-105 transition-transform flex self-center items-center justify-center gap-2 text-sm uppercase tracking-wider">
             More Projects
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
         </a>
