@@ -1,10 +1,7 @@
 <script setup>
-import { Analytics } from "@vercel/analytics/next"
 </script>
 
 <template>
-  <Analytics />
-  <!-- Full-width background wrapper -->
   <div class="bg-dark-bg min-h-screen flex flex-col items-center">
     
     <!-- Centered Layout Container -->
