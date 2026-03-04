@@ -6,57 +6,39 @@ const activeTab = ref('all')
 const projects = [
   {
     id: 1,
-    title: 'POS System Dashboard',
-    category: 'webapp',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&w=800&q=80',
-    description: 'A comprehensive Point of Sale system for retail businesses with inventory management.',
-    tech: ['Vue', 'Laravel', 'MySQL'],
-    link: '#',
+    title: 'Personal Trainer Website — Coach Yohanes',
+    category: 'frontend',
+    image: '',
+    description: 'A high-impact landing page for a personal trainer in Bali, featuring meal plans, training packages, and facility details.',
+    tech: ['Vue.js', 'Vite', 'Tailwind CSS', 'DaisyUI'],
+    link: 'https://github.com/bintangmogot/gym-yohanes',
   },
   {
     id: 2,
-    title: 'Company Profile CMS',
-    category: 'cms',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80',
-    description: 'Custom CMS for a corporate client allowing dynamic content updates without code.',
-    tech: ['WordPress', 'PHP', 'Bootstrap'],
-    link: '#',
+    title: 'Restaurant Management System — Oemah Bu Liek',
+    category: 'webapp',
+    image: '',
+    description: 'Internal web app for a restaurant business with attendance tracking, payroll processing, and inventory management.',
+    tech: ['Laravel', 'PHP', 'MySQL', 'Bootstrap'],
+    link: '',
   },
   {
     id: 3,
-    title: 'E-Commerce Frontend',
-    category: 'frontend',
-    image: 'https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?auto=format&fit=crop&w=800&q=80',
-    description: 'High-performance e-commerce shopping cart and checkout flow.',
-    tech: ['React', 'Tailwind', 'Redux'],
-    link: '#',
+    title: 'LMS & Certification — Amikom Center',
+    category: 'cms',
+    image: '',
+    description: 'An integrated LMS platform with E-commerce for browsing, purchasing, and accessing professional online courses.',
+    tech: ['WordPress', 'Elementor Pro', 'WooCommerce'],
+    link: '',
   },
   {
     id: 4,
-    title: 'Task Management App',
-    category: 'webapp',
-    image: 'https://images.unsplash.com/photo-1540350394557-8d14678e7f91?auto=format&fit=crop&w=800&q=80',
-    description: 'Drag-and-drop task manager with real-time collaboration features.',
-    tech: ['Vue', 'Firebase', 'Tailwind'],
-    link: '#',
-  },
-  {
-    id: 5,
-    title: 'Analytics Dashboard',
+    title: 'Multi-Project Landing Pages — Greenwich, PAO & Xiao',
     category: 'frontend',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
-    description: 'Data visualization dashboard with real-time KPI tracking and CSV export.',
-    tech: ['Vue', 'Chart.js', 'Node.js'],
-    link: '#',
-  },
-  {
-    id: 6,
-    title: 'Blog CMS Platform',
-    category: 'cms',
-    image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80',
-    description: 'A fully custom blog platform with rich text editor and SEO tools built-in.',
-    tech: ['Laravel', 'Vue', 'MySQL'],
-    link: '#',
+    image: '',
+    description: 'A series of responsive landing pages for multiple clients with clean layouts presenting key project information.',
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap'],
+    link: 'https://github.com/bintangmogot/GreenWickCoin',
   },
 ]
 
@@ -67,9 +49,9 @@ const filteredProjects = computed(() => {
 
 const tabs = [
   { id: 'all',      label: 'All Work' },
+  { id: 'frontend', label: 'Frontend' },
   { id: 'webapp',   label: 'Web Apps' },
   { id: 'cms',      label: 'CMS' },
-  { id: 'frontend', label: 'Frontend' },
 ]
 </script>
 
@@ -116,7 +98,7 @@ const tabs = [
                 :alt="project.title"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
+              <div class="absolute inset-0 bg-linear-to-t from-slate-900/80 via-transparent to-transparent"></div>
               <!-- External link hover button -->
               <a
                 :href="project.link"

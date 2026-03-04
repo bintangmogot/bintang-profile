@@ -37,10 +37,10 @@
       <div class="flex flex-col md:flex-row mt-12 md:mt-24 w-full z-11">
          <div class="sm:w-4/5 xl:w-1/2">
             <p class="text-slate-300 text-base md:text-xl leading-relaxed mb-6 font-medium">
-               Designing intuitive interfaces,
-               transforming them into clean code,
-               mastering modern frameworks, and
-               building dynamic WordPress experiences.
+               Building responsive websites from
+               Figma to code, crafting dynamic
+               WordPress experiences, and expanding
+               into full-stack with Laravel.
             </p>
             <a href="#about" class="inline-flex items-center text-primary font-semibold text-lg hover:text-cyan-300  border-b border-transparent hover:border-cyan-400 pb-1 hover:-translate-y-1 transition-all duration-300">
                View My Work 

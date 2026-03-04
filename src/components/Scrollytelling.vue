@@ -8,7 +8,7 @@
 
         <div class="flex flex-col md:flex-row items-start max-w-7xl mx-auto relative md:gap-8 lg:gap-12">
             <!-- SISI KIRI (Sticky): MD ke atas -->
-            <div class="hidden md:flex w-full md:w-1/2 sticky top-16 h-[80vh] flex-col justify-start py-6 z-20 px-6 md:px-0">
+            <div class="hidden md:flex w-full md:w-1/2 sticky top-16 h-[90vh] flex-col justify-start py-6 z-20 px-6 md:px-0">
                 <div class="flex flex-col">
                     <h2 class="text-5xl lg:text-7xl font-extrabold text-white tracking-tight leading-none">Featured</h2>
                     <h3 class="text-xl lg:text-2xl font-semibold text-primary mt-3">Projects & Experience</h3>
@@ -36,7 +36,7 @@
                 </div>
 
                 <!-- Sticky Media Container (5:4 Ratio) -->
-                <div class="aspect-5/4 w-full overflow-hidden rounded-4xl bg-slate-900 shadow-2xl relative group/media border border-white/5 mt-9">
+                <div class="aspect-5/4 w-full overflow-hidden rounded-2xl bg-slate-900 shadow-2xl relative group/media border border-white/5 mt-9">
                     <transition name="fade" mode="out-in" style="transition-duration: 200ms;">
                         <div :key="activeIndex" class="w-full h-full">
                             <video 
@@ -50,6 +50,7 @@
                                 :src="steps[activeIndex].media" 
                                 class="w-full h-full object-cover grayscale group-hover/media:grayscale-0 transition-all duration-500" 
                                 alt="Project Preview"
+                                style="text-align: center;"
                             />
                         </div>
                     </transition>
@@ -128,16 +129,16 @@
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
 
-                    <div class="flex flex-col md:flex-row">
+                    <div class="flex flex-col lg:flex-row">
                         <!-- Left: Media -->
-                        <div class="md:w-1/2 p-6 md:p-10">
-                            <div class="aspect-5/4 rounded-2xl overflow-hidden border border-white/5 shadow-2xl">
+                        <div class="lg:w-1/2 p-6 lg:p-10">
+                            <div class="aspect-5/4 rounded-2xl overflow-hidden border border-white/5 shadow-2xl" style="text-align: center;">
                                 <img :src="selectedProject.media" class="w-full h-full object-cover" :alt="selectedProject.title">
                             </div>
                         </div>
 
                         <!-- Right: Details -->
-                        <div class="md:w-1/2 p-6 md:p-10 md:pl-0 flex flex-col justify-center">
+                        <div class="lg:w-1/2 p-6 lg:p-10 lg:pl-0 flex flex-col justify-center">
                             <h3 class="text-xs font-bold text-primary uppercase tracking-[0.2em] mb-2">{{ selectedProject.navTitle }}</h3>
                             <h2 class="text-4xl font-extrabold text-white mb-6 leading-tight">{{ selectedProject.title }}</h2>
                             
@@ -156,11 +157,11 @@
                             </div>
 
                             <div class="flex flex-wrap gap-4 mt-auto">
-                                <a v-if="selectedProject.liveLink" :href="selectedProject.liveLink" target="_blank" class="px-8 py-4 bg-primary text-slate-900 font-bold rounded-xl hover:scale-105 transition-transform flex items-center gap-2 text-sm uppercase tracking-wider">
+                                <a v-if="selectedProject.liveLink" :href="selectedProject.liveLink" target="_blank" class="px-8 py-4 bg-primary text-slate-900 font-bold rounded-xl hover:scale-105 transition-transform flex items-center gap-2 text-sm uppercase tracking-wider w-100 sm:w-auto justify-center">
                                     Live Demo
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                                 </a>
-                                <a v-if="selectedProject.githubLink" :href="selectedProject.githubLink" target="_blank" class="px-8 py-4 bg-white/5 text-white font-bold border border-white/10 rounded-xl hover:bg-white/10 transition-colors flex items-center gap-2 text-sm uppercase tracking-wider">
+                                <a v-if="selectedProject.githubLink" :href="selectedProject.githubLink" target="_blank" class="px-8 py-4 bg-white/5 text-white font-bold border border-white/10 rounded-xl hover:bg-white/10 transition-colors flex items-center gap-2 text-sm uppercase tracking-wider w-100 sm:w-auto justify-center">
                                     GitHub
                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/></svg>
                                 </a>
@@ -170,7 +171,7 @@
                 </div>
             </div>
         </transition>
-        <a href="/projects" target="_blank" class="px-8 py-4 mt-8 md:-mt-[20vh] xl:mt-8 mx-6 md:mx-0 bg-primary text-slate-900 font-bold rounded-xl hover:scale-105 transition-transform flex self-center items-center justify-center gap-2 text-sm uppercase tracking-wider">
+        <a href="/projects" target="_blank" class="px-8 py-4 mt-8 md:-mt-[20vh] xl:mt-8 mx-6 md:mx-0 bg-primary text-slate-900 hover:bg-sky-400 font-bold rounded-xl transition-transform flex self-center items-center justify-center gap-2 text-sm uppercase tracking-wider">
             More Projects
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
         </a>
@@ -182,40 +183,52 @@ import { ref, onMounted, onUnmounted } from 'vue';
 
 const steps = [
     {
-        navTitle: "Discovery",
-        title: "Deep UX Analysis",
-        description: "Menganalisis kebutuhan pengguna secara mendalam untuk menciptakan fondasi produk yang solid.",
-        longDescription: "Analisis mendalam melalui riset pasar dan kebutuhan pengguna untuk memastikan produk memiliki fondasi yang kuat, strategis, dan tepat sasaran.",
-        media: "https://yavuzceliker.github.io/sample-images/image-66.jpg",
+        navTitle: "Full-Stack",
+        title: "Personal Trainer Website — Coach Yohanes",
+        description: "Designed to build a strong digital presence for a premier personal trainer in Canggu, Bali. Features meal plans, training packages, and facility details.",
+        longDescription: "Designed to build a strong digital presence for a premier personal trainer in Canggu, Bali. Previously, client results and training packages were scattered across social media. I developed this high-impact landing page to centralize success stories, visual transformations, and training methodology. The site features a modern, responsive design that effectively converts visitors into clients by clearly presenting meal plans, training packages, and facility details.",
+        media: "https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/coach",
         type: "image",
-        githubLink: "https://github.com",
-        liveLink: "https://demo.example.com",
-        techStack: ["Figma", "User Research", "Miro"],
-        features: ["Market Audit", "User Persona", "Journey Mapping"]
+        githubLink: "https://github.com/bintangmogot/gym-yohanes",
+        liveLink: "https://gym-yohanes.vercel.app/",
+        techStack: ["Vue.js", "Vite", "Tailwind CSS", "DaisyUI", "JavaScript"],
+        features: ["Responsive Landing Page", "Meal Plan Showcase", "Training Package Display", "UI/UX Design Integration"]
     },
     {
-        navTitle: "Strategy",
-        title: "Modern Interactive UI",
-        description: "Merancang antarmuka yang tidak hanya indah secara visual, tetapi juga memberikan interaksi yang mulus.",
-        longDescription: "Desain sistem yang fokus pada estetika minimalis dan kegunaan maksimal, dioptimalkan untuk berbagai perangkat dengan transisi yang halus.",
-        media: "https://yavuzceliker.github.io/sample-images/image-5.jpg",
+        navTitle: "Web App",
+        title: "Restaurant Management System — Oemah Bu Liek",
+        description: "Designed to modernize the operations of a busy restaurant in Surabaya, automating payroll calculations and streamlining stock management.",
+        longDescription: "Designed to modernize the operations of a busy restaurant in Surabaya. Previously, employee attendance and inventory were tracked manually, leading to inefficiencies. I developed this web-based application to automate payroll calculations (including overtime logic) and streamline stock management, ensuring data accuracy and operational speed.",
+        media: "https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/bu_liek",
         type: "image",
-        githubLink: "https://github.com",
-        liveLink: "https://demo.example.com",
-        techStack: ["Vue 3", "Tailwind CSS", "GSAP"],
-        features: ["Responsive Design", "Motion Graphics", "Accessibility"]
+        githubLink: "https://github.com/bintangmogot/website_oemahbuliek",
+        liveLink: "http://bintangsuryaaprilian.page.gd/",
+        techStack: ["Laravel", "PHP", "MySQL", "Bootstrap", "JavaScript"],
+        features: ["Employee Attendance & Photo Verification", "Payroll with Overtime Logic", "Inventory Stock-In/Stock-Out Tracking", "Role-Based Access Control"]
     },
     {
-        navTitle: "Execution",
-        title: "Scalable Frontend",
-        description: "Mengimplementasikan desain ke dalam kode yang bersih, efisien, dan siap hadapi traffic tinggi.",
-        longDescription: "Pengembangan sistem frontend dengan arsitektur yang modular (scalable), performa super cepat, dan optimasi SEO menyeluruh.",
-        media: "https://yavuzceliker.github.io/sample-images/image-3.jpg",
+        navTitle: "WordPress",
+        title: "LMS & Certification Platform — Amikom Center",
+        description: "An integrated digital platform that combines a professional corporate identity with a functional E-commerce LMS for online courses.",
+        longDescription: "I developed an integrated digital platform that combines a professional corporate identity with a functional E-commerce LMS. The website serves as a dual-purpose portal: introducing the company's vision and providing a marketplace for people to purchase online courses from team Amikom Center. I implemented a system that allows users to seamlessly browse, purchase, and access digital learning materials, all within a responsive environment tailored for an academic and professional audience.",
+        media: "https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/amikom",
         type: "image",
-        githubLink: "https://github.com",
-        liveLink: "https://demo.example.com",
-        techStack: ["React", "TypeScript", "Next.js"],
-        features: ["Clean Architecture", "Speed Optimization", "Unit Testing"]
+        githubLink: "", 
+        liveLink: "https://amikomcenter.com/",
+        techStack: ["WordPress", "Elementor Pro", "LMS Plugins", "WooCommerce", "Figma"],
+        features: ["LMS Course Marketplace", "E-commerce Integration", "Corporate Profile", "Responsive UI Implementation"]
+    },
+    {
+        navTitle: "Frontend",
+        title: "Landing Pages — Greenwick, PAO & Xiao",
+        description: "A series of responsive landing pages for various projects, each with consistent layout presenting roadmaps and key information.",
+        longDescription: "I developed a series of responsive landing pages for various projects, including Greenwick, PAO, and Xiao. The goal was to create a clean and consistent layout to present project details such as roadmaps and key information. By coding directly with Bootstrap, I ensured that each site is lightweight, fast, and fully responsive, providing a reliable and professional look for each project's digital presence. \ *There are 3 projects in this section, each with its own unique features and design. You can view complete projects when you click the button \"More Projects\".",
+        media: "https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/xiao",
+        type: "image",
+        githubLink: "https://github.com/bintangmogot/XiaoCoin",
+        liveLink: "https://xiao-coin.vercel.app/",
+        techStack: ["HTML5", "CSS3", "JavaScript", "Bootstrap"],
+        features: ["Multi-Project Consistency", "Tokenomics Display", "Roadmap Sections", "Fully Responsive Design"]
     }
 ];
 

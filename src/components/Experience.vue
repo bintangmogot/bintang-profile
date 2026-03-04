@@ -4,7 +4,7 @@
       <h2 class="text-3xl font-bold text-white mb-12 flex items-center">
         <span class="text-primary font-mono text-lg mr-3">02.</span>
         Where I've Worked
-        <span class="flex-1 h-px bg-white/10 ml-6 hidden md:block"></span>
+        <span class="flex-1  bg-white/10 ml-6 hidden md:block"></span>
       </h2>
 
       <!-- Layout: sidebar + content on desktop, tabs on top on mobile -->
@@ -82,6 +82,26 @@
                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                 </svg>
               </button>
+
+              <!-- Certification buttons -->
+              <div v-if="experiences[activeExp].certifications && experiences[activeExp].certifications.length" class="mt-4">
+                <p class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3">Certifications</p>
+                <div class="flex flex-wrap gap-2">
+                  <a
+                    v-for="(cert, ci) in experiences[activeExp].certifications"
+                    :key="ci"
+                    :href="cert.link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-primary border border-white/10 hover:border-primary/40 px-4 py-2 rounded-lg transition-all hover:bg-primary/5"
+                  >
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                    {{ cert.name }}
+                  </a>
+                </div>
+              </div>
             </div>
           </transition>
         </div>
@@ -94,9 +114,9 @@
           href="https://drive.google.com/file/d/1iA80CTcUyFwr2b-n5rToSDhfTgID8wnL/view?usp=sharing"
           target="_blank"
           rel="noopener noreferrer"
-          class="group flex items-center gap-3 px-8 py-4 border-2 border-primary/40 hover:border-primary text-white rounded-xl hover:bg-primary/10 transition-all font-bold text-sm uppercase tracking-wider"
+          class="group flex items-center gap-3 px-8 py-4 border-2 border-primary/40 hover:border-primary bg-primary text-slate-900 rounded-xl hover:bg-sky-400 transition-all font-bold text-sm uppercase tracking-wider"
         >
-          <svg class="w-5 h-5 text-primary group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-slate-900 group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
           </svg>
           Download Resume
@@ -140,7 +160,7 @@
 
             <!-- Skills used -->
             <div v-if="activeModal?.skills">
-              <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Tech Used</p>
+              <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Skills Used</p>
               <div class="flex flex-wrap gap-2">
                 <span v-for="skill in activeModal.skills" :key="skill" class="px-3 py-1 text-xs font-bold rounded-full bg-primary/10 text-primary border border-primary/20 uppercase tracking-wider">
                   {{ skill }}
@@ -183,73 +203,94 @@ const closeModal = () => {
 
 const experiences = [
   {
-    company: 'Freelance',
-    year: '2024–Now',
-    role: 'Fullstack Developer',
-    period: 'January 2024 – Present',
-    description: 'Working independently with clients across various industries, handling everything from requirements gathering to deployment.',
+    company: 'PT. GIT Solution',
+    year: '2024–2025',
+    role: 'WordPress Builder & Figma Web Designer',
+    period: 'April 2024 – May 2025',
+    description: 'Part-time remote position at a digital agency in Yogyakarta (working from Surabaya). Built WordPress websites and designed interfaces with Figma while mentoring junior developers.',
     bullets: [
-      'Designed and built a POS system for a local retail chain using Vue 3 and Laravel, reducing checkout time by 40%.',
-      'Developed a company profile website with custom CMS for a marketing agency, enabling non-technical staff to update content.',
-      'Implemented interactive dashboards with real-time data syncing via Firebase, serving 500+ daily active users.',
-      'Delivered projects on time across multiple clients simultaneously using Agile workflows.',
+      'Converted UI/UX designs from Figma into pixel-perfect, responsive websites using Elementor Page Builder.',
+      'Developed and maintained 3+ dynamic company profiles and landing pages using WordPress and Elementor, reducing development time by 50%.',
+      'Mentored a team of junior web developers and employees in WordPress best practices through internal video tutorials.',
+      'Improved website functionality and user experience, contributing to increased client engagement and company revenue.',
+      'Designed website interfaces with Figma and collaborated with developers to ensure accurate design implementation.',
+      'Received Certificate of Employment from PT. GIT Solution.',
     ],
-    skills: ['Vue 3', 'Laravel', 'Firebase', 'MySQL', 'Tailwind CSS'],
+    skills: ['WordPress', 'Elementor', 'Figma', 'CSS', 'UI/UX Design'],
+    certifications: [
+      { name: 'Certificate of Employment', link: 'https://drive.google.com/file/d/1ESFdiuRJAxwijjf7nj9VKV1t6dzBbPn5/view?usp=sharing' },
+    ],
     photos: [
-      'https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?w=600&q=80',
-      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80',
+      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/work/amikom',
+      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/work/20230929_105258',
+      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/work/20231128_094925',
+      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/work/20231101_152031',
     ],
   },
   {
-    company: 'Internship',
-    year: '2023',
-    role: 'Frontend Developer Intern',
-    period: 'July 2023 – December 2023',
-    description: 'Joined a software house internship where I contributed to multiple client projects under senior developer mentorship.',
+    company: 'Freelance',
+    year: '2024–Now',
+    role: 'Frontend & Web Developer',
+    period: '2024 – Present',
+    description: 'Taking on freelance projects across various industries — from personal trainer websites with Vue.js to restaurant management systems with Laravel and multi-client landing pages.',
     bullets: [
-      'Contributed to the frontend of an e-commerce platform using React and Redux, implementing product filtering and cart logic.',
-      'Collaborated with the design team to translate Figma mockups into responsive, pixel-perfect interfaces.',
-      'Wrote unit tests for critical UI components using Jest, improving code coverage by 30%.',
-      'Participated in daily standups and sprint reviews as part of an Agile Scrum team.',
+      'Built a personal trainer portfolio website (Coach Yohanes) using Vue.js, Vite, Tailwind CSS, and DaisyUI for a client in Bali. Now in progress to add tons of features with Laravel, such as admin panel, macro nutrition counter for meal plan order, and booking system for personal trainer.',
+      'Built a Company Profile Website for Papua Multi Event Company using Wordpress with Elementor Pro.',
+      'Created responsive multi-project landing pages (Greenwick, PAO, Xiao) using HTML, CSS, JavaScript, and Bootstrap.',
     ],
-    skills: ['React', 'Redux', 'TypeScript', 'Jest', 'Figma'],
+    skills: ['Vue.js', 'Laravel', 'WordPress', 'Bootstrap', 'JavaScript'],
+    photos: ['https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/bu_liek',
+      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/coach',
+      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/pao',
+      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/xiao',
+    ],
+  },
+  {
+    company: 'Oemah Bu Liek Restaurant',
+    year: '2023–2025',
+    role: 'Full Stack Developer · Waiter · Stock · Cashier',
+    period: 'January 2023 – November 2025',
+    description: "Actively involved in my family's restaurant — Oemah Bu Liek Restaurant, Gwalk Surabaya — taking on multiple operational roles from front-of-house service to back-end stock and finance management.",
+    bullets: [
+      'Developed an internal restaurant management system (Oemah Bu Liek) with Laravel — featuring employee attendance, payroll with overtime logic, and inventory tracking.',  
+      'Served customers as a waiter, ensuring a welcoming and efficient dining experience.',
+      'Managed daily stock inventory, tracked supplies, and coordinated restocking with suppliers.',
+      'Operated the cashier system, handled transactions, and balanced daily sales reports.',
+      'Contributed ideas for promotions and menu updates to help grow the business.',
+    ],
+    skills: ['Laravel', 'Customer Service', 'Stock Management', 'Cashiering', 'Teamwork', 'Operations'],
     photos: [
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80',
-      'https://images.unsplash.com/photo-1530893609608-32a9af3aa95c?w=600&q=80',
+      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/liek/oemah_bu_liek',
+      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/liek/IMG_20240908_194958',
+      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/liek/IMG-20240714-WA0024',
+      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/liek/IMG-20240714-WA0018',
     ],
   },
   {
     company: 'University',
-    year: '2021–Now',
-    role: 'CS Student & Researcher',
-    period: 'September 2021 – Present',
-    description: 'Pursuing a Computer Science degree with a focus on software engineering and human-computer interaction.',
+    year: '2021–2025',
+    role: 'CS Student & Lab Coordinator',
+    period: 'August 2021 – July 2025',
+    description: 'Bachelor of Computer Science at Wijaya Kusuma Surabaya University. GPA 3.86/4.00 (Honors: Excellent). Also served as Laboratory Assistant Coordinator for the Informatics Program.',
     bullets: [
-      'Built a web-based academic scheduling system as a final year project using Vue 3 and Node.js.',
-      'Won 2nd place in the university-level programming hackathon building a civic-tech app in 24 hours.',
-      'Served as the lead developer of the Student Tech Association, organizing workshops and technical events.',
-      'Maintained a GPA of 3.8+ while managing freelance projects on the side.',
+      'Graduated with a Bachelor of Computer Science degree from Wijaya Kusuma Surabaya University, GPA 3.86/4.00 with Excellent honors.',
+      'Served as Laboratory Assistant Coordinator, planning and organizing practical sessions for students.',
+      'Oversaw laboratory assistant\'s performance, timeline achievement, and scheduled internal coordination meetings.',
+      'Certified Junior Web Developer — BNSP (LSP TIK), valid June 2023 – June 2026.',
+      'Internship Certificate MBKM 2023 — PT. GIT Solution.',
     ],
-    skills: ['Vue 3', 'Node.js', 'MongoDB', 'Data Structures', 'Algorithms'],
+    skills: ['Computer Science', 'Leadership', 'Web Development', 'BNSP Certified'],
+    certifications: [
+      { name: 'BNSP Junior Web Developer', link: 'https://drive.google.com/file/d/1tteYzbIm9gxoxcJx9gjBPCj3BpX_VUsS/view?usp=sharing' },
+      { name: 'Internship Certificate MBKM 2023', link: 'https://drive.google.com/file/d/1Po7n4JJ6rDWLH7rXkem3VRnYrDXGgbRo/view?usp=sharing' },
+    ],
     photos: [
-      'https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?w=600&q=80',
-      'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=600&q=80',
-    ],
-  },
-  {
-    company: 'Open Source',
-    year: '2022–Now',
-    role: 'Open Source Contributor',
-    period: 'March 2022 – Present',
-    description: 'Actively contributing to open-source projects and building personal tools that the community can use.',
-    bullets: [
-      'Contributed bug fixes and new features to 3 open-source Vue component libraries.',
-      'Maintained a developer toolkit CLI tool with 500+ GitHub stars.',
-      'Reviewed pull requests and mentored new contributors in community-driven projects.',
-    ],
-    skills: ['Vue', 'TypeScript', 'GitHub Actions', 'Documentation'],
-    photos: [
-      'https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=600&q=80',
+      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/university/IMG_2293',
+      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/university/DSCF1703',
+      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/university/20250813_180027',
+      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/work/dealing2',
+
+
     ],
   },
 ];
