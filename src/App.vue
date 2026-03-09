@@ -10,7 +10,7 @@
       <!-- Left Sidebar (Desktop Only) -->
       <aside class="hidden lg:flex flex-col items-center justify-end h-screen sticky top-0 pb-0">
         <div class="flex flex-col items-center gap-6 text-slate-400 mb-8 z-20">
-          <a href="https://drive.google.com/file/d/1iA80CTcUyFwr2b-n5rToSDhfTgID8wnL/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="text-sm tracking-[0.2em] text-slate-400 hover:text-cyan-400 hover:-translate-y-1 transition-all flex flex-row items-start gap-1 rotate-180 justify-self-end self-end" style="writing-mode: vertical-rl;">
+          <a href="https://drive.google.com/file/d/1Ydff4zvIXFCUkm5oeyJZoCo-4UF-QveN/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="text-sm tracking-[0.2em] text-slate-400 hover:text-cyan-400 hover:-translate-y-1 transition-all flex flex-row items-start gap-1 rotate-180 justify-self-end self-end" style="writing-mode: vertical-rl;">
             <svg class="w-4 h-4 rotate-90 mb-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"></path></svg>
              Résumé
           </a>

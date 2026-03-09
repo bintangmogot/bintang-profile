@@ -8,13 +8,29 @@
       </h2>
 
       <!-- Layout: sidebar + content on desktop, tabs on top on mobile -->
-      <div class="flex flex-col md:flex-row gap-0 md:gap-8">
+    <div class="flex flex-col gap-6 lg:gap-10">
+      <!-- === CATEGORY TABS (Level 1) === -->
+      <div class="flex w-full gap-2 p-1.5 bg-white/5 rounded-xl border border-white/10 self-start">
+        <button
+          v-for="(cat, idx) in categories"
+          :key="idx"
+          @click="activeCat = idx; activeExp = 0"
+          class="px-6 py-2.5 flex-1 rounded-lg text-sm font-bold transition-all uppercase tracking-wider"
+          :class="activeCat === idx 
+            ? 'bg-primary text-slate-900 shadow-lg shadow-primary/20' 
+            : 'text-slate-400 hover:text-white hover:bg-white/5'"
+        >
+          {{ cat.title }}
+        </button>
+      </div>
 
-        <!-- === TAB LIST === -->
+      <div class="flex flex-col md:flex-row gap-0 md:gap-8">
+        <!-- === COMPANY TABS (Level 2) === -->
+        
         <!-- Mobile: horizontal scroll -->
         <div class="flex md:hidden overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden border-b border-white/10 mb-8 -mx-4 px-4">
           <button
-            v-for="(exp, i) in experiences"
+            v-for="(exp, i) in categories[activeCat].items"
             :key="i"
             @click="activeExp = i"
             class="flex-none px-5 py-3 text-sm font-semibold whitespace-nowrap border-b-2 transition-all -mb-px"
@@ -29,12 +45,12 @@
         <!-- Desktop: vertical list -->
         <div class="hidden md:flex flex-col shrink-0 w-40 border-l-2 border-white/10">
           <button
-            v-for="(exp, i) in experiences"
+            v-for="(exp, i) in categories[activeCat].items"
             :key="i"
             @click="activeExp = i"
             class="px-4 py-4 text-left text-sm transition-all border-l-2 -ml-0.5 group"
             :class="activeExp === i
-              ? 'border-primary text-white'
+              ? 'border-primary text-white bg-primary/5'
               : 'border-transparent text-slate-500 hover:text-slate-200 hover:bg-white/3'"
           >
             <p class="font-semibold leading-tight transition-colors" :class="activeExp === i ? 'text-primary' : ''">
@@ -47,20 +63,20 @@
         <!-- === CONTENT PANE === -->
         <div class="flex-1 min-w-0">
           <transition name="exp-fade" mode="out-in">
-            <div :key="activeExp" class="flex flex-col gap-4">
+            <div :key="`${activeCat}-${activeExp}`" class="flex flex-col gap-4">
               <!-- Title -->
               <div>
                 <h3 class="text-xl font-bold text-white leading-tight">
-                  {{ experiences[activeExp].role }}
-                  <span class="text-primary"> @ {{ experiences[activeExp].company }}</span>
+                  {{ categories[activeCat].items[activeExp].role }}
+                  <span class="text-primary"> @ {{ categories[activeCat].items[activeExp].company }}</span>
                 </h3>
-                <p class="text-slate-500 text-sm font-mono mt-1">{{ experiences[activeExp].period }}</p>
+                <p class="text-slate-500 text-sm font-mono mt-1">{{ categories[activeCat].items[activeExp].period }}</p>
               </div>
 
               <!-- Bullet points -->
               <ul class="space-y-3 mt-2">
                 <li
-                  v-for="(point, j) in experiences[activeExp].bullets"
+                  v-for="(point, j) in categories[activeCat].items[activeExp].bullets"
                   :key="j"
                   class="flex items-start gap-3 text-slate-400 text-sm leading-relaxed"
                 >
@@ -73,7 +89,7 @@
 
               <!-- View Details button -->
               <button
-                @click="openModal(experiences[activeExp])"
+                @click="openModal(categories[activeCat].items[activeExp])"
                 class="mt-4 self-start flex items-center gap-2 text-sm font-bold text-primary hover:text-white border border-primary/30 hover:border-primary px-5 py-2.5 rounded-lg transition-all hover:bg-primary/10"
               >
                 View Details
@@ -84,11 +100,11 @@
               </button>
 
               <!-- Certification buttons -->
-              <div v-if="experiences[activeExp].certifications && experiences[activeExp].certifications.length" class="mt-4">
+              <div v-if="categories[activeCat].items[activeExp].certifications && categories[activeCat].items[activeExp].certifications.length" class="mt-4">
                 <p class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3">Certifications</p>
                 <div class="flex flex-wrap gap-2">
                   <a
-                    v-for="(cert, ci) in experiences[activeExp].certifications"
+                    v-for="(cert, ci) in categories[activeCat].items[activeExp].certifications"
                     :key="ci"
                     :href="cert.link"
                     target="_blank"
@@ -105,13 +121,13 @@
             </div>
           </transition>
         </div>
-
       </div>
+    </div>
 
       <!-- Download Resume -->
       <div class="mt-16 flex justify-center">
         <a
-          href="https://drive.google.com/file/d/1iA80CTcUyFwr2b-n5rToSDhfTgID8wnL/view?usp=sharing"
+          href="https://drive.google.com/file/d/1Ydff4zvIXFCUkm5oeyJZoCo-4UF-QveN/view?usp=sharing"
           target="_blank"
           rel="noopener noreferrer"
           class="group flex items-center gap-3 px-8 py-4 border-2 border-primary/40 hover:border-primary bg-primary text-slate-900 rounded-xl hover:bg-sky-400 transition-all font-bold text-sm uppercase tracking-wider"
@@ -187,6 +203,7 @@
 <script setup>
 import { ref } from 'vue';
 
+const activeCat = ref(0);
 const activeExp = ref(0);
 const isModalOpen = ref(false);
 const activeModal = ref(null);
@@ -201,98 +218,120 @@ const closeModal = () => {
   document.body.style.overflow = '';
 };
 
-const experiences = [
+const categories = [
   {
-    company: 'PT. GIT Solution',
-    year: '2024–2025',
-    role: 'WordPress Builder & Figma Web Designer',
-    period: 'April 2024 – May 2025',
-    description: 'Part-time remote position at a digital agency in Yogyakarta (working from Surabaya). Built WordPress websites and designed interfaces with Figma while mentoring junior developers.',
-    bullets: [
-      'Converted UI/UX designs from Figma into pixel-perfect, responsive websites using Elementor Page Builder.',
-      'Developed and maintained 3+ dynamic company profiles and landing pages using WordPress and Elementor, reducing development time by 50%.',
-      'Mentored a team of junior web developers and employees in WordPress best practices through internal video tutorials.',
-      'Improved website functionality and user experience, contributing to increased client engagement and company revenue.',
-      'Designed website interfaces with Figma and collaborated with developers to ensure accurate design implementation.',
-      'Received Certificate of Employment from PT. GIT Solution.',
-    ],
-    skills: ['WordPress', 'Elementor', 'Figma', 'CSS', 'UI/UX Design'],
-    certifications: [
-      { name: 'Certificate of Employment', link: 'https://drive.google.com/file/d/1ESFdiuRJAxwijjf7nj9VKV1t6dzBbPn5/view?usp=sharing' },
-    ],
-    photos: [
-      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/work/amikom',
-      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/work/20230929_105258',
-      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/work/20231128_094925',
-      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/work/20231101_152031',
-    ],
+    title: 'Website Developer',
+    items: [
+      {
+        company: 'PT. GIT Solution',
+        year: '2024–2025',
+        role: 'WordPress Builder & Figma Web Designer',
+        period: 'April 2024 – May 2025',
+        description: 'Part-time remote position at a digital agency in Yogyakarta (working from Surabaya). Built WordPress websites and designed interfaces with Figma while mentoring junior developers.',
+        bullets: [
+          'Converted UI/UX designs from Figma into pixel-perfect, responsive websites using Elementor Page Builder.',
+          'Developed and maintained 3+ dynamic company profiles and landing pages using WordPress and Elementor, reducing development time by 50%.',
+          'Mentored a team of junior web developers and employees in WordPress best practices through internal video tutorials.',
+          'Improved website functionality and user experience, contributing to increased client engagement and company revenue.',
+          'Designed website interfaces with Figma and collaborated with developers to ensure accurate design implementation.',
+          'Received Certificate of Employment from PT. GIT Solution.',
+        ],
+        skills: ['WordPress', 'Elementor', 'Figma', 'CSS', 'UI/UX Design'],
+        certifications: [
+          { name: 'Certificate of Employment', link: 'https://drive.google.com/file/d/1ESFdiuRJAxwijjf7nj9VKV1t6dzBbPn5/view?usp=sharing' },
+        ],
+        photos: [
+          'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/work/amikom',
+          'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/work/20230929_105258',
+          'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/work/20231128_094925',
+          'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/work/20231101_152031',
+        ],
+      },
+      {
+        company: 'Oemah Bu Liek Restaurant',
+        year: '2025',
+        role: 'Full Stack Developer',
+        period: 'February - June 2025',
+        description: "Actively involved in my family's restaurant — Oemah Bu Liek Restaurant, Gwalk Surabaya — taking on multiple operational roles from front-of-house service to back-end stock and finance management.",
+        bullets: [
+          'Developed an internal restaurant management system (Oemah Bu Liek) with Laravel — featuring employee attendance, payroll with overtime logic, and inventory tracking.',  
+          
+        ],
+        skills: ['Laravel', 'PHP', 'MySQL', 'HTML', 'CSS', 'JavaScript'],
+        photos: [
+          'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/liek/oemah_bu_liek',
+          'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/liek/IMG_20240908_194958',
+        ],
+      },
+      {
+        company: 'Freelance',
+        year: '2024–Now',
+        role: 'Frontend & Web Developer',
+        period: '2024 – Present',
+        description: 'Taking on freelance projects across various industries — from personal trainer websites with Vue.js to restaurant management systems with Laravel and multi-client landing pages.',
+        bullets: [
+          'Built a personal trainer portfolio website (Coach Yohanes) using Vue.js, Vite, Tailwind CSS, and DaisyUI for a client in Bali. Now in progress to add tons of features with Laravel, such as admin panel, macro nutrition counter for meal plan order, and booking system for personal trainer.',
+          'Built a Company Profile Website for Papua Multi Event Company using Wordpress with Elementor Pro.',
+          'Created responsive multi-project landing pages (Greenwick, PAO, Xiao) using HTML, CSS, JavaScript, and Bootstrap.',
+        ],
+        skills: ['Vue.js', 'Laravel', 'WordPress', 'Bootstrap', 'JavaScript'],
+        photos: ['https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/bu_liek',
+          'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/coach',
+          'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/pao',
+          'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/xiao',
+        ],
+      },
+    ]
   },
   {
-    company: 'Freelance',
-    year: '2024–Now',
-    role: 'Frontend & Web Developer',
-    period: '2024 – Present',
-    description: 'Taking on freelance projects across various industries — from personal trainer websites with Vue.js to restaurant management systems with Laravel and multi-client landing pages.',
-    bullets: [
-      'Built a personal trainer portfolio website (Coach Yohanes) using Vue.js, Vite, Tailwind CSS, and DaisyUI for a client in Bali. Now in progress to add tons of features with Laravel, such as admin panel, macro nutrition counter for meal plan order, and booking system for personal trainer.',
-      'Built a Company Profile Website for Papua Multi Event Company using Wordpress with Elementor Pro.',
-      'Created responsive multi-project landing pages (Greenwick, PAO, Xiao) using HTML, CSS, JavaScript, and Bootstrap.',
-    ],
-    skills: ['Vue.js', 'Laravel', 'WordPress', 'Bootstrap', 'JavaScript'],
-    photos: ['https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/bu_liek',
-      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/coach',
-      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/pao',
-      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/xiao',
-    ],
-  },
-  {
-    company: 'Oemah Bu Liek Restaurant',
-    year: '2023–2025',
-    role: 'Full Stack Developer · Waiter · Stock · Cashier',
-    period: 'January 2023 – November 2025',
-    description: "Actively involved in my family's restaurant — Oemah Bu Liek Restaurant, Gwalk Surabaya — taking on multiple operational roles from front-of-house service to back-end stock and finance management.",
-    bullets: [
-      'Developed an internal restaurant management system (Oemah Bu Liek) with Laravel — featuring employee attendance, payroll with overtime logic, and inventory tracking.',  
-      'Served customers as a waiter, ensuring a welcoming and efficient dining experience.',
-      'Managed daily stock inventory, tracked supplies, and coordinated restocking with suppliers.',
-      'Operated the cashier system, handled transactions, and balanced daily sales reports.',
-      'Contributed ideas for promotions and menu updates to help grow the business.',
-    ],
-    skills: ['Laravel', 'Customer Service', 'Stock Management', 'Cashiering', 'Teamwork', 'Operations'],
-    photos: [
-      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/liek/oemah_bu_liek',
-      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/liek/IMG_20240908_194958',
-      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/liek/IMG-20240714-WA0024',
-      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/liek/IMG-20240714-WA0018',
-    ],
-  },
-  {
-    company: 'University',
-    year: '2021–2025',
-    role: 'CS Student & Lab Coordinator',
-    period: 'August 2021 – July 2025',
-    description: 'Bachelor of Computer Science at Wijaya Kusuma Surabaya University. GPA 3.86/4.00 (Honors: Excellent). Also served as Laboratory Assistant Coordinator for the Informatics Program.',
-    bullets: [
-      'Graduated with a Bachelor of Computer Science degree from Wijaya Kusuma Surabaya University, GPA 3.86/4.00 with Excellent honors.',
-      'Served as Laboratory Assistant Coordinator, planning and organizing practical sessions for students.',
-      'Oversaw laboratory assistant\'s performance, timeline achievement, and scheduled internal coordination meetings.',
-      'Certified Junior Web Developer — BNSP (LSP TIK), valid June 2023 – June 2026.',
-      'Internship Certificate MBKM 2023 — PT. GIT Solution.',
-    ],
-    skills: ['Computer Science', 'Leadership', 'Web Development', 'BNSP Certified'],
-    certifications: [
-      { name: 'BNSP Junior Web Developer', link: 'https://drive.google.com/file/d/1tteYzbIm9gxoxcJx9gjBPCj3BpX_VUsS/view?usp=sharing' },
-      { name: 'Internship Certificate MBKM 2023', link: 'https://drive.google.com/file/d/1Po7n4JJ6rDWLH7rXkem3VRnYrDXGgbRo/view?usp=sharing' },
-    ],
-    photos: [
-      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/university/IMG_2293',
-      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/university/DSCF1703',
-      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/university/20250813_180027',
-      'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/work/dealing2',
-
-
-    ],
-  },
+    title: 'Work & Education',
+    items: [
+      {
+        company: 'Oemah Bu Liek Restaurant',
+        year: '2023–2025',
+        role: 'Waiter · Stock · Cashier',
+        period: 'January 2023 – November 2025',
+        description: "Actively involved in my family's restaurant — Oemah Bu Liek Restaurant, Gwalk Surabaya — taking on multiple operational roles from front-of-house service to back-end stock and finance management.",
+        bullets: [
+          'Served customers as a waiter, ensuring a welcoming and efficient dining experience.',
+          'Managed daily stock inventory, tracked supplies, and coordinated restocking with suppliers.',
+          'Operated the cashier system, handled transactions, and balanced daily sales reports.',
+          'Contributed ideas for promotions and menu updates to help grow the business.',
+        ],
+        skills: ['Customer Service', 'Stock Management', 'Cashiering', 'Teamwork', 'Operations'],
+        photos: [
+          'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/liek/IMG_20240908_194958',
+          'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/liek/IMG-20240714-WA0024',
+          'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/liek/IMG-20240714-WA0018',
+        ],
+      },
+      {
+        company: 'University',
+        year: '2021–2025',
+        role: 'CS Student & Lab Coordinator',
+        period: 'August 2021 – July 2025',
+        description: 'Bachelor of Computer Science at Wijaya Kusuma Surabaya University. GPA 3.86/4.00 (Honors: Excellent). Also served as Laboratory Assistant Coordinator for the Informatics Program.',
+        bullets: [
+          'Graduated with a Bachelor of Computer Science degree from Wijaya Kusuma Surabaya University, GPA 3.86/4.00 with Excellent honors.',
+          'Served as Laboratory Assistant Coordinator, planning and organizing practical sessions for students.',
+          'Oversaw laboratory assistant\'s performance, timeline achievement, and scheduled internal coordination meetings.',
+          'Certified Junior Web Developer — BNSP (LSP TIK), valid June 2023 – June 2026.',
+          'Internship Certificate MBKM 2023 — PT. GIT Solution.',
+        ],
+        skills: ['Computer Science', 'Leadership', 'Web Development', 'BNSP Certified'],
+        certifications: [
+          { name: 'BNSP Junior Web Developer', link: 'https://drive.google.com/file/d/1tteYzbIm9gxoxcJx9gjBPCj3BpX_VUsS/view?usp=sharing' },
+          { name: 'Internship Certificate MBKM 2023', link: 'https://drive.google.com/file/d/1Po7n4JJ6rDWLH7rXkem3VRnYrDXGgbRo/view?usp=sharing' },
+        ],
+        photos: [
+          'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/university/IMG_2293',
+          'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/university/DSCF1703',
+          'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/university/20250813_180027',
+          'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/work/dealing2',
+        ],
+      },
+    ]
+  }
 ];
 </script>
 
