@@ -202,7 +202,7 @@ const steps = [
         media: "https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/bu_liek",
         type: "image",
         githubLink: "https://github.com/bintangmogot/website_oemahbuliek",
-        liveLink: "http://bintangsuryaaprilian.page.gd/",
+        liveLink: "https://omahbuliek.page.gd/",
         techStack: ["Laravel", "PHP", "MySQL", "Bootstrap", "JavaScript"],
         features: ["Employee Attendance & Photo Verification", "Payroll with Overtime Logic", "Inventory Stock-In/Stock-Out Tracking", "Role-Based Access Control"]
     },

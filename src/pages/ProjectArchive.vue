@@ -182,7 +182,7 @@ const archiveProjects = ref([
     madeAt: 'Freelance',
     techStack: ['Laravel', 'MySQL', 'Bootstrap'],
     linkDisplay: 'oemahbuliek.com',
-    liveLink: 'http://bintangsuryaaprilian.page.gd/',
+    liveLink: 'https://omahbuliek.page.gd/',
     githubLink: 'https://github.com/bintangmogot/website_oemahbuliek',
     media: 'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/bu_liek',
     longDescription: 'Designed to modernize the operations of a busy restaurant in Surabaya. Automates payroll calculations (including overtime logic) and streamlines stock management, ensuring data accuracy and operational speed.',

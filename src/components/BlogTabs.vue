@@ -3,7 +3,7 @@ import { ref, computed } from 'vue'
 
 const activeTab = ref('all')
 
-const projects = [
+const blogs = [
   {
     id: 1,
     title: 'Personal Trainer Website — Coach Yohanes',
@@ -20,7 +20,7 @@ const projects = [
     image: '',
     description: 'Internal web app for a restaurant business with attendance tracking, payroll processing, and inventory management.',
     tech: ['Laravel', 'PHP', 'MySQL', 'Bootstrap'],
-    link: '',
+    link: 'https://omahbuliek.page.gd/',
   },
   {
     id: 3,
@@ -29,7 +29,7 @@ const projects = [
     image: '',
     description: 'An integrated LMS platform with E-commerce for browsing, purchasing, and accessing professional online courses.',
     tech: ['WordPress', 'Elementor Pro', 'WooCommerce'],
-    link: '',
+    link: 'https://amikomcenter.com/',
   },
   {
     id: 4,
@@ -42,9 +42,9 @@ const projects = [
   },
 ]
 
-const filteredProjects = computed(() => {
-  if (activeTab.value === 'all') return projects
-  return projects.filter((p) => p.category === activeTab.value)
+const filteredblogs = computed(() => {
+  if (activeTab.value === 'all') return blogs
+  return blogs.filter((p) => p.category === activeTab.value)
 })
 
 const tabs = [
@@ -56,14 +56,14 @@ const tabs = [
 </script>
 
 <template>
-  <section id="projects" class="py-24 px-4 md:px-8 bg-black/20">
+  <section id="blogs" class="py-24 px-4 md:px-8 bg-black/20">
     <div class="max-w-7xl mx-auto">
       
       <!-- Section header + tabs -->
       <div class="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-6">
         <h2 class="text-3xl font-bold text-white flex items-center shrink-0">
           <span class="text-primary font-mono text-lg mr-3">02.</span>
-          Selected Projects
+          Selected Blogs
           <span class="flex-1 h-px bg-white/10 ml-6 hidden md:block w-16"></span>
         </h2>
 
@@ -83,25 +83,25 @@ const tabs = [
         </div>
       </div>
 
-      <!-- Project Grid -->
+      <!-- blog Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <transition-group name="proj">
           <div
-            v-for="project in filteredProjects"
-            :key="project.id"
+            v-for="blog in filteredblogs"
+            :key="blog.id"
             class="group rounded-2xl bg-slate-800/60 border border-white/5 overflow-hidden hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 flex flex-col"
           >
             <!-- Image -->
             <div class="relative h-44 overflow-hidden shrink-0">
               <img
-                :src="project.image"
-                :alt="project.title"
+                :src="blog.image"
+                :alt="blog.title"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div class="absolute inset-0 bg-linear-to-t from-slate-900/80 via-transparent to-transparent"></div>
               <!-- External link hover button -->
               <a
-                :href="project.link"
+                :href="blog.link"
                 target="_blank"
                 class="absolute top-3 right-3 w-9 h-9 rounded-full bg-black/50 backdrop-blur flex items-center justify-center text-white opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-200 hover:bg-primary hover:text-slate-900"
               >
@@ -114,14 +114,14 @@ const tabs = [
             <!-- Content -->
             <div class="p-5 flex flex-col flex-1">
               <h3 class="text-base font-bold text-white mb-1.5 group-hover:text-primary transition-colors">
-                {{ project.title }}
+                {{ blog.title }}
               </h3>
               <p class="text-slate-400 text-sm leading-relaxed flex-1 mb-4">
-                {{ project.description }}
+                {{ blog.description }}
               </p>
               <div class="flex flex-wrap gap-1.5">
                 <span
-                  v-for="tech in project.tech"
+                  v-for="tech in blog.tech"
                   :key="tech"
                   class="text-[10px] px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 font-bold uppercase tracking-wider"
                 >

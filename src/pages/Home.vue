@@ -39,7 +39,6 @@
 <script setup>
 import HeroSection from '../components/HeroSection.vue'
 import BentoAbout from '../components/BentoAbout.vue'
-import ProjectTabs from '../components/ProjectTabs.vue'
 import Scrollytelling from '../components/Scrollytelling.vue'
 import Experience from '../components/Experience.vue'
 import Pricing from '../components/Pricing.vue'
