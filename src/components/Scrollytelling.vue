@@ -71,7 +71,7 @@
                     <!-- CARD PROJECT -->
                     <div 
                         @click="openModal(step)"
-                        class="group/card relative flex flex-col p-8 rounded-4xl transition-all duration-200 cursor-pointer 
+                        class="group/card relative flex flex-col p-4 sm:p-8 rounded-4xl transition-all duration-200 cursor-pointer 
                                bg-white/3 border border-white/5 hover:border-primary/40 
                                hover:bg-white/5 hover:backdrop-blur-md hover:shadow-2xl overflow-hidden h-full min-h-[580px] md:min-h-[400px]"
                     >
@@ -97,10 +97,10 @@
 
                             <div class="pt-2">
                                 <h3 class="text-xs font-bold text-primary uppercase tracking-[0.2em] mb-2">{{ step.navTitle }}</h3>
-                                <h3 class="text-3xl font-bold text-white group-hover/card:text-primary transition-colors tracking-tight">{{ step.title }}</h3>
+                                <h3 class="text-2xl sm:text-3xl font-bold text-white group-hover/card:text-primary transition-colors tracking-tight">{{ step.title }}</h3>
                             </div>
 
-                            <p class="text-slate-400 leading-relaxed text-lg line-clamp-2 group-hover/card:text-white transition-colors">
+                            <p class="text-slate-400 leading-relaxed text-sm sm:text-lg line-clamp-2 group-hover/card:text-white transition-colors">
                                 {{ step.description }}
                             </p>
                         
@@ -131,7 +131,7 @@
 
                     <div class="flex flex-col lg:flex-row">
                         <!-- Left: Media -->
-                        <div class="lg:w-1/2 p-6 lg:p-10">
+                        <div class="lg:w-1/2 p-6 lg:p-10 lg:sticky lg:top-0 lg:h-fit">
                             <div class="aspect-5/4 rounded-2xl overflow-hidden border border-white/5 shadow-2xl" style="text-align: center;">
                                 <img :src="selectedProject.media" class="w-full h-full object-cover" :alt="selectedProject.title">
                             </div>
@@ -140,7 +140,7 @@
                         <!-- Right: Details -->
                         <div class="lg:w-1/2 p-6 lg:p-10 lg:pl-0 flex flex-col justify-center">
                             <h3 class="text-xs font-bold text-primary uppercase tracking-[0.2em] mb-2">{{ selectedProject.navTitle }}</h3>
-                            <h2 class="text-4xl font-extrabold text-white mb-6 leading-tight">{{ selectedProject.title }}</h2>
+                            <h2 class="text-2xl md:text-4xl font-extrabold text-white mb-6 leading-tight">{{ selectedProject.title }}</h2>
                             
                             <p class="text-slate-300 text-lg leading-relaxed mb-8">
                                 {{ selectedProject.longDescription }}
@@ -184,15 +184,24 @@ import { ref, onMounted, onUnmounted } from 'vue';
 const steps = [
     {
         navTitle: "Full-Stack",
-        title: "Personal Trainer Website — Coach Yohanes",
-        description: "Designed to build a strong digital presence for a premier personal trainer in Canggu, Bali. Features meal plans, training packages, and facility details.",
-        longDescription: "Designed to build a strong digital presence for a premier personal trainer in Canggu, Bali. Previously, client results and training packages were scattered across social media. I developed this high-impact landing page to centralize success stories, visual transformations, and training methodology. The site features a modern, responsive design that effectively converts visitors into clients by clearly presenting meal plans, training packages, and facility details.",
+        title: "Personal Trainer Website — Coach Yohanes (ongoing)",
+        description: "Personal Training & Nutrition Management System for Coach Yohan. A professional fullstack platform featuring dynamic meal tracking, calendar booking, and e-commerce tailored for the fitness industry in Bali. Built with Vue 3, Laravel 11, and Tailwind CSS.",
+        longDescription: "A personal trainer in Canggu, Bali, had a growing roster of international clients — but no digital system to match. Training bookings were handled via WhatsApp, meal plans were shared through Instagram stories, and client transformations were buried in phone galleries. I designed and built this full-stack platform to solve that. Starting as a high-conversion landing page showcasing credentials, testimonials, and training packages, the system is progressively evolving into a complete fitness management suite — featuring an interactive 'Build Your Own Plate' nutrition tracker with real-time macro calculations, a calendar-based session booking system with admin approval workflows, and an integrated e-commerce store for gym supplements and gear. The frontend is built with Vue 3 Composition API and Tailwind CSS 4 for a premium, responsive experience, while the backend runs on Laravel 11 serving a RESTful API with PostgreSQL.",
         media: "https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/coach",
         type: "image",
-        githubLink: "https://github.com/bintangmogot/gym-yohanes",
+        githubLink: "https://github.com/bintangmogot/fitness-management-app",
         liveLink: "https://gym-yohanes.vercel.app/",
         techStack: ["Vue.js", "Vite", "Tailwind CSS", "DaisyUI", "JavaScript"],
-        features: ["Responsive Landing Page", "Meal Plan Showcase", "Training Package Display", "UI/UX Design Integration"]
+        features: [
+            "Conversion-Optimized Landing Page",
+            "Dynamic 'Build Your Own Plate' Nutrition Tracker",
+            "Real-Time Macro Calculator (Kcal, Protein, Carbs, Fat)",
+            "Calendar-Based Session Booking with Admin Approval",
+            "E-Commerce for Gym Supplements & Gear",
+            "Embedded Video Testimonials",
+            "Mobile-First Responsive UI/UX"
+        ]
+
     },
     {
         navTitle: "Web App",
@@ -204,7 +213,12 @@ const steps = [
         githubLink: "https://github.com/bintangmogot/website_oemahbuliek",
         liveLink: "https://omahbuliek.page.gd/",
         techStack: ["Laravel", "PHP", "MySQL", "Bootstrap", "JavaScript"],
-        features: ["Employee Attendance & Photo Verification", "Payroll with Overtime Logic", "Inventory Stock-In/Stock-Out Tracking", "Role-Based Access Control"]
+        features: [
+            "Employee Attendance & Photo Verification",
+            "Payroll with Overtime Logic",
+            "Inventory Stock-In/Stock-Out Tracking",
+            "Role-Based Access Control"
+        ]
     },
     {
         navTitle: "WordPress",
@@ -216,7 +230,12 @@ const steps = [
         githubLink: "", 
         liveLink: "https://amikomcenter.com/",
         techStack: ["WordPress", "Elementor Pro", "LMS Plugins", "WooCommerce", "Figma"],
-        features: ["LMS Course Marketplace", "E-commerce Integration", "Corporate Profile", "Responsive UI Implementation"]
+        features: [
+            "LMS Course Marketplace", 
+            "E-commerce Integration", 
+            "Corporate Profile", 
+            "Responsive UI Implementation"
+        ]
     },
     {
         navTitle: "Frontend",
@@ -228,7 +247,12 @@ const steps = [
         githubLink: "https://github.com/bintangmogot/XiaoCoin",
         liveLink: "https://xiao-coin.vercel.app/",
         techStack: ["HTML5", "CSS3", "JavaScript", "Bootstrap"],
-        features: ["Multi-Project Consistency", "Tokenomics Display", "Roadmap Sections", "Fully Responsive Design"]
+        features: [
+            "Multi-Project Consistency", 
+            "Tokenomics Display", 
+            "Roadmap Sections", 
+            "Fully Responsive Design"
+        ]
     }
 ];
 

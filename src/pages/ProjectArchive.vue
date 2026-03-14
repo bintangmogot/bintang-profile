@@ -32,7 +32,7 @@
         >
           <!-- Year -->
           <div class="archive-cell year-cell">
-            <span class="mobile-label">Year</span>
+            <span class="mobile-label hidden md:block">Year</span>
             {{ project.year }}
           </div>
 
@@ -166,14 +166,14 @@ const techIcons = {
 const archiveProjects = ref([
   {
     year: '2026',
-    title: 'Personal Trainer Website — Coach Yohanes',
+    title: 'Personal Trainer Website — Coach Yohanes (Ongoing)',
     madeAt: 'Freelance',
     techStack: ['Vue 3', 'Tailwind', 'DaisyUI', 'Laravel', 'MySQL'],
-    linkDisplay: 'coach-yohanes.vercel.app',
+    linkDisplay: 'coach-yohanes.app',
     liveLink: 'https://gym-yohanes.vercel.app',
     githubLink: 'https://github.com/bintangmogot/gym-yohanes',
     media: 'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/coach',
-    longDescription: 'Designed to build a strong digital presence for a premier personal trainer in Canggu, Bali. Features meal plans, training packages, and facility details with a modern, responsive design.',
+    longDescription: "A personal trainer in Canggu, Bali, had a growing roster of international clients — but no digital system to match. Training bookings were handled via WhatsApp, meal plans were shared through Instagram stories, and client transformations were buried in phone galleries. I designed and built this full-stack platform to solve that. Starting as a high-conversion landing page showcasing credentials, testimonials, and training packages, the system is progressively evolving into a complete fitness management suite — featuring an interactive 'Build Your Own Plate' nutrition tracker with real-time macro calculations, a calendar-based session booking system with admin approval workflows, and an integrated e-commerce store for gym supplements and gear. The frontend is built with Vue 3 Composition API and Tailwind CSS 4 for a premium, responsive experience, while the backend runs on Laravel 11 serving a RESTful API with PostgreSQL.",
     features: ['Responsive Landing Page', 'Meal Plan Showcase', 'Training Package Display', 'UI/UX Design Integration'],
   },
   {
@@ -202,10 +202,10 @@ const archiveProjects = ref([
   },
   {
     year: '2025',
-    title: 'PAO Narrative Landing Page',
+    title: '$PAO Narrative Landing Page',
     madeAt: 'Freelance',
     techStack: ['HTML5', 'CSS3', 'Bootstrap'],
-    linkDisplay: 'pao-coin.vercel.app',
+    linkDisplay: 'pao-coin.app',
     liveLink: 'https://pao-coin-nine.vercel.app/',
     githubLink: 'https://github.com/bintangmogot/GreenWickCoin',
     media: 'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/pao',
@@ -214,10 +214,10 @@ const archiveProjects = ref([
   },
   {
       year: '2025',
-      title: 'Green Wick Interactive Website',
+      title: '$Green Wick Interactive Website',
       madeAt: 'Freelance',
       techStack: ['HTML5', 'CSS3', 'Bootstrap'],
-      linkDisplay: 'green-wick-coin.vercel.app',
+      linkDisplay: 'green-wick-coin.app',
       liveLink: 'https://green-wick-coin.vercel.app/',
       githubLink: 'https://github.com/bintangmogot/GreenWickCoin',
       media: 'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/greenwick',
@@ -226,15 +226,27 @@ const archiveProjects = ref([
     },
     {
       year: '2025',
-      title: 'Xiao Portfolio & Gallery Page',
+      title: '$Xiao Portfolio & Gallery Page',
       madeAt: 'Freelance',
       techStack: ['HTML5', 'CSS3', 'Bootstrap'],
-      linkDisplay: 'xiao-coin.vercel.app',
+      linkDisplay: 'xiao-coin.app',
       liveLink: 'https://xiao-coin.vercel.app/',
       githubLink: 'https://github.com/bintangmogot/GreenWickCoin',
       media: 'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/xiao',
       longDescription: 'A multipurpose landing page for Xiao, focusing on media-heavy content and partner integrations. Features an optimized image gallery and a clean, responsive grid system to display professional partnerships.',
       features: ['Media Gallery Showcase', 'Partner Grid System', 'Responsive Navigation', 'Custom UI Components'],
+    },
+    {
+      year: '2025',
+      title: '$ZEN COIN Landing Page',
+      madeAt: 'Freelance',
+      techStack: ['HTML5', 'CSS3', 'Tailwind CSS', 'JavaScript', 'Tone.js'],
+      linkDisplay: 'zen-coin.app',
+      liveLink: 'https://zen-coin.vercel.app/',
+      githubLink: 'https://github.com/bintangmogot/zen-coin',
+      media: 'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/zen-coin_1',
+      longDescription: 'A multipurpose landing page for $ZEN COIN, focusing on media-heavy content and partner integrations. Features an optimized image gallery and a clean, responsive grid system to display professional partnerships.',
+      features: ['3D flip card', 'Responsive Navigation', 'Custom UI Components', 'Media Gallery Showcase'],
     },
     {
       year: '2024',
@@ -359,7 +371,6 @@ const closeModal = () => {
 
 /* Mobile labels */
 .mobile-label {
-  display: block;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.1em;

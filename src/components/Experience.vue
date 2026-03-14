@@ -15,7 +15,7 @@
           v-for="(cat, idx) in categories"
           :key="idx"
           @click="activeCat = idx; activeExp = 0"
-          class="px-6 py-2.5 flex-1 rounded-lg text-sm font-bold transition-all uppercase tracking-wider"
+          class="px-6 py-2.5 flex-1 rounded-lg text-xs sm:text-sm font-bold transition-all uppercase tracking-wider"
           :class="activeCat === idx 
             ? 'bg-primary text-slate-900 shadow-lg shadow-primary/20' 
             : 'text-slate-400 hover:text-white hover:bg-white/5'"

@@ -255,6 +255,12 @@ onMounted(() => {
   overflow: hidden;
   transition: border-color 0.3s ease;
 }
+@media (max-width: 639px) {
+  .bento-cell {
+    padding: 12px;
+  }
+}
+
 .bento-cell:hover {
   border-color: rgba(14, 165, 233, 0.2);
 }
