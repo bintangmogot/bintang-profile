@@ -1,4 +1,9 @@
 <script setup>
+import { language } from './store.js';
+
+const toggleLanguage = () => {
+  language.value = language.value === 'ID' ? 'EN' : 'ID';
+};
 </script>
 
 <template>
@@ -38,7 +43,11 @@
 
       <!-- Right Sidebar (Desktop Only) -->
       <aside class="hidden lg:flex flex-col items-center justify-end h-screen sticky top-0 pb-0">
-        <div class="flex flex-col items-center gap-6 mb-8 z-20">
+        <div class="flex flex-col items-center gap-4 mb-8 z-20">
+          <button @click="toggleLanguage" class="flex flex-col items-center gap-2 text-sm tracking-[0.2em] font-bold text-slate-400 hover:text-cyan-400 transition-all border border-slate-500 hover:border-cyan-400 px-2 py-3 rounded">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M3.6 9h16.8 M3.6 15h16.8 M12 3a15.3 15.3 0 0 1 4 9 15.3 15.3 0 0 1-4 9 15.3 15.3 0 0 1-4-9 15.3 15.3 0 0 1 4-9z"></path></svg>
+            <span style="writing-mode: vertical-rl;">{{ language }}</span>
+          </button>
           <a href="mailto:bintangaprilian100@gmail.com" class="text-sm tracking-[0.2em] text-slate-400 hover:text-cyan-400 hover:-translate-y-1 transition-all" style="writing-mode: vertical-rl;">
             bintangaprilian100@gmail.com
           </a>

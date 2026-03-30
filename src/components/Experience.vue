@@ -3,7 +3,7 @@
     <div class="max-w-5xl mx-auto">
       <h2 class="text-3xl font-bold text-white mb-12 flex items-center">
         <span class="text-primary font-mono text-lg mr-3">02.</span>
-        Where I've Worked
+        {{ language === 'EN' ? "Where I've Worked" : "Pengalaman Kerja" }}
         <span class="flex-1  bg-white/10 ml-6 hidden md:block"></span>
       </h2>
 
@@ -92,7 +92,7 @@
                 @click="openModal(categories[activeCat].items[activeExp])"
                 class="mt-4 self-start flex items-center gap-2 text-sm font-bold text-primary hover:text-white border border-primary/30 hover:border-primary px-5 py-2.5 rounded-lg transition-all hover:bg-primary/10"
               >
-                View Details
+                {{ language === 'EN' ? "View Details" : "Lihat Detail" }}
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
@@ -101,7 +101,7 @@
 
               <!-- Certification buttons -->
               <div v-if="categories[activeCat].items[activeExp].certifications && categories[activeCat].items[activeExp].certifications.length" class="mt-4">
-                <p class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3">Certifications</p>
+                <p class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3">{{ language === 'EN' ? "Certifications" : "Sertifikasi" }}</p>
                 <div class="flex flex-wrap gap-2">
                   <a
                     v-for="(cert, ci) in categories[activeCat].items[activeExp].certifications"
@@ -135,7 +135,7 @@
           <svg class="w-5 h-5 text-slate-900 group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
           </svg>
-          Download Resume
+          {{ language === 'EN' ? "Download Resume" : "Unduh Resume" }}
         </a>
       </div>
     </div>
@@ -161,7 +161,7 @@
 
           <!-- Body -->
           <div class="p-6 space-y-6">
-            <p class="text-slate-400 text-sm leading-relaxed">{{ activeModal?.description }}</p>
+            <p class="text-slate-400 text-sm leading-relaxed whitespace-pre-line">{{ activeModal?.description }}</p>
 
             <ul class="space-y-3">
               <li
@@ -176,7 +176,7 @@
 
             <!-- Skills used -->
             <div v-if="activeModal?.skills">
-              <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Skills Used</p>
+              <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">{{ language === 'EN' ? "Skills Used" : "Keahlian" }}</p>
               <div class="flex flex-wrap gap-2">
                 <span v-for="skill in activeModal.skills" :key="skill" class="px-3 py-1 text-xs font-bold rounded-full bg-primary/10 text-primary border border-primary/20 uppercase tracking-wider">
                   {{ skill }}
@@ -186,7 +186,7 @@
 
             <!-- Photo gallery -->
             <div v-if="activeModal?.photos?.length">
-              <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Documentation</p>
+              <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">{{ language === 'EN' ? "Documentation" : "Dokumentasi" }}</p>
               <div class="grid grid-cols-2 gap-3">
                 <div v-for="(photo, pi) in activeModal.photos" :key="pi" class="rounded-xl overflow-hidden aspect-video bg-slate-800">
                   <img :src="photo" :alt="`Photo ${pi + 1}`" class="w-full h-full object-cover" />
@@ -201,7 +201,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { language } from '../store.js';
 
 const activeCat = ref(0);
 const activeExp = ref(0);
@@ -218,27 +219,36 @@ const closeModal = () => {
   document.body.style.overflow = '';
 };
 
-const categories = [
+const categories = computed(() => [
   {
-    title: 'Website Developer',
+    title: language.value === 'EN' ? 'Website Developer' : 'Pengembang Web',
     items: [
       {
         company: 'PT. GIT Solution',
-        year: '2024–2025',
-        role: 'WordPress Builder & Figma Web Designer',
-        period: 'April 2024 – May 2025',
-        description: 'Part-time remote position at a digital agency in Yogyakarta (working from Surabaya). Built WordPress websites and designed interfaces with Figma while mentoring junior developers.',
-        bullets: [
+        year: '2024 - 2025',
+        role: language.value === 'EN' ? 'WordPress Builder & Figma Web Designer' : 'Pembuat WordPress & Desainer Web Figma',
+        period: language.value === 'EN' ? 'April 2024 - May 2025' : 'April 2024 - Mei 2025',
+        description: language.value === 'EN' 
+          ? 'Part-time remote position at a digital agency in Yogyakarta (working from Surabaya).\n\nBuilt WordPress websites and designed interfaces with Figma while mentoring junior developers.' 
+          : 'Posisi paruh waktu (remote) di agensi digital Yogyakarta. Aku membangun website WordPress dan merancang antarmuka dengan Figma sekaligus membimbing developer pemula.',
+        bullets: language.value === 'EN' ? [
           'Converted UI/UX designs from Figma into pixel-perfect, responsive websites using Elementor Page Builder.',
           'Developed and maintained 3+ dynamic company profiles and landing pages using WordPress and Elementor, reducing development time by 50%.',
           'Mentored a team of junior web developers and employees in WordPress best practices through internal video tutorials.',
           'Improved website functionality and user experience, contributing to increased client engagement and company revenue.',
           'Designed website interfaces with Figma and collaborated with developers to ensure accurate design implementation.',
           'Received Certificate of Employment from PT. GIT Solution.',
+        ] : [
+          'Mengubah desain UI/UX dari Figma menjadi website yang pixel-perfect dan responsif menggunakan Elementor Page Builder.',
+          'Mengembangkan dan memelihara profil perusahaan serta landing page dinamis menggunakan WordPress dan Elementor.',
+          'Membimbing tim developer junior mengenai praktik WordPress terbaik melalui tutorial video internal.',
+          'Meningkatkan fungsionalitas dan pengalaman pengguna yang sejalan dengan peningkatan klien.',
+          'Mendesain antarmuka dengan Figma dan berkolaborasi erat dengan developer.',
+          'Menerima Sertifikat Pekerjaan dari PT. GIT Solution.'
         ],
         skills: ['WordPress', 'Elementor', 'Figma', 'CSS', 'UI/UX Design'],
         certifications: [
-          { name: 'Certificate of Employment', link: 'https://drive.google.com/file/d/1ESFdiuRJAxwijjf7nj9VKV1t6dzBbPn5/view?usp=sharing' },
+          { name: language.value === 'EN' ? 'Certificate of Employment' : 'Sertifikat Kerja', link: 'https://drive.google.com/file/d/1ESFdiuRJAxwijjf7nj9VKV1t6dzBbPn5/view?usp=sharing' },
         ],
         photos: [
           'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/work/amikom',
@@ -248,14 +258,17 @@ const categories = [
         ],
       },
       {
-        company: 'Oemah Bu Liek Restaurant',
+        company: 'Oemah Bu Liek',
         year: '2025',
         role: 'Full Stack Developer',
-        period: 'February - June 2025',
-        description: "Actively involved in my family's restaurant — Oemah Bu Liek Restaurant, Gwalk Surabaya — taking on multiple operational roles from front-of-house service to back-end stock and finance management.",
-        bullets: [
-          'Developed an internal restaurant management system (Oemah Bu Liek) with Laravel — featuring employee attendance, payroll with overtime logic, and inventory tracking.',  
-          
+        period: language.value === 'EN' ? 'February - June 2025' : 'Februari - Juni 2025',
+        description: language.value === 'EN' 
+          ? "Actively involved in my family's restaurant, Oemah Bu Liek Restaurant (Gwalk Surabaya).\n\nI took on multiple operational roles from front-of-house service to back-end stock and finance management."
+          : "Aku berkontribusi aktif untuk restoran keluarga (Oemah Bu Liek, Gwalk Surabaya) sebagai pengembang web dari sistem absensi hingga stok.",
+        bullets: language.value === 'EN' ? [
+          'Developed an internal restaurant management system (Oemah Bu Liek) with Laravel: featuring employee attendance, payroll with overtime logic, and inventory tracking.',  
+        ] : [
+          'Mengembangkan sistem manajemen restoran dengan Laravel, mencakup fitur absensi, perhitungan gaji, lembur dan tracking stok.'
         ],
         skills: ['Laravel', 'PHP', 'MySQL', 'HTML', 'CSS', 'JavaScript'],
         photos: [
@@ -265,14 +278,20 @@ const categories = [
       },
       {
         company: 'Freelance',
-        year: '2024–Now',
+        year: '2024 - Now',
         role: 'Frontend & Web Developer',
-        period: '2024 – Present',
-        description: 'Taking on freelance projects across various industries — from personal trainer websites with Vue.js to restaurant management systems with Laravel and multi-client landing pages.',
-        bullets: [
+        period: language.value === 'EN' ? '2024 - Present' : '2024 - Sekarang',
+        description: language.value === 'EN' 
+          ? 'Taking on freelance projects across various industries: from personal trainer websites with Vue.js to restaurant management systems with Laravel and multi-client landing pages.'
+          : 'Aku mengerjakan beragam proyek freelance, mulai dari website instruktur gym menggunakan Vue, sistem restoran dengan Laravel, hingga landing page untuk berbagai klien.',
+        bullets: language.value === 'EN' ? [
           'Built a personal trainer portfolio website (Coach Yohanes) using Vue.js, Vite, Tailwind CSS, and DaisyUI for a client in Bali. Now in progress to add tons of features with Laravel, such as admin panel, macro nutrition counter for meal plan order, and booking system for personal trainer.',
           'Built a Company Profile Website for Papua Multi Event Company using Wordpress with Elementor Pro.',
           'Created responsive multi-project landing pages (Greenwick, PAO, Xiao) using HTML, CSS, JavaScript, and Bootstrap.',
+        ] : [
+          'Membuat website untuk pelatih personal (Coach Yohanes) dengan Vue.js. Sedang berlanjut integrasi sistem order rencana makanan, dan booking jadwal via Laravel.',
+          'Membangun profil dari Papua Multi Event dengan WordPress.',
+          'Mendesain landing page interaktif bergaya modern untuk proyek crypto Greenwick, PAO dan Xiao.'
         ],
         skills: ['Vue.js', 'Laravel', 'WordPress', 'Bootstrap', 'JavaScript'],
         photos: ['https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/bu_liek',
@@ -284,19 +303,26 @@ const categories = [
     ]
   },
   {
-    title: 'Work & Education',
+    title: language.value === 'EN' ? 'Education' : 'Pendidikan',
     items: [
       {
-        company: 'Oemah Bu Liek Restaurant',
-        year: '2023–2025',
+        company: 'Oemah Bu Liek',
+        year: '2023 - 2025',
         role: 'Waiter · Stock · Cashier',
-        period: 'January 2023 – November 2025',
-        description: "Actively involved in my family's restaurant — Oemah Bu Liek Restaurant, Gwalk Surabaya — taking on multiple operational roles from front-of-house service to back-end stock and finance management.",
-        bullets: [
+        period: language.value === 'EN' ? 'January 2023 - November 2025' : 'Januari 2023 - November 2025',
+        description: language.value === 'EN' 
+          ? "Actively involved in my family's restaurant, Oemah Bu Liek Restaurant at Gwalk Surabaya."
+          : "Aku aktif bekerja di restoran keluarga Oemah Bu Liek Surabaya untuk membantu operasional harian.",
+        bullets: language.value === 'EN' ? [
           'Served customers as a waiter, ensuring a welcoming and efficient dining experience.',
           'Managed daily stock inventory, tracked supplies, and coordinated restocking with suppliers.',
           'Operated the cashier system, handled transactions, and balanced daily sales reports.',
           'Contributed ideas for promotions and menu updates to help grow the business.',
+        ] : [
+          'Melayani pelanggan sebagai pramusaji, memastikan mereka mendapat pengalaman yang baik dan memuaskan.',
+          'Manajemen stok bahan baku harian.',
+          'Menjadi kasir dan pelaporan penjualan harian.',
+          'Berkontribusi dalam memberikan ide promosi makanan baru untuk membesarkan bisnis keluarga.'
         ],
         skills: ['Customer Service', 'Stock Management', 'Cashiering', 'Teamwork', 'Operations'],
         photos: [
@@ -307,16 +333,24 @@ const categories = [
       },
       {
         company: 'University',
-        year: '2021–2025',
-        role: 'CS Student & Lab Coordinator',
-        period: 'August 2021 – July 2025',
-        description: 'Bachelor of Computer Science at Wijaya Kusuma Surabaya University. GPA 3.86/4.00 (Honors: Excellent). Also served as Laboratory Assistant Coordinator for the Informatics Program.',
-        bullets: [
+        year: '2021 - 2025',
+        role: language.value === 'EN' ? 'CS Student & Lab Coordinator' : 'Mahasiswa IT & Koordinator Lab',
+        period: language.value === 'EN' ? 'August 2021 - July 2025' : 'Agustus 2021 - Juli 2025',
+        description: language.value === 'EN' 
+          ? 'Bachelor of Computer Science at Wijaya Kusuma Surabaya University (GPA 3.86/4.00, Honors: Excellent).\n\nAlso served as Laboratory Assistant Coordinator for the Informatics Program.'
+          : 'S1 Ilmu Komputer dari Universitas Wijaya Kusuma Surabaya. IPK 3.86 (Pujian/Dengan Pujian). Aku juga pernah memimpin Asisten Laboratorium Komputer.',
+        bullets: language.value === 'EN' ? [
           'Graduated with a Bachelor of Computer Science degree from Wijaya Kusuma Surabaya University, GPA 3.86/4.00 with Excellent honors.',
           'Served as Laboratory Assistant Coordinator, planning and organizing practical sessions for students.',
           'Oversaw laboratory assistant\'s performance, timeline achievement, and scheduled internal coordination meetings.',
-          'Certified Junior Web Developer — BNSP (LSP TIK), valid June 2023 – June 2026.',
-          'Internship Certificate MBKM 2023 — PT. GIT Solution.',
+          'Certified Junior Web Developer - BNSP (LSP TIK), valid June 2023 - June 2026.',
+          'Internship Certificate MBKM 2023 - PT. GIT Solution.',
+        ] : [
+          'Lulus S1 Teknik Informatika di UNWKS dengan predikat cumlaude (GPA 3.86/4.00).',
+          'Memimpin Asisten Lab, mendampingi mahasiswa pada kelas praktik koding dasar.',
+          'Mengawasi penilaian kerja rekan, ketepatan waktu, juga meeting kordinasi rutin.',
+          'Tersertifikasi Junior Web Developer dari BNSP.',
+          'Lulus pragram magang kampus merdeka di GIT solution.'
         ],
         skills: ['Computer Science', 'Leadership', 'Web Development', 'BNSP Certified'],
         certifications: [
@@ -332,7 +366,7 @@ const categories = [
       },
     ]
   }
-];
+]);
 </script>
 
 <style scoped>

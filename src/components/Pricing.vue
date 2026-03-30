@@ -4,11 +4,10 @@
       <div class="text-center mb-8">
         <h2 class="text-3xl font-bold text-white flex items-center justify-center">
           <span class="text-primary font-mono text-lg mr-3">03.</span>
-          Pricing Plans
+          {{ language === 'EN' ? "Pricing Plans" : "Paket Harga" }}
         </h2>
         <p class="text-slate-400 mt-4 max-w-xl mx-auto text-sm leading-relaxed">
-          Simple, transparent pricing. Every plan includes a free consultation and revision rounds.
-          More complex requirements? Let's talk!
+          {{ language === 'EN' ? "Simple, transparent pricing. Every plan includes a free consultation and revision rounds. More complex requirements? Let's talk!" : "Harga simpel dan transparan. Setiap paket mencakup konsultasi gratis dan revisi. Proyek lebih kompleks? Mari berdiskusi!" }}
         </p>
       </div>
 
@@ -22,7 +21,7 @@
             :class="{ 'pricing-card--featured': plan.featured }"
           >
             <!-- Badge -->
-            <div v-if="plan.featured" class="featured-badge">Most Popular</div>
+            <div v-if="plan.featured" class="featured-badge">{{ language === 'EN' ? "Most Popular" : "Paling Populer" }}</div>
 
             <div class="flex flex-col h-full">
               <!-- Plan header -->
@@ -81,50 +80,60 @@
       </div>
 
       <p class="text-center text-slate-600 text-xs mt-8">
-        Prices are estimates. Final cost depends on project scope. Contact me for a custom quote.
+        {{ language === 'EN' ? "Prices are estimates. Final cost depends on project scope. Contact me for a custom quote." : "Harga di atas adalah estimasi. Total harga bergantung pada cakupan proyek. Hubungi aku untuk penawaran khusus." }}
       </p>
     </div>
   </section>
 </template>
 
 <script setup>
+import { computed } from 'vue';
+import { language } from '../store.js';
+
 const WA_NUMBER = '62895353811311';
 
-const plans = [
+// We use `computed` so that the plans update whenever the `language` state changes.
+const plans = computed(() => [
   {
     name: 'Starter',
-    price: 'Rp 1.5M',
-    priceNote: '/ project',
+    // Change price format based on selected language
+    price: language.value === 'EN' ? '$100' : 'Rp 1.5M',
+    priceNote: language.value === 'EN' ? '/ project' : '/ proyek',
     featured: false,
-    description: 'Perfect for landing pages, profile websites, or simple company profiles.',
-    message: 'Hi Bintang! I\'m interested in the Starter plan (Rp 1.5M). I need a landing page / simple website. Can we discuss further?',
+    description: language.value === 'EN' ? 'Perfect for landing pages, profile websites, or simple company profiles.' : 'Cocok untuk landing page, website profil, atau profil perusahaan sederhana.',
+    // Also updating the WhatsApp message to match the selected pricing plan.
+    message: language.value === 'EN'
+      ? 'Hi Bintang! I\'m interested in the Starter plan ($100). I need a landing page / simple website. Can we discuss further?'
+      : 'Halo Bintang! Saya tertarik dengan paket Starter (Rp 1.5M). Saya butuh landing page / website simpel. Bisa kita diskusikan?',
     features: [
-      { text: 'Up to 3 pages', included: true },
-      { text: 'Responsive design', included: true },
-      { text: 'Contact form integration', included: true },
-      { text: 'Basic SEO setup', included: true },
-      { text: '2 rounds of revisions', included: true },
-      { text: 'CMS / Admin panel', included: false },
-      { text: 'Custom backend / API', included: false },
-      { text: 'Priority support', included: false },
+      { text: language.value === 'EN' ? 'Up to 3 pages' : 'Maksimal 3 halaman', included: true },
+      { text: language.value === 'EN' ? 'Responsive design' : 'Desain Responsif', included: true },
+      { text: language.value === 'EN' ? 'Contact form integration' : 'Integrasi Form Kontak', included: true },
+      { text: language.value === 'EN' ? 'Basic SEO setup' : 'Setup SEO Dasar', included: true },
+      { text: language.value === 'EN' ? '2 rounds of revisions' : '2 kali revisi', included: true },
+      { text: language.value === 'EN' ? 'CMS / Admin panel' : 'CMS / Panel Admin', included: false },
+      { text: language.value === 'EN' ? 'Custom backend / API' : 'Custom Backend / API', included: false },
+      { text: language.value === 'EN' ? 'Priority support' : 'Prioritas Dukungan', included: false },
     ],
   },
   {
     name: 'Professional',
-    price: 'Rp 5M',
-    priceNote: '/ project',
+    price: language.value === 'EN' ? '$350' : 'Rp 5M',
+    priceNote: language.value === 'EN' ? '/ project' : '/ proyek',
     featured: true,
-    description: 'Ideal for business websites, web apps, or multi-page projects with a CMS.',
-    message: 'Hi Bintang! I\'m interested in the Professional plan (Rp 5M). I need a business website / web app with CMS. Can we discuss further?',
+    description: language.value === 'EN' ? 'Ideal for business websites, web apps, or multi-page projects with a CMS.' : 'Ideal untuk website bisnis, web app, atau proyek multi-halaman dengan CMS.',
+    message: language.value === 'EN'
+      ? 'Hi Bintang! I\'m interested in the Professional plan ($350). I need a business website / web app with CMS. Can we discuss further?'
+      : 'Halo Bintang! Saya tertarik dengan paket Professional (Rp 5M). Saya butuh website bisnis / web app dengan CMS. Bisa kita diskusikan?',
     features: [
-      { text: 'Up to 10 pages', included: true },
-      { text: 'Responsive design', included: true },
-      { text: 'Contact form integration', included: true },
-      { text: 'Advanced SEO setup', included: true },
-      { text: '5 rounds of revisions', included: true },
-      { text: 'CMS / Admin panel', included: true },
-      { text: 'Custom backend / API', included: false },
-      { text: 'Priority support', included: false },
+      { text: language.value === 'EN' ? 'Up to 10 pages' : 'Maksimal 10 halaman', included: true },
+      { text: language.value === 'EN' ? 'Responsive design' : 'Desain Responsif', included: true },
+      { text: language.value === 'EN' ? 'Contact form integration' : 'Integrasi Form Kontak', included: true },
+      { text: language.value === 'EN' ? 'Advanced SEO setup' : 'Setup SEO Lanjutan', included: true },
+      { text: language.value === 'EN' ? '5 rounds of revisions' : '5 kali revisi', included: true },
+      { text: language.value === 'EN' ? 'CMS / Admin panel' : 'CMS / Panel Admin', included: true },
+      { text: language.value === 'EN' ? 'Custom backend / API' : 'Custom Backend / API', included: false },
+      { text: language.value === 'EN' ? 'Priority support' : 'Prioritas Dukungan', included: false },
     ],
   },
   {
@@ -132,20 +141,22 @@ const plans = [
     price: 'Custom',
     priceNote: null,
     featured: false,
-    description: 'Full-stack systems, POS, ERP, or anything requiring complex custom development.',
-    message: 'Hi Bintang! I\'m interested in a custom Enterprise project. I need a full-stack system. Can we discuss the scope and pricing?',
+    description: language.value === 'EN' ? 'Full-stack systems, POS, ERP, or anything requiring complex custom development.' : 'Sistem full-stack, POS, ERP, atau apa pun yang membutuhkan pengembangan custom kompleks.',
+    message: language.value === 'EN' 
+      ? 'Hi Bintang! I\'m interested in a custom Enterprise project. I need a full-stack system. Can we discuss the scope and pricing?'
+      : 'Halo Bintang! Saya tertarik dengan proyek Enterprise custom. Saya butuh sistem full-stack. Bisa kita diskusikan cakupan dan harganya?',
     features: [
-      { text: 'Unlimited pages', included: true },
-      { text: 'Responsive design', included: true },
-      { text: 'Contact form integration', included: true },
-      { text: 'Advanced SEO setup', included: true },
-      { text: 'Unlimited revisions', included: true },
-      { text: 'CMS / Admin panel', included: true },
-      { text: 'Custom backend / API', included: true },
-      { text: 'Priority support', included: true },
+      { text: language.value === 'EN' ? 'Unlimited pages' : 'Halaman tak terbatas', included: true },
+      { text: language.value === 'EN' ? 'Responsive design' : 'Desain Responsif', included: true },
+      { text: language.value === 'EN' ? 'Contact form integration' : 'Integrasi Form Kontak', included: true },
+      { text: language.value === 'EN' ? 'Advanced SEO setup' : 'Setup SEO Lanjutan', included: true },
+      { text: language.value === 'EN' ? 'Unlimited revisions' : 'Revisi tak terbatas', included: true },
+      { text: language.value === 'EN' ? 'CMS / Admin panel' : 'CMS / Panel Admin', included: true },
+      { text: language.value === 'EN' ? 'Custom backend / API' : 'Custom Backend / API', included: true },
+      { text: language.value === 'EN' ? 'Priority support' : 'Prioritas Dukungan', included: true },
     ],
   },
-];
+]);
 
 const buildWALink = (plan) => {
   const encoded = encodeURIComponent(plan.message);

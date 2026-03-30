@@ -6,9 +6,9 @@
       <div class="mb-16">
         <router-link to="/" class="group inline-flex items-center gap-2 text-sm text-primary hover:text-cyan-400 transition-colors mb-8">
           <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-          Bintang Surya
+          Bintang Aprilian
         </router-link>
-        <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight">All Projects</h1>
+        <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight">{{ language === 'EN' ? "All Projects" : "Semua Proyek" }}</h1>
       </div>
 
       <!-- ===== TABLE ===== -->
@@ -16,11 +16,11 @@
 
         <!-- Header Row (hidden on mobile) -->
         <div class="archive-header hidden md:grid">
-          <div>Year</div>
-          <div>Project</div>
-          <div>Made at</div>
-          <div>Built with</div>
-          <div>Link</div>
+          <div>{{ language === 'EN' ? "Year" : "Tahun" }}</div>
+          <div>{{ language === 'EN' ? "Project" : "Proyek" }}</div>
+          <div>{{ language === 'EN' ? "Made at" : "Dibuat di" }}</div>
+          <div>{{ language === 'EN' ? "Built with" : "Dibuat dengan" }}</div>
+          <div>{{ language === 'EN' ? "Link" : "Tautan" }}</div>
         </div>
 
         <!-- Data Rows -->
@@ -32,13 +32,13 @@
         >
           <!-- Year -->
           <div class="archive-cell year-cell">
-            <span class="mobile-label hidden md:block">Year</span>
+            <span class="mobile-label hidden md:block">{{ language === 'EN' ? "Year" : "Tahun" }}</span>
             {{ project.year }}
           </div>
 
           <!-- Project -->
           <div class="archive-cell project-cell">
-            <span class="mobile-label">Project</span>
+            <span class="mobile-label">{{ language === 'EN' ? "Project" : "Proyek" }}</span>
             <span class="project-name">
               {{ project.title }}
               <svg v-if="project.liveLink" class="inline-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
@@ -105,11 +105,11 @@
               <span v-if="selectedProject?.madeAt" class="text-slate-500 text-xs px-2 py-0.5 rounded bg-white/5">{{ selectedProject.madeAt }}</span>
             </div>
 
-            <p class="text-slate-300 text-sm md:text-base leading-relaxed mb-8">{{ selectedProject?.longDescription }}</p>
+            <p class="text-slate-300 text-sm md:text-base leading-relaxed mb-8 whitespace-pre-line">{{ selectedProject?.longDescription }}</p>
 
             <!-- Tech Stack -->
             <div class="mb-8">
-              <h4 class="section-label">Technologies</h4>
+              <h4 class="section-label">{{ language === 'EN' ? "Technologies" : "Teknologi" }}</h4>
               <div class="chip-list mt-3">
                 <span v-for="tech in selectedProject?.techStack" :key="tech" class="chip chip-lg">
                   <svg v-if="techIcons[tech]" class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" v-html="techIcons[tech]"></svg>
@@ -120,7 +120,7 @@
 
             <!-- Key Features -->
             <div v-if="selectedProject?.features?.length" class="mb-10">
-              <h4 class="section-label">Key Features</h4>
+              <h4 class="section-label">{{ language === 'EN' ? "Key Features" : "Fitur Utama" }}</h4>
               <ul class="mt-3 space-y-3">
                 <li v-for="(feat, i) in selectedProject.features" :key="i" class="flex items-start gap-3 text-slate-400 text-sm">
                   <div class="w-1.5 h-1.5 rounded-full bg-primary/60 mt-1.5 shrink-0"></div>
@@ -132,11 +132,11 @@
             <!-- CTA Buttons -->
             <div class="cta-group">
               <a v-if="selectedProject?.liveLink" :href="selectedProject.liveLink" target="_blank" class="cta-primary">
-                Visit Site
+                {{ language === 'EN' ? "Visit Site" : "Kunjungi Situs" }}
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
               </a>
               <a v-if="selectedProject?.githubLink" :href="selectedProject.githubLink" target="_blank" class="cta-secondary">
-                Source
+                {{ language === 'EN' ? "Source" : "Sumber" }}
                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/></svg>
               </a>
             </div>
@@ -151,7 +151,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { language } from '../store.js';
 
 const techIcons = {
   'Vue 3': '<path d="M24,1.61H14.06L12,5.16,9.94,1.61H0L12,22.39ZM12,14.08,5.16,2.23H9.59L12,6.41l2.41-4.18h4.43Z" transform="translate(0 -1.61)"/>',
@@ -163,126 +164,128 @@ const techIcons = {
   'Stripe': '<path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.887 3.333 1.553 3.333 2.46 0 1.059-.783 1.89-2.33 1.89-1.67 0-4.115-.68-5.783-1.649l-.913 5.525C5.508 23.415 8.397 24 11.464 24c2.641 0 4.75-.624 6.265-1.844 1.734-1.378 2.573-3.359 2.573-5.74-.003-4.136-2.529-5.982-6.326-7.266z"/>',
 };
 
-const archiveProjects = ref([
+const archiveProjects = computed(() => [
   {
     year: '2026',
-    title: 'Personal Trainer Website — Coach Yohanes (Ongoing)',
+    title: language.value === 'EN' ? 'Personal Trainer Website: Coach Yohanes (Ongoing)' : 'Website Personal Trainer: Coach Yohanes (Berjalan)',
     madeAt: 'Freelance',
     techStack: ['Vue 3', 'Tailwind', 'DaisyUI', 'Laravel', 'MySQL'],
     linkDisplay: 'coach-yohanes.app',
     liveLink: 'https://gym-yohanes.vercel.app',
     githubLink: 'https://github.com/bintangmogot/gym-yohanes',
     media: 'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/coach',
-    longDescription: "A personal trainer in Canggu, Bali, had a growing roster of international clients — but no digital system to match. Training bookings were handled via WhatsApp, meal plans were shared through Instagram stories, and client transformations were buried in phone galleries. I designed and built this full-stack platform to solve that. Starting as a high-conversion landing page showcasing credentials, testimonials, and training packages, the system is progressively evolving into a complete fitness management suite — featuring an interactive 'Build Your Own Plate' nutrition tracker with real-time macro calculations, a calendar-based session booking system with admin approval workflows, and an integrated e-commerce store for gym supplements and gear. The frontend is built with Vue 3 Composition API and Tailwind CSS 4 for a premium, responsive experience, while the backend runs on Laravel 11 serving a RESTful API with PostgreSQL.",
-    features: ['Responsive Landing Page', 'Meal Plan Showcase', 'Training Package Display', 'UI/UX Design Integration'],
+    longDescription: language.value === 'EN' 
+      ? "A personal trainer in Canggu, Bali, had a growing roster of international clients, but no digital system to match. Training bookings were handled via WhatsApp, meal plans were shared through Instagram stories, and client transformations were buried in phone galleries.\n\nI designed and built this full-stack platform to solve that. Starting as a high-conversion landing page showcasing credentials, testimonials, and training packages, the system is progressively evolving into a complete fitness management suite.\n\nThis suite features an interactive 'Build Your Own Plate' nutrition tracker with real-time macro calculations, a calendar-based session booking system with admin approval workflows, and an integrated e-commerce store for gym supplements and gear. The frontend is built with Vue 3 Composition API and Tailwind CSS 4 for a premium, responsive experience, while the backend runs on Laravel 11 serving a RESTful API with PostgreSQL." 
+      : "Seorang personal trainer di Canggu, Bali, memiliki daftar klien internasional yang terus bertambah, tetapi belum memiliki sistem digital yang memadai. Jadwal latihan dipesan via WhatsApp, rencana makan (meal plan) dibagikan melalui story Instagram, dan foto transformasi klien terkubur di galeri foto.\n\nAku mendesain dan membangun platform full-stack ini untuk mengatasi masalah tersebut. Dimulai sebagai landing page dengan konversi tinggi yang menampilkan kredensial, testimoni, dan paket latihan, sistem ini secara bertahap berevolusi menjadi platform manajemen kebugaran lengkap.\n\nFitur utamanya mencakup pelacak nutrisi interaktif 'Build Your Own Plate' dengan kalkulasi makro real-time, sistem pemesanan sesi latihan berbasis kalender dengan alur persetujuan admin, serta toko e-commerce terintegrasi untuk suplemen dan peralatan gym. Frontend dibangun menggunakan Vue 3 Composition API dan Tailwind CSS 4 yang responsif, sedangkan backend berjalan di atas Laravel 11 dan PostgreSQL.",
+    features: language.value === 'EN' ? ['Responsive Landing Page', 'Meal Plan Showcase', 'Training Package Display', 'UI/UX Design Integration'] : ['Landing Page Responsif', 'Etalase Meal Plan', 'Tampilan Paket Latihan', 'Integrasi Desain UI/UX'],
   },
   {
     year: '2025',
-    title: 'Restaurant Management System — Oemah Bu Liek',
+    title: language.value === 'EN' ? 'Restaurant Management System: Oemah Bu Liek' : 'Sistem Manajemen Restoran: Oemah Bu Liek',
     madeAt: 'Freelance',
     techStack: ['Laravel', 'MySQL', 'Bootstrap'],
     linkDisplay: 'oemahbuliek.com',
     liveLink: 'https://omahbuliek.page.gd/',
     githubLink: 'https://github.com/bintangmogot/website_oemahbuliek',
     media: 'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/bu_liek',
-    longDescription: 'Designed to modernize the operations of a busy restaurant in Surabaya. Automates payroll calculations (including overtime logic) and streamlines stock management, ensuring data accuracy and operational speed.',
-    features: ['Employee Attendance & Photo Verification', 'Payroll with Overtime Logic', 'Inventory Stock-In/Stock-Out Tracking', 'Role-Based Access Control'],
+    longDescription: language.value === 'EN' ? 'Designed to modernize the operations of a busy restaurant in Surabaya.\n\nAutomates payroll calculations (including overtime logic) and streamlines stock management, ensuring data accuracy and operational speed.' : 'Dirancang untuk memodernisasi operasional restoran yang padat di Surabaya.\n\nMengotomatiskan perhitungan gaji (serta honor lembur) dan merampingkan manajemen stok, guna memastikan akurasi data dan mempercepat proses operasional harian.',
+    features: language.value === 'EN' ? ['Employee Attendance & Photo Verification', 'Payroll with Overtime Logic', 'Inventory Stock-In/Stock-Out Tracking', 'Role-Based Access Control'] : ['Absensi Karyawan & Verifikasi Foto', 'Sistem Penggajian & Uang Lembur', 'Sistem Pantau Stok Masuk / Keluar', 'Hak Akses Keamanan Berjenjang'],
   },
   {
     year: '2025',
-    title: 'Digital Education Hub — Bina Akhlak Digital',
+    title: language.value === 'EN' ? 'Digital Education Hub: Bina Akhlak Digital' : 'Pusat Edukasi Digital: Bina Akhlak Digital',
     madeAt: 'PT. GIT Solution',
     techStack: ['WordPress', 'Elementor Pro', 'WooCommerce'],
     linkDisplay: 'binaakhlakdigital.id',
     liveLink: 'https://binaakhlakdigital.id/',
     githubLink: '',
     media: 'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/bina',
-    longDescription: 'A specialized digital education hub focused on character building. Created a user-friendly Learning Management System (LMS) environment where students can access structured educational content. Integrated essential tools to support course delivery and community interaction.',
-    features: ['Homeschooling Program', 'LMS Course Delivery', 'Community Interaction Tools', 'Responsive Design'],
+    longDescription: language.value === 'EN' ? 'A specialized digital education hub focused on character building.\n\nCreated a user-friendly Learning Management System (LMS) environment where students can access structured educational content. Integrated essential tools to support course delivery and community interaction.' : 'Situs pusat edukasi digital yang berfokus pada pendidikan pembentukan karakter.\n\nAku membuat platform Learning Management System (LMS) yang user-friendly agar para murid bisa mengakses materi belajar dengan mudah. Berbagai sistem terintegrasi dengan baik untuk menyajikan video pembelajaran edukatif yang interaktif.',
+    features: language.value === 'EN' ? ['Homeschooling Program', 'LMS Course Delivery', 'Community Interaction Tools', 'Responsive Design'] : ['Program Homeschooling', 'Sistem LMS untuk materi Video', 'Sistem Interaksi Belajar Komunitas', 'Akses yang Nyaman dan Responsif'],
   },
   {
     year: '2025',
-    title: '$PAO Narrative Landing Page',
+    title: language.value === 'EN' ? '$PAO Narrative Landing Page' : 'Landing Page Naratif $PAO',
     madeAt: 'Freelance',
     techStack: ['HTML5', 'CSS3', 'Bootstrap'],
     linkDisplay: 'pao-coin.app',
     liveLink: 'https://pao-coin-nine.vercel.app/',
     githubLink: 'https://github.com/bintangmogot/GreenWickCoin',
     media: 'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/pao',
-    longDescription: 'An engaging, narrative-driven landing page for PAO, built using Bootstrap. Focused on presenting a unique brand story through professional layout design and clear step-by-step instructional sections for user onboarding.',
-    features: ['Storytelling-focused Layout', 'Instructional UI Design', 'Bootstrap Grid Implementation', 'Responsive Branding'],
+    longDescription: language.value === 'EN' ? 'An engaging, narrative-driven landing page for PAO, built using Bootstrap.\n\nFocused on presenting a unique brand story through professional layout design and clear step-by-step instructional sections for user onboarding.' : 'Sebuah halaman landing berbasis naratif untuk koin $PAO, dengan menggunakan elemen Bootstrap.\n\nSitus ini dibangun dengan menonjolkan desain visual bercerita dan panduan langkah per langkah untuk memberi panduan pada pelanggan.',
+    features: language.value === 'EN' ? ['Storytelling-focused Layout', 'Instructional UI Design', 'Bootstrap Grid Implementation', 'Responsive Branding'] : ['Layout Responsif Berbasis Cerita', 'Desain Instruksi UI yang Jelas', 'Implementasi Bootstrap Grid', 'Branding Website yang Sesuai Tema'],
   },
   {
       year: '2025',
-      title: '$Green Wick Interactive Website',
+      title: language.value === 'EN' ? '$Green Wick Interactive Website' : 'Website Interaktif $Green Wick',
       madeAt: 'Freelance',
       techStack: ['HTML5', 'CSS3', 'Bootstrap'],
       linkDisplay: 'green-wick-coin.app',
       liveLink: 'https://green-wick-coin.vercel.app/',
       githubLink: 'https://github.com/bintangmogot/GreenWickCoin',
       media: 'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/greenwick',
-      longDescription: 'A custom landing page for the Green Wick project featuring interactive web elements and CSS animations. Implemented a unique web-based mini-game concept to increase user engagement and time-on-page.',
-      features: ['Interactive Web Elements', 'CSS3 Animations', 'Custom Game Logic', 'Community-driven UI'],
+      longDescription: language.value === 'EN' ? 'A custom landing page for the Green Wick project featuring interactive web elements and CSS animations.\n\nImplemented a unique web-based mini-game concept to increase user engagement and time-on-page.' : 'Landing page interaktif memukau khusus untuk proyek Green Wick Web3 yang menampilkan berbagai elemen CSS dan animasi yang merespons user.\n\nDitambahkan konsep mini-game unik untuk mendorong retensi kunjungan website para calon pelanggan atau member komunitas.',
+      features: language.value === 'EN' ? ['Interactive Web Elements', 'CSS3 Animations', 'Custom Game Logic', 'Community-driven UI'] : ['Elemen Web Interaktif', 'Animasi CSS3 Responsif', 'Penerapan Fitur Game Website Mini', 'Sistem Interaktif Untuk Komunitas'],
     },
     {
       year: '2025',
-      title: '$Xiao Portfolio & Gallery Page',
+      title: language.value === 'EN' ? '$Xiao Portfolio & Gallery Page' : 'Halaman Galeri Web Desain $Xiao',
       madeAt: 'Freelance',
       techStack: ['HTML5', 'CSS3', 'Bootstrap'],
       linkDisplay: 'xiao-coin.app',
       liveLink: 'https://xiao-coin.vercel.app/',
       githubLink: 'https://github.com/bintangmogot/GreenWickCoin',
       media: 'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/xiao',
-      longDescription: 'A multipurpose landing page for Xiao, focusing on media-heavy content and partner integrations. Features an optimized image gallery and a clean, responsive grid system to display professional partnerships.',
-      features: ['Media Gallery Showcase', 'Partner Grid System', 'Responsive Navigation', 'Custom UI Components'],
+      longDescription: language.value === 'EN' ? 'A multipurpose landing page for Xiao, focusing on media-heavy content and partner integrations.\n\nFeatures an optimized image gallery and a clean, responsive grid system to display professional partnerships.' : 'Landing page khusus website perkenalan kripto coin proyek $Xiao, dengan mengutamakan optimalisasi gambar media digital tanpa merusak kecepatan respon website.\n\nMenampilkan grid mitra kerja sponsor dan antarmuka grid image gallery untuk portfolio kerja dan roadmap proyek startup kripto tersebut.',
+      features: language.value === 'EN' ? ['Media Gallery Showcase', 'Partner Grid System', 'Responsive Navigation', 'Custom UI Components'] : ['Akses Tampilan Galeri Digital', 'Sistem Layout Grid untuk Sponsor', 'Navigasi Minimalis dan Responsif', 'Antarmuka Visual Terintegrasi Khusus'],
     },
     {
       year: '2025',
-      title: '$ZEN COIN Landing Page',
+      title: language.value === 'EN' ? '$ZEN COIN Landing Page' : 'Landing Page $ZEN COIN',
       madeAt: 'Freelance',
       techStack: ['HTML5', 'CSS3', 'Tailwind CSS', 'JavaScript', 'Tone.js'],
       linkDisplay: 'zen-coin.app',
       liveLink: 'https://zen-coin.vercel.app/',
       githubLink: 'https://github.com/bintangmogot/zen-coin',
       media: 'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/zen-coin_1',
-      longDescription: 'A multipurpose landing page for $ZEN COIN, focusing on media-heavy content and partner integrations. Features an optimized image gallery and a clean, responsive grid system to display professional partnerships.',
-      features: ['3D flip card', 'Responsive Navigation', 'Custom UI Components', 'Media Gallery Showcase'],
+      longDescription: language.value === 'EN' ? 'A multipurpose landing page for $ZEN COIN, focusing on media-heavy content and partner integrations.\n\nFeatures an optimized image gallery and a clean, responsive grid system to display professional partnerships.' : 'Halaman khusus dan Landing page untuk proyek startup mata uang digital $ZEN COIN yang sangat memanjakan para penikmat interface elegan ala estetik zen dan spiritual kultur timur.\n\nWebsite dilengkapi fitur Tone Audio Javascript khusus animasi dan 3D coin render grid untuk kenyamanan dan kesan profesional tingkat lanjut.',
+      features: language.value === 'EN' ? ['3D flip card', 'Responsive Navigation', 'Custom UI Components', 'Media Gallery Showcase'] : ['Render 3D kartu bolak balik interaktif', 'Pemutar suara dinamis', 'Animasi Elegan Desain UI', 'Menu Galeri Khusus Teroptimasi'],
     },
     {
       year: '2024',
-      title: 'LMS & Certification Platform — Amikom Center',
+      title: language.value === 'EN' ? 'LMS & Certification Platform: Amikom Center' : 'Platform Sertifikasi Khusus & LMS: Amikom Center',
       madeAt: 'PT. GIT Solution',
       techStack: ['WordPress', 'Elementor Pro', 'WooCommerce', 'Tutor LMS'],
       linkDisplay: 'amikomcenter.com',
       liveLink: 'https://amikomcenter.com/',
       githubLink: '',
       media: 'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/amikom',
-      longDescription: 'An integrated digital platform that combines a professional corporate identity with a functional E-commerce LMS. Serves as a dual-purpose portal: introducing the company\'s vision and providing a marketplace for professional online courses.',
-      features: ['LMS Course Marketplace', 'E-commerce Integration', 'Corporate Profile', 'Responsive UI Implementation'],
+      longDescription: language.value === 'EN' ? 'An integrated digital platform that combines a professional corporate identity with a functional E-commerce LMS.\n\nServes as a dual-purpose portal: introducing the company\'s vision and providing a marketplace for professional online courses.' : 'Aplikasi digital berbasis web yang berhasil memadukan platform identitas profil perusahan profesional dengan sistem fungsional E-Commerce (Marketplace) LMS.\n\nSitus ini menjadi wadah serbaguna yang memperkenalkan program kursus tatap muka offline dan kursus E-Learning.',
+      features: language.value === 'EN' ? ['LMS Course Marketplace', 'E-commerce Integration', 'Corporate Profile', 'Responsive UI Implementation'] : ['Pasar Marketplace Pilihan Kursus LMS', 'Sistem Belanja Checkout Integrasi Transaksi', 'Situs Profil Perusahaan Profesional', 'Mendukung Akses Dari Lintas Perangkat'],
     },
     {
       year: '2024',
-      title: 'LMS — GITS Training',
+      title: language.value === 'EN' ? 'LMS: GITS Training' : 'LMS: GITS Training',
       madeAt: 'PT. GIT Solution',
       techStack: ['WordPress', 'Elementor Pro', 'WooCommerce'],
       linkDisplay: 'gitstraining.com',
       liveLink: 'https://gitstraining.com/',
       githubLink: '',
       media: 'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/gits',
-      longDescription: 'A comprehensive Learning Management System (LMS) for GITS Training, a platform dedicated to professional IT certification and digital skills. Designed to handle user registration, course management, and interactive assessments so students can track their learning progress and prepare for national certifications (BNSP).',
-      features: ['User Registration & Course Management', 'LMS Video Tutorials', 'BNSP Certification Prep', 'Mentoring System'],
+      longDescription: language.value === 'EN' ? 'A comprehensive Learning Management System (LMS) for GITS Training, a platform dedicated to professional IT certification and digital skills.\n\nDesigned to handle user registration, course management, and interactive assessments so students can track their learning progress and prepare for national certifications (BNSP).' : 'Aplikasi Learning Management System berskala masif yang komprehensif untuk GITS Training yang berfungsi sebagai sentral pendidikan dalam mempersiapkan sertifikasi teknologi informasi beserta kompetensi keterampilan di dunia ranah pekerjaan profesional.\n\nDilengkapi fungsi registrasi mandiri peserta didik, kelas online berbayar, sertifikasi nasional (Ujian BNSP), forum diskusi mentoring grup, hingga manajemen penugasan.',
+      features: language.value === 'EN' ? ['User Registration & Course Management', 'LMS Video Tutorials', 'BNSP Certification Prep', 'Mentoring System'] : ['Fitur Registrasi Manual & Online Siswa', 'Instruktur Video Mentoring Belajar Interaktif', 'Manajemen Portal Persiapan Sertifikasi Resmi Ujian BNSP', 'Fitur Form Diskusi Antar Mentor dan User'],
     },
     {
       year: '2024',
-      title: 'Multi-Service Platform — Papua Multi Event',
+      title: language.value === 'EN' ? 'Multi-Service Platform: Papua Multi Event' : 'Platform Penyedia Jasa Lintas Acara: Papua Multi Event',
       madeAt: 'Freelance',
       techStack: ['WordPress', 'Elementor'],
       linkDisplay: 'papuamultievent.com',
       liveLink: 'https://papuamultievent.com/',
       githubLink: '',
       media: 'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/papua',
-      longDescription: 'A comprehensive digital platform built to showcase a diverse range of services, from wedding organization to tourism and professional training. Created a clean, responsive interface that allows the owner to manage content easily.',
-      features: ['Wedding Organizer Section', 'Tourism Packages', 'Training & Course Listings', 'Responsive on All Devices'],
+      longDescription: language.value === 'EN' ? 'A comprehensive digital platform built to showcase a diverse range of services, from wedding organization to tourism and professional training. \n\nCreated a clean, responsive interface that allows the owner to manage content easily.' : 'Portal layanan platform digital lengkap merangkap portal info sewa jasa penyelenggara banyak acara yang berbasis di daerah timur, yaitu Papua.\n\nMenyediakan ragam jasa penawaran utama, pelatihan sertifikasi diklat acara profesional, serta jasa pemandu tim tamasya tur keluarga dalam mengeksplor ragam wisata alam liar lokal dari wilayah tanah asli Papua.',
+      features: language.value === 'EN' ? ['Wedding Organizer Section', 'Tourism Packages', 'Training & Course Listings', 'Responsive on All Devices'] : ['Sekmen Katalog Desain Acara Wedding', 'Rencana Penawaran Pelayanan Pemandu Wisata Tur Privat', 'Dokumentasi Brosur Program Kursus Publik', 'Berjalan Lancar Di Resolusi Layar Apapun'],
     },
   ]);
 

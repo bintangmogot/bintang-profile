@@ -4,7 +4,7 @@
     <div class="max-w-7xl mx-auto">
       <h2 class="text-3xl font-bold text-white mb-12 flex items-center">
         <span class="text-primary font-mono text-lg mr-3">01.</span>
-        About Me
+        {{ language === 'EN' ? "About Me" : "Kenalan Yuk" }}
         <span class="flex-1 h-px bg-white/10 ml-6 hidden md:block"></span>
       </h2>
 
@@ -18,10 +18,12 @@
         <!-- === CELL A: Bio (col 1-2, row 1-2) === -->
         <div class="bento-cell bento-bio slide-from-left">
           <h3 class="text-2xl font-extrabold text-white mb-3 leading-tight">
-            CS Graduate &amp; <span class="text-primary">Web Developer</span>
+            {{ language === 'EN' ? "CS Graduate &" : "Lulusan Informatika &" }} <span class="text-primary">Web Developer</span>
           </h3>
           <p class="text-slate-400 text-sm leading-relaxed">
-            I'm a Web Developer and Computer Science graduate from Wijaya Kusuma Surabaya University. I specialize in translating Figma designs into responsive websites using HTML, CSS, JavaScript, and WordPress with Elementor. Currently expanding my skills into full-stack development with Laravel.
+            {{ language === 'EN' 
+               ? "I'm a Web Developer and Computer Science graduate from Wijaya Kusuma Surabaya University. I specialize in translating Figma designs into responsive websites using HTML, CSS, JavaScript, and WordPress with Elementor. Currently expanding my skills into full-stack development with Laravel."
+               : "Aku adalah Pengembang Web dan lulusan Informatika dari Universitas Wijaya Kusuma Surabaya. Aku berspesialisasi dalam menerjemahkan desain Figma menjadi website responsif menggunakan HTML, CSS, JavaScript, dan WordPress dengan Elementor. Saat ini aku sedang memperluas keahlian ke full-stack developer dengan Laravel." }}
           </p>
           <div class="flex flex-wrap gap-2 mt-5">
             <span class="badge badge-cyan">Frontend</span>
@@ -48,7 +50,7 @@
 
         <!-- === CELL C: Location (col 4, row 1) === -->
         <div class="bento-cell bento-location slide-from-right">
-          <p class="text-slate-500 text-xs font-mono uppercase tracking-widest mb-1">Based in</p>
+          <p class="text-slate-500 text-xs font-mono uppercase tracking-widest mb-1">{{ language === 'EN' ? "Based in" : "Berbasis di" }}</p>
           <p class="text-white font-bold text-xl flex items-center gap-2">
             Bali, Indonesia
             <span class="inline-flex overflow-hidden rounded-sm border border-white/10 shadow-xs w-6 h-4 shrink-0">
@@ -60,7 +62,7 @@
           </p>
           <p class="text-xs text-emerald-400 mt-3 flex items-center gap-2 font-medium">
             <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse inline-block"></span>
-            Available to Hire
+            {{ language === 'EN' ? "Available to Hire" : "Tersedia untuk Pekerjaan" }}
           </p>
         </div>
 
@@ -79,7 +81,7 @@
 
         <!-- === CELL E: Tech Stack (col 1-2, row 3) Wide === -->
         <div class="bento-cell bento-stack slide-from-left">
-          <p class="text-slate-500 text-xs font-mono uppercase tracking-widest mb-4">Tech Stack</p>
+          <p class="text-slate-500 text-xs font-mono uppercase tracking-widest mb-4">{{ language === 'EN' ? "Tech Stack" : "Teknologi" }}</p>
           <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-4 xl:grid-cols-6 gap-3">
             <div v-for="tech in techStack" :key="tech.name" class="tech-icon-card" :title="tech.name">
               <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" v-html="tech.path"></svg>
@@ -92,7 +94,7 @@
         <div class="bento-cell bento-stat2 slide-from-right grid grid-cols-2 gap-4 justify-around">
           <div class="flex flex-col items-center">
             <p class="text-5xl font-black text-primary">10+</p>
-            <p class="text-slate-400 text-sm mt-1">Projects Shipped</p>
+            <p class="text-slate-400 text-sm mt-1">{{ language === 'EN' ? "Projects Shipped" : "Proyek Selesai" }}</p>
             <div class="mt-4 w-full h-px bg-white/10"></div>
             <a
             href="https://www.linkedin.com/in/contact-bintangsurya/"
@@ -106,7 +108,7 @@
           </div>
           <div class="flex flex-col items-center">
             <p class="text-5xl font-black text-white">3+</p>
-            <p class="text-slate-400 text-sm mt-1">Years of Coding</p>
+            <p class="text-slate-400 text-sm mt-1">{{ language === 'EN' ? "Years of Coding" : "Tahun Coding" }}</p>
           </div>
         </div>
 
@@ -117,6 +119,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import { language } from '../store.js';
 
 const gridRef = ref(null);
 

@@ -2,16 +2,16 @@
     <section id="scrollytelling" class="bg-dark-bg py-20 md:px-8 relative">
         <!-- HEADING MOBILE (< md) -->
         <div class="md:hidden px-6 mb-8">
-            <h2 class="text-4xl font-extrabold text-white tracking-tight leading-none">Featured</h2>
-            <h3 class="text-xl font-semibold text-primary mt-2">Projects & Experience</h3>
+            <h2 class="text-4xl font-extrabold text-white tracking-tight leading-none">{{ language === 'EN' ? "Featured" : "Sorotan" }}</h2>
+            <h3 class="text-xl font-semibold text-primary mt-2">{{ language === 'EN' ? "Projects & Experience" : "Proyek & Pengalaman" }}</h3>
         </div>
 
         <div class="flex flex-col md:flex-row items-start max-w-7xl mx-auto relative md:gap-8 lg:gap-12">
             <!-- SISI KIRI (Sticky): MD ke atas -->
             <div class="hidden md:flex w-full md:w-1/2 sticky top-16 h-[90vh] flex-col justify-start py-6 z-20 px-6 md:px-0">
                 <div class="flex flex-col">
-                    <h2 class="text-5xl lg:text-7xl font-extrabold text-white tracking-tight leading-none">Featured</h2>
-                    <h3 class="text-xl lg:text-2xl font-semibold text-primary mt-3">Projects & Experience</h3>
+                    <h2 class="text-5xl lg:text-7xl font-extrabold text-white tracking-tight leading-none">{{ language === 'EN' ? "Featured" : "Sorotan" }}</h2>
+                    <h3 class="text-xl lg:text-2xl font-semibold text-primary mt-3">{{ language === 'EN' ? "Projects & Experience" : "Proyek & Pengalaman" }}</h3>
                     
                     <!-- Line Nav -->
                     <nav class="mt-4 space-y-1">
@@ -142,12 +142,12 @@
                             <h3 class="text-xs font-bold text-primary uppercase tracking-[0.2em] mb-2">{{ selectedProject.navTitle }}</h3>
                             <h2 class="text-2xl md:text-4xl font-extrabold text-white mb-6 leading-tight">{{ selectedProject.title }}</h2>
                             
-                            <p class="text-slate-300 text-lg leading-relaxed mb-8">
+                            <p class="text-slate-300 text-lg leading-relaxed mb-8 whitespace-pre-line">
                                 {{ selectedProject.longDescription }}
                             </p>
 
                             <div class="mb-8">
-                                <h4 class="text-white font-bold mb-4">Key Features</h4>
+                                <h4 class="text-white font-bold mb-4">{{ language === 'EN' ? "Key Features" : "Fitur Utama" }}</h4>
                                 <ul class="grid grid-cols-1 gap-3">
                                     <li v-for="(feat, i) in selectedProject.features" :key="i" class="flex items-center gap-3 text-slate-400">
                                         <div class="w-1.5 h-1.5 rounded-full bg-primary/50"></div>
@@ -158,7 +158,7 @@
 
                             <div class="flex flex-wrap gap-4 mt-auto">
                                 <a v-if="selectedProject.liveLink" :href="selectedProject.liveLink" target="_blank" class="px-8 py-4 bg-primary text-slate-900 font-bold rounded-xl hover:scale-105 transition-transform flex items-center gap-2 text-sm uppercase tracking-wider w-100 sm:w-auto justify-center">
-                                    Live Demo
+                                    {{ language === 'EN' ? "Live Demo" : "Demo Langsung" }}
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                                 </a>
                                 <a v-if="selectedProject.githubLink" :href="selectedProject.githubLink" target="_blank" class="px-8 py-4 bg-white/5 text-white font-bold border border-white/10 rounded-xl hover:bg-white/10 transition-colors flex items-center gap-2 text-sm uppercase tracking-wider w-100 sm:w-auto justify-center">
@@ -172,27 +172,32 @@
             </div>
         </transition>
         <a href="/projects" target="_blank" class="px-8 py-4 mt-8 md:-mt-[20vh] xl:mt-8 mx-6 md:mx-0 bg-primary text-slate-900 hover:bg-sky-400 font-bold rounded-xl transition-transform flex self-center items-center justify-center gap-2 text-sm uppercase tracking-wider">
-            More Projects
+            {{ language === 'EN' ? "More Projects" : "Proyek Lainnya" }}
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
         </a>
     </section>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { language } from '../store.js';
 
-const steps = [
+const steps = computed(() => [
     {
         navTitle: "Full-Stack",
-        title: "Personal Trainer Website — Coach Yohanes (ongoing)",
-        description: "Personal Training & Nutrition Management System for Coach Yohan. A professional fullstack platform featuring dynamic meal tracking, calendar booking, and e-commerce tailored for the fitness industry in Bali. Built with Vue 3, Laravel 11, and Tailwind CSS.",
-        longDescription: "A personal trainer in Canggu, Bali, had a growing roster of international clients — but no digital system to match. Training bookings were handled via WhatsApp, meal plans were shared through Instagram stories, and client transformations were buried in phone galleries. I designed and built this full-stack platform to solve that. Starting as a high-conversion landing page showcasing credentials, testimonials, and training packages, the system is progressively evolving into a complete fitness management suite — featuring an interactive 'Build Your Own Plate' nutrition tracker with real-time macro calculations, a calendar-based session booking system with admin approval workflows, and an integrated e-commerce store for gym supplements and gear. The frontend is built with Vue 3 Composition API and Tailwind CSS 4 for a premium, responsive experience, while the backend runs on Laravel 11 serving a RESTful API with PostgreSQL.",
+        title: language.value === 'EN' ? "Personal Trainer Website: Coach Yohanes (ongoing)" : "Website Personal Trainer: Coach Yohanes (berjalan)",
+        description: language.value === 'EN' 
+            ? "Personal Training & Nutrition Management System for Coach Yohan. A professional fullstack platform featuring dynamic meal tracking, calendar booking, and e-commerce tailored for the fitness industry in Bali. Built with Vue 3, Laravel 11, and Tailwind CSS."
+            : "Sistem Manajemen Latihan & Nutrisi Pribadi. Platform fullstack profesional dengan pelacakan makanan dinamis, pemesanan kalender, dan e-commerce yang disesuaikan untuk industri kebugaran di Bali. Dibangun dengan Vue 3, Laravel 11, dan Tailwind CSS.",
+        longDescription: language.value === 'EN'
+            ? "A personal trainer in Canggu, Bali, had a growing roster of international clients, but no digital system to match. Training bookings were handled via WhatsApp, meal plans were shared through Instagram stories, and client transformations were buried in phone galleries.\n\nI designed and built this full-stack platform to solve that. Starting as a high-conversion landing page showcasing credentials, testimonials, and training packages, the system is progressively evolving into a complete fitness management suite.\n\nThis suite features an interactive 'Build Your Own Plate' nutrition tracker with real-time macro calculations, a calendar-based session booking system with admin approval workflows, and an integrated e-commerce store for gym supplements and gear. The frontend is built with Vue 3 Composition API and Tailwind CSS 4 for a premium, responsive experience, while the backend runs on Laravel 11 serving a RESTful API with PostgreSQL."
+            : "Platform full-stack ini aku desain untuk seorang pelatih di Canggu, Bali yang kewalahan menangani pesanan karena dilakukan manual via WhatsApp.\n\nDimulai sebagai landing page konversi tinggi untuk menampilkan kredensial, sistem ini sedang dikembangkan menjadi platform lengkap: termasuk pelacak nutrisi 'Build Your Own Plate' (dengan kalkulator makro real-time), sistem booking kalender, dan e-commerce untuk suplemen gym.\n\nBagian frontend dibangun dengan Vue 3 dan Tailwind CSS untuk pengalaman premium yang responsif, sedangkan backend-nya berjalan di Laravel 11 dengan PostgreSQL.",
         media: "https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/coach",
         type: "image",
         githubLink: "https://github.com/bintangmogot/fitness-management-app",
         liveLink: "https://gym-yohanes.vercel.app/",
         techStack: ["Vue.js", "Vite", "Tailwind CSS", "DaisyUI", "JavaScript"],
-        features: [
+        features: language.value === 'EN' ? [
             "Conversion-Optimized Landing Page",
             "Dynamic 'Build Your Own Plate' Nutrition Tracker",
             "Real-Time Macro Calculator (Kcal, Protein, Carbs, Fat)",
@@ -200,61 +205,96 @@ const steps = [
             "E-Commerce for Gym Supplements & Gear",
             "Embedded Video Testimonials",
             "Mobile-First Responsive UI/UX"
+        ] : [
+            "Landing Page Teroptimasi Konversi",
+            "Pelacak Nutrisi 'Build Your Own Plate' Dinamis",
+            "Kalkulator Makro Real-Time",
+            "Pemesanan Berbasis Kalender",
+            "E-Commerce untuk Suplemen Gym & Perlengkapan",
+            "Testimoni Video Tersemat",
+            "Mobile-First Responsive UI/UX"
         ]
 
     },
     {
         navTitle: "Web App",
-        title: "Restaurant Management System — Oemah Bu Liek",
-        description: "Designed to modernize the operations of a busy restaurant in Surabaya, automating payroll calculations and streamlining stock management.",
-        longDescription: "Designed to modernize the operations of a busy restaurant in Surabaya. Previously, employee attendance and inventory were tracked manually, leading to inefficiencies. I developed this web-based application to automate payroll calculations (including overtime logic) and streamline stock management, ensuring data accuracy and operational speed.",
+        title: "Restaurant Management System: Oemah Bu Liek",
+        description: language.value === 'EN'
+            ? "Designed to modernize the operations of a busy restaurant in Surabaya, automating payroll calculations and streamlining stock management."
+            : "Dirancang untuk memodernisasi operasional restoran sibuk di Surabaya, mengotomatisasi perhitungan penggajian dan menyederhanakan manajemen stok.",
+        longDescription: language.value === 'EN'
+            ? "Designed to modernize the operations of a busy restaurant in Surabaya. Previously, employee attendance and inventory were tracked manually, leading to inefficiencies.\n\nI developed this web-based application to automate payroll calculations (including overtime logic) and streamline stock management, ensuring data accuracy and operational speed."
+            : "Dirancang untuk memastikan operasi lancar pada restoran sibuk di Surabaya. Sebelumnya, absensi karyawan dan inventaris dicatat secara manual.\n\nAku mengembangkan aplikasi web ini untuk mengotomatisasi perhitungan penggajian (termasuk overtime) dan mengelola manajemen sistem stok masuk dan keluar, memastikan akurasi data dan kecepatan operasi.",
         media: "https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/bu_liek",
         type: "image",
         githubLink: "https://github.com/bintangmogot/website_oemahbuliek",
         liveLink: "https://omahbuliek.page.gd/",
         techStack: ["Laravel", "PHP", "MySQL", "Bootstrap", "JavaScript"],
-        features: [
+        features: language.value === 'EN' ? [
             "Employee Attendance & Photo Verification",
             "Payroll with Overtime Logic",
             "Inventory Stock-In/Stock-Out Tracking",
+            "Role-Based Access Control"
+        ] : [
+            "Absensi Karyawan & Verifikasi Foto",
+            "Sistem Gaji dengan Logika Lembur",
+            "Tracking Stok Masuk & Keluar",
             "Role-Based Access Control"
         ]
     },
     {
         navTitle: "WordPress",
-        title: "LMS & Certification Platform — Amikom Center",
-        description: "An integrated digital platform that combines a professional corporate identity with a functional E-commerce LMS for online courses.",
-        longDescription: "I developed an integrated digital platform that combines a professional corporate identity with a functional E-commerce LMS. The website serves as a dual-purpose portal: introducing the company's vision and providing a marketplace for people to purchase online courses from team Amikom Center. I implemented a system that allows users to seamlessly browse, purchase, and access digital learning materials, all within a responsive environment tailored for an academic and professional audience.",
+        title: "LMS & Certification Platform: Amikom Center",
+        description: language.value === 'EN'
+            ? "An integrated digital platform that combines a professional corporate identity with a functional E-commerce LMS for online courses."
+            : "Platform digital terpadu yang menggabungkan identitas profil perusahaan yang profesional dengan LMS E-commerce yang fungsional untuk kursus IT online.",
+        longDescription: language.value === 'EN'
+            ? "I developed an integrated digital platform that combines a professional corporate identity with a functional E-commerce LMS.\n\nThe website serves as a dual-purpose portal: introducing the company's vision and providing a marketplace for people to purchase online courses from team Amikom Center. I implemented a system that allows users to seamlessly browse, purchase, and access digital learning materials, all within a responsive environment tailored for an academic and professional audience."
+            : "Aku mengembangkan platform digital terintegrasi yang menggabungkan profil perusahaan profesional dengan E-commerce LMS yang fungsional.\n\nWebsite ini berfungsi ganda: memperkenalkan visi misi serta menyediakan tempat belanja kursus online dari tim Amikom Center. Aku mengimplementasikan sistem yang memungkinkan pendaftaran dan pembelian kelas kursus, yang disesuaikan untuk akademisi dan para profesional.",
         media: "https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/amikom",
         type: "image",
         githubLink: "", 
         liveLink: "https://amikomcenter.com/",
         techStack: ["WordPress", "Elementor Pro", "LMS Plugins", "WooCommerce", "Figma"],
-        features: [
+        features: language.value === 'EN' ? [
             "LMS Course Marketplace", 
             "E-commerce Integration", 
             "Corporate Profile", 
             "Responsive UI Implementation"
+        ] : [
+            "LMS Course Marketplace",
+            "Integrasi E-commerce",
+            "Profil Perusahaan",
+            "Implementasi UI Responsif"
         ]
     },
     {
         navTitle: "Frontend",
-        title: "Landing Pages — Greenwick, PAO & Xiao",
-        description: "A series of responsive landing pages for various projects, each with consistent layout presenting roadmaps and key information.",
-        longDescription: "I developed a series of responsive landing pages for various projects, including Greenwick, PAO, and Xiao. The goal was to create a clean and consistent layout to present project details such as roadmaps and key information. By coding directly with Bootstrap, I ensured that each site is lightweight, fast, and fully responsive, providing a reliable and professional look for each project's digital presence. \ *There are 3 projects in this section, each with its own unique features and design. You can view complete projects when you click the button \"More Projects\".",
+        title: "Landing Pages: Greenwick, PAO & Xiao",
+        description: language.value === 'EN'
+            ? "A series of responsive landing pages for various projects, each with consistent layout presenting roadmaps and key information."
+            : "Kumpulan landing page dinamis untuk berbagai varian proyek klien, dengan konsistensi tampilan layout interaktif dan informasi utama proyek.",
+        longDescription: language.value === 'EN'
+            ? "I developed a series of responsive landing pages for various projects, including Greenwick, PAO, and Xiao.\n\nThe goal was to create a clean and consistent layout to present project details such as roadmaps and key information. By coding directly with Bootstrap, I ensured that each site is lightweight, fast, and fully responsive, providing a reliable and professional look for each project's digital presence.\n\n*There are 3 projects in this section, each with its own unique features and design. You can view complete projects when you click the button \"More Projects\"."
+            : "Aku merancang landing page untuk klien-klienku seperti Greenwick, PAO, dan Xiao Coin.\n\nTujuan utamanya membuat halaman profesional dan interaktif yang mampu menarik simpati dari para calon pelanggan yang memaparkan detail proyek roadmap. Tampilan ini didukung oleh penggunaan Bootstrap yang membuat kinerjanya konsisten walaupun digunakan di berbagai perangkat.\n\n*Terdapat 3 proyek di sesi ini, tiap proyek memiliki varian desain yang unik. Anda dapat melihat semuanya dengan menekan tombol \"Proyek Lainnya\".",
         media: "https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/xiao",
         type: "image",
         githubLink: "https://github.com/bintangmogot/XiaoCoin",
         liveLink: "https://xiao-coin.vercel.app/",
         techStack: ["HTML5", "CSS3", "JavaScript", "Bootstrap"],
-        features: [
+        features: language.value === 'EN' ? [
             "Multi-Project Consistency", 
             "Tokenomics Display", 
             "Roadmap Sections", 
             "Fully Responsive Design"
+        ] : [
+            "Konsistensi Semua Proyek",
+            "Tokenomics Display",
+            "Roadmap Proyek",
+            "Fully Responsive Design"
         ]
     }
-];
+]);
 
 const activeIndex = ref(0);
 let observer = null;
@@ -306,7 +346,7 @@ onUnmounted(() => {
 
 <style scoped>
 .fade-enter-active, .fade-leave-active { transition: all 0.5s ease; }
-.fade-enter-from { opacity: 0; transform: scale(1.05); }
+/* .fade-enter-from { opacity: 0; transform: scale(1.05); } */
 .fade-leave-to { opacity: 0; transform: scale(0.95); }
 
 .modal-fade-enter-active, .modal-fade-leave-active { transition: all 0.4s ease-out; }
