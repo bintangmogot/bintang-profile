@@ -1,5 +1,5 @@
 <script setup>
-import { language } from '../store.js';
+import { language, toggleLanguage } from '../store.js';
 </script>
 
 <template>
@@ -9,6 +9,14 @@ import { language } from '../store.js';
     <div class="flex items-center w-full mb-12 mt-12 lg:mt-20 lg:mb-20">
       <span class="text-white font-bold text-lg md:text-xl whitespace-nowrap mr-6 tracking-wide">Bintang Aprilian</span>
       <div class="h-[2px] bg-slate-600/50 grow"></div>
+      <!-- Language Button for Mobile/MD (Hidden on Desktop) -->
+      <button 
+        @click="toggleLanguage" 
+        class="lg:hidden ml-6 px-3 py-1.5 rounded-lg border border-slate-600 hover:border-primary text-xs font-bold text-slate-400 hover:text-white transition-all flex items-center gap-2"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M3.6 9h16.8 M3.6 15h16.8 M12 3a15.3 15.3 0 0 1 4 9 15.3 15.3 0 0 1-4 9 15.3 15.3 0 0 1-4-9 15.3 15.3 0 0 1 4-9z"></path></svg>
+        {{ language }}
+      </button>
     </div>
 
     <!-- Main Content -->

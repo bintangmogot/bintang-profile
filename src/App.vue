@@ -1,9 +1,5 @@
 <script setup>
-import { language } from './store.js';
-
-const toggleLanguage = () => {
-  language.value = language.value === 'ID' ? 'EN' : 'ID';
-};
+import { language, toggleLanguage } from './store.js';
 </script>
 
 <template>
