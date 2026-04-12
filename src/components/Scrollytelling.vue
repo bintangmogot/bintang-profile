@@ -146,6 +146,13 @@
                                 {{ selectedProject.longDescription }}
                             </p>
 
+                            <p v-if="selectedProject.isPrivate" class="text-slate-500 text-xs italic opacity-60 mb-8 -mt-4">
+                                {{ language === 'EN' 
+                                    ? "* Note: This project's source code is private due to client confidentiality or internal policies." 
+                                    : "* Catatan: Kode sumber proyek ini bersifat pribadi karena kerahasiaan klien atau kebijakan internal." 
+                                }}
+                            </p>
+
                             <div class="mb-8">
                                 <h4 class="text-white font-bold mb-4">{{ language === 'EN' ? "Key Features" : "Fitur Utama" }}</h4>
                                 <ul class="grid grid-cols-1 gap-3">
@@ -183,6 +190,33 @@ import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { language } from '../store.js';
 
 const steps = computed(() => [
+    {
+        navTitle: "Frontend",
+        title: language.value === 'EN' ? "Cinematic Slide Deck: Capluk Portfolio" : "Website Presentasi Sinematik: Portofolio Capluk",
+        description: language.value === 'EN' 
+            ? "A cinematic, single-page portfolio for an Indonesian Creative Director. Features a custom 'Liquid UI' system with glassmorphism and real-time blur, built using Next.js, Tailwind CSS, and GSAP."
+            : "Portofolio sinematik satu halaman untuk seorang Creative Director. Dilengkapi sistem 'Liquid UI' kustom dengan efek glassmorphism dan blur real-time, dibangun menggunakan Next.js, Tailwind CSS, dan GSAP.",
+        longDescription: language.value === 'EN'
+            ? "A cinematic, single-page presentation website built for an Indonesian Creative Director, Motion Designer, and VFX Artist with 25+ years in the film industry.\n\nDesigned as a \"cinematic slide deck,\" users navigate horizontally across sections without vertical scrolling. Features a custom \"Liquid UI\" system heavily relying on glassmorphism and real-time backdrop blurring, smooth GSAP animations, and an interactive kinetic custom cursor."
+            : "Website presentasi sinematik satu halaman yang dibangun untuk seorang Creative Director, Motion Designer, dan VFX Artist asal Indonesia dengan pengalaman 25+ tahun di industri film.\n\nDirancang sebagai \"slide interaktif sinematik\", pengguna menavigasi konten secara horizontal tanpa menggulir ke bawah layaknya website pada umumnya. Menggunakan sistem \"Liquid UI\" kustom dengan balutan glassmorphism dan blur latar belakang real-time, beserta animasi GSAP yang mulus dan kursor kustom interaktif.",
+        media: "https://res.cloudinary.com/workstation-/image/upload/q_auto/f_auto/v1775991363/capluk-portfolio/capluk-main.png",
+        type: "image",
+        githubLink: "",
+        isPrivate: true,
+        liveLink: "https://portfolio-capluk.vercel.app/",
+        techStack: ["Next.js", "Tailwind CSS", "GSAP", "TypeScript"],
+        features: language.value === 'EN' ? [
+            "Horizontal Slide Navigation",
+            "Liquid Glassmorphism UI",
+            "GSAP Animations & 3D Tilt",
+            "Theme System (Cinematic / Grayscale)"
+        ] : [
+            "Navigasi Slide Horizontal",
+            "UI Glassmorphism Presisi",
+            "Animasi GSAP & Efek 3D Tilt",
+            "Sistem Tema (Sinematik / Grayscale)"
+        ]
+    },
     {
         navTitle: "Full-Stack",
         title: language.value === 'EN' ? "Personal Trainer Website: Coach Yohanes (ongoing)" : "Website Personal Trainer: Coach Yohanes (berjalan)",
