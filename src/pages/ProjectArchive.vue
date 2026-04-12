@@ -424,6 +424,22 @@ const archiveProjects = computed(() => [
       longDescription: language.value === 'EN' ? 'A comprehensive digital platform built to showcase a diverse range of services, from wedding organization to tourism and professional training. \n\nCreated a clean, responsive interface that allows the owner to manage content easily.' : 'Portal layanan platform digital lengkap merangkap portal info sewa jasa penyelenggara banyak acara yang berbasis di daerah timur, yaitu Papua.\n\nMenyediakan ragam jasa penawaran utama, pelatihan sertifikasi diklat acara profesional, serta jasa pemandu tim tamasya tur keluarga dalam mengeksplor ragam wisata alam liar lokal dari wilayah tanah asli Papua.',
       features: language.value === 'EN' ? ['Wedding Organizer Section', 'Tourism Packages', 'Training & Course Listings', 'Responsive on All Devices'] : ['Sekmen Katalog Desain Acara Wedding', 'Rencana Penawaran Pelayanan Pemandu Wisata Tur Privat', 'Dokumentasi Brosur Program Kursus Publik', 'Berjalan Lancar Di Resolusi Layar Apapun'],
     },
+    {
+      year: '2026',
+      title: 'Shiro Gym // Kinetic Brutalism',
+      madeAt: 'Personal',
+      techStack: ['Vue 3', 'Tailwind CSS', 'Vite', 'GSAP'],
+      linkDisplay: 'shiro-gym.vercel.app',
+      liveLink: 'https://shiro-gym.vercel.app/',
+      githubLink: 'https://github.com/bintangmogot/shiro-gym',
+      media: 'https://res.cloudinary.com/workstation-/image/upload/v1775996722/shiro-gym/header-shiro.png',
+      longDescription: language.value === 'EN' 
+        ? 'A high-performance fitness manifesto website showcasing "Kinetic Brutalism." Built with Vue 3 and GSAP, it features aggressive typography, monochromatic aesthetics, and high-impact animations to match the elite intensity of Shiro Gym.\n\nThis project serves as a showcase of my ability to build immersive, concept-driven web experiences that go beyond standard UI patterns.'
+        : 'Situs web manifesto kebugaran performa tinggi yang memamerkan estetika "Kinetic Brutalism." Dibangun dengan Vue 3 dan GSAP, situs ini menampilkan tipografi yang agresif, estetika monokromatik, dan animasi berdampak tinggi untuk menyamai intensitas elit Shiro Gym.\n\nProyek ini berfungsi sebagai bukti kemampuan saya dalam membangun pengalaman web berbasis konsep yang imersif di luar pola UI standar.',
+      features: language.value === 'EN' ? ['Kinetic Brutalism Design', 'GSAP Animation Suite', 'Monochromatic Theme', 'Liquid UI Layout'] : ['Desain Kinetic Brutalism', 'Paket Animasi GSAP', 'Tema Monokromatik', 'Layout UI Liquid'],
+      category: 'Others',
+      isPersonal: true
+    },
   ]);
 
 const codingProjects = computed(() => archiveProjects.value.filter(p => !p.techStack.includes('WordPress') && !p.isPersonal && p.category !== 'Others'));
