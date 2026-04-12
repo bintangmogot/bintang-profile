@@ -133,6 +133,61 @@
           </div>
         </div>
 
+        <!-- Others Section Label -->
+        <div v-if="otherProjects.length > 0" class="section-divider mt-16">
+          <span class="section-divider-text">{{ language === 'EN' ? "Others & Personal" : "Lainnya & Proyek Pribadi" }}</span>
+          <div class="section-divider-line"></div>
+        </div>
+
+        <!-- Others Data Rows -->
+        <div
+          v-for="(project, index) in otherProjects"
+          :key="'others-' + index"
+          @click="openDetail(project)"
+          class="archive-row group"
+        >
+          <!-- Year -->
+          <div class="archive-cell year-cell">
+            <span class="mobile-label hidden md:block">{{ language === 'EN' ? "Year" : "Tahun" }}</span>
+            {{ project.year }}
+          </div>
+
+          <!-- Project -->
+          <div class="archive-cell project-cell">
+            <span class="project-name">
+              {{ project.title }}
+              <svg v-if="project.liveLink" class="inline-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+            </span>
+          </div>
+
+          <!-- Made at (hidden on mobile) -->
+          <div class="archive-cell made-at-cell hidden md:flex">
+            {{ project.madeAt }}
+          </div>
+
+          <!-- Built with (hidden on mobile) -->
+          <div class="archive-cell built-with-cell hidden md:flex">
+            <div class="chip-list">
+              <span v-for="tech in project.techStack" :key="tech" class="chip">{{ tech }}</span>
+            </div>
+          </div>
+
+          <!-- Link (hidden on mobile) -->
+          <div class="archive-cell link-cell hidden md:flex">
+            <a
+              v-if="project.linkDisplay"
+              :href="project.liveLink"
+              @click.stop
+              target="_blank"
+              rel="noopener noreferrer"
+              class="link-text"
+            >
+              {{ project.linkDisplay }}
+              <svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+            </a>
+          </div>
+        </div>
+
       </div>
       <!-- ===== END TABLE ===== -->
 
@@ -371,8 +426,9 @@ const archiveProjects = computed(() => [
     },
   ]);
 
-const codingProjects = computed(() => archiveProjects.value.filter(p => !p.techStack.includes('WordPress')));
-const wordpressProjects = computed(() => archiveProjects.value.filter(p => p.techStack.includes('WordPress')));
+const codingProjects = computed(() => archiveProjects.value.filter(p => !p.techStack.includes('WordPress') && !p.isPersonal && p.category !== 'Others'));
+const wordpressProjects = computed(() => archiveProjects.value.filter(p => p.techStack.includes('WordPress') && !p.isPersonal && p.category !== 'Others'));
+const otherProjects = computed(() => archiveProjects.value.filter(p => p.isPersonal || p.category === 'Others'));
 
 const selectedProject = ref(null);
 const isModalOpen = ref(false);
