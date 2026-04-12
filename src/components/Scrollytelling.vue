@@ -43,12 +43,12 @@
                                 v-if="steps[activeIndex].type === 'video'"
                                 :src="steps[activeIndex].media" 
                                 autoplay muted loop 
-                                class="w-full h-full object-cover grayscale group-hover/media:grayscale-0 transition-all duration-500">
+                                class="w-full h-full object-cover transition-all duration-700 group-hover/media:scale-110">
                             </video>
                             <img 
                                 v-else 
                                 :src="steps[activeIndex].media" 
-                                class="w-full h-full object-cover grayscale group-hover/media:grayscale-0 transition-all duration-500" 
+                                class="w-full h-full object-cover transition-all duration-700 group-hover/media:scale-110" 
                                 alt="Project Preview"
                                 style="text-align: center;"
                             />
@@ -76,8 +76,8 @@
                                hover:bg-white/5 hover:backdrop-blur-md hover:shadow-2xl overflow-hidden h-full min-h-[580px] md:min-h-[400px]"
                     >
                         <!-- Mobile Media (Muncul hanya jika di bawah md) -->
-                        <div class="md:hidden aspect-5/4 w-full rounded-2xl overflow-hidden mb-6 border border-white/10 shadow-lg">
-                             <img :src="step.media" class="w-full h-full object-cover" :alt="step.title" />
+                        <div class="md:hidden aspect-5/4 w-full rounded-2xl overflow-hidden mb-6 border border-white/10 shadow-lg group/mobile-media">
+                             <img :src="step.media" class="w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110" :alt="step.title" />
                         </div>
 
                         <div class="space-y-4">
