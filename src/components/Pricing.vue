@@ -97,43 +97,78 @@ const plans = computed(() => [
   {
     name: 'Starter',
     // Change price format based on selected language
-    price: language.value === 'EN' ? '$100' : 'Rp 1.5M',
+    price: language.value === 'EN' ? '$100' : 'Rp 1.5 Juta',
     priceNote: language.value === 'EN' ? '/ project' : '/ proyek',
     featured: false,
-    description: language.value === 'EN' ? 'Perfect for landing pages, profile websites, or simple company profiles.' : 'Cocok untuk landing page, website profil, atau profil perusahaan sederhana.',
+    description: language.value === 'EN' 
+      ? 'A high-impact single-page presence. Perfect for landing pages, personal profiles, or simple company showcases.' 
+      : 'Halaman tunggal yang berdampak besar. Cocok untuk landing page, profil pribadi, atau showcase perusahaan simpel.',
     // Also updating the WhatsApp message to match the selected pricing plan.
     message: language.value === 'EN'
-      ? 'Hi Bintang! I\'m interested in the Starter plan ($100). I need a landing page / simple website. Can we discuss further?'
-      : 'Halo Bintang! Saya tertarik dengan paket Starter (Rp 1.5M). Saya butuh landing page / website simpel. Bisa kita diskusikan?',
+      ? "Hi Bintang! I'm interested in your Starter plan for a high-impact landing page. Looking forward to discussing the project with you!"
+      : 'Halo Bintang! Saya tertarik dengan paket Starter untuk membuat landing page. Mari diskusikan detail proyeknya!',
     features: [
       { text: language.value === 'EN' ? 'Up to 3 pages' : 'Maksimal 3 halaman', included: true },
+      { text: language.value === 'EN' ? '1 rounds of revisions' : '1 kali revisi', included: true },
       { text: language.value === 'EN' ? 'Responsive design' : 'Desain Responsif', included: true },
       { text: language.value === 'EN' ? 'Contact form integration' : 'Integrasi Form Kontak', included: true },
-      { text: language.value === 'EN' ? 'Basic SEO setup' : 'Setup SEO Dasar', included: true },
-      { text: language.value === 'EN' ? '2 rounds of revisions' : '2 kali revisi', included: true },
+      { text: language.value === 'EN' ? 'Multi-Language Support' : 'Dukungan Multi-Bahasa', included: false },
+      { text: language.value === 'EN' ? 'Basic SEO setup' : 'Setup SEO Dasar', included: false },
       { text: language.value === 'EN' ? 'CMS / Admin panel' : 'CMS / Panel Admin', included: false },
-      { text: language.value === 'EN' ? 'Custom backend / API' : 'Custom Backend / API', included: false },
       { text: language.value === 'EN' ? 'Priority support' : 'Prioritas Dukungan', included: false },
+      { text: language.value === 'EN' ? 'Custom UI Design (Figma)' : 'Desain UI Custom (Figma)', included: false },
+      { text: language.value === 'EN' ? 'E-commerce / Payment Integration' : 'Integrasi E-commerce / Pembayaran', included: false },
+      { text: language.value === 'EN' ? 'Custom backend / API' : 'Custom Backend / API', included: false },
     ],
   },
   {
     name: 'Professional',
-    price: language.value === 'EN' ? '$350' : 'Rp 5M',
+    price: language.value === 'EN' ? '$300' : 'Rp 5 Juta',
     priceNote: language.value === 'EN' ? '/ project' : '/ proyek',
     featured: true,
-    description: language.value === 'EN' ? 'Ideal for business websites, web apps, or multi-page projects with a CMS.' : 'Ideal untuk website bisnis, web app, atau proyek multi-halaman dengan CMS.',
+    description: language.value === 'EN' 
+      ? 'Scalable multi-page websites and web apps. Ideal for growing businesses needing SEO and multi-language support.' 
+      : 'Website multi-halaman dan web app yang skalabel. Ideal untuk bisnis berkembang yang butuh SEO dan multi-bahasa.',
     message: language.value === 'EN'
-      ? 'Hi Bintang! I\'m interested in the Professional plan ($350). I need a business website / web app with CMS. Can we discuss further?'
-      : 'Halo Bintang! Saya tertarik dengan paket Professional (Rp 5M). Saya butuh website bisnis / web app dengan CMS. Bisa kita diskusikan?',
+      ? "Hi Bintang! I'd like to inquire about the Professional plan for a scalable multi-page project. Can we discuss the details?"
+      : 'Halo Bintang! Saya ingin bertanya tentang paket Professional untuk proyek multi-halaman. Bisa kita bahas lebih lanjut?',
     features: [
       { text: language.value === 'EN' ? 'Up to 10 pages' : 'Maksimal 10 halaman', included: true },
+      { text: language.value === 'EN' ? '3 rounds of revisions' : '3 kali revisi', included: true },
       { text: language.value === 'EN' ? 'Responsive design' : 'Desain Responsif', included: true },
       { text: language.value === 'EN' ? 'Contact form integration' : 'Integrasi Form Kontak', included: true },
-      { text: language.value === 'EN' ? 'Advanced SEO setup' : 'Setup SEO Lanjutan', included: true },
-      { text: language.value === 'EN' ? '5 rounds of revisions' : '5 kali revisi', included: true },
-      { text: language.value === 'EN' ? 'CMS / Admin panel' : 'CMS / Panel Admin', included: true },
-      { text: language.value === 'EN' ? 'Custom backend / API' : 'Custom Backend / API', included: false },
+      { text: language.value === 'EN' ? 'Multi-Language Support' : 'Dukungan Multi-Bahasa', included: true },
+      { text: language.value === 'EN' ? 'Basic SEO setup' : 'Setup SEO Dasar', included: true },
+      { text: language.value === 'EN' ? 'CMS / Admin panel' : 'CMS / Panel Admin', included: false },
       { text: language.value === 'EN' ? 'Priority support' : 'Prioritas Dukungan', included: false },
+      { text: language.value === 'EN' ? 'Custom UI Design (Figma)' : 'Desain UI Custom (Figma)', included: false },
+      { text: language.value === 'EN' ? 'E-commerce / Payment Integration' : 'Integrasi E-commerce / Pembayaran', included: false },
+      { text: language.value === 'EN' ? 'Custom backend / API' : 'Custom Backend / API', included: false },
+    ],
+  },
+  {
+    name: 'Business',
+    price: language.value === 'EN' ? '$600' : 'Rp 9 Juta',
+    priceNote: language.value === 'EN' ? '/ project' : '/ proyek',
+    featured: false,
+    description: language.value === 'EN' 
+      ? 'Complete digital solutions with custom designs. Best for E-commerce, CMS-driven platforms, and corporate systems.' 
+      : 'Solusi digital lengkap dengan desain kustom. Terbaik untuk E-commerce, platform berbasis CMS, dan sistem perusahaan.',
+    message: language.value === 'EN'
+      ? "Hi Bintang! I'm interested in the Business plan with custom Figma design and E-commerce/CMS features. Let's talk about the scope!"
+      : 'Halo Bintang! Saya tertarik dengan paket Business yang mencakup desain Figma dan fitur E-commerce/CMS. Mari diskusikan cakupannya!',
+    features: [
+      { text: language.value === 'EN' ? 'Up to 20 pages' : 'Maksimal 20 halaman', included: true },
+      { text: language.value === 'EN' ? '5 rounds of revisions' : '5 kali revisi', included: true },
+      { text: language.value === 'EN' ? 'Responsive design' : 'Desain Responsif', included: true },
+      { text: language.value === 'EN' ? 'Contact form integration' : 'Integrasi Form Kontak', included: true },
+      { text: language.value === 'EN' ? 'Multi-Language Support' : 'Dukungan Multi-Bahasa', included: true },
+      { text: language.value === 'EN' ? 'Advanced SEO setup' : 'Setup SEO Lanjutan', included: true },
+      { text: language.value === 'EN' ? 'CMS / Admin panel' : 'CMS / Panel Admin', included: true },
+      { text: language.value === 'EN' ? 'Priority support' : 'Prioritas Dukungan', included: true },
+      { text: language.value === 'EN' ? 'Custom UI Design (Figma)' : 'Desain UI Custom (Figma)', included: true },
+      { text: language.value === 'EN' ? 'E-commerce / Payment Integration' : 'Integrasi E-commerce / Pembayaran', included: true },
+      { text: language.value === 'EN' ? 'Custom backend / API' : 'Custom Backend / API', included: false },
     ],
   },
   {
@@ -141,19 +176,24 @@ const plans = computed(() => [
     price: 'Custom',
     priceNote: null,
     featured: false,
-    description: language.value === 'EN' ? 'Full-stack systems, POS, ERP, or anything requiring complex custom development.' : 'Sistem full-stack, POS, ERP, atau apa pun yang membutuhkan pengembangan custom kompleks.',
+    description: language.value === 'EN' 
+      ? 'Tailor-made full-stack ecosystems. For high-performance POS, ERP, or complex custom internal tools.' 
+      : 'Ekosistem full-stack kustom. Untuk POS, ERP berperforma tinggi, atau alat internal kustom yang kompleks.',
     message: language.value === 'EN' 
-      ? 'Hi Bintang! I\'m interested in a custom Enterprise project. I need a full-stack system. Can we discuss the scope and pricing?'
-      : 'Halo Bintang! Saya tertarik dengan proyek Enterprise custom. Saya butuh sistem full-stack. Bisa kita diskusikan cakupan dan harganya?',
+      ? "Hi Bintang! I have a complex full-stack project in mind and would like to discuss a custom Enterprise solution with you."
+      : 'Halo Bintang! Saya memiliki proyek full-stack yang kompleks dan ingin mendiskusikan solusi Enterprise kustom dengan Anda.',
     features: [
       { text: language.value === 'EN' ? 'Unlimited pages' : 'Halaman tak terbatas', included: true },
+      { text: language.value === 'EN' ? 'Unlimited revisions' : 'Revisi tak terbatas', included: true },
       { text: language.value === 'EN' ? 'Responsive design' : 'Desain Responsif', included: true },
       { text: language.value === 'EN' ? 'Contact form integration' : 'Integrasi Form Kontak', included: true },
+      { text: language.value === 'EN' ? 'Multi-Language Support' : 'Dukungan Multi-Bahasa', included: true },
       { text: language.value === 'EN' ? 'Advanced SEO setup' : 'Setup SEO Lanjutan', included: true },
-      { text: language.value === 'EN' ? 'Unlimited revisions' : 'Revisi tak terbatas', included: true },
       { text: language.value === 'EN' ? 'CMS / Admin panel' : 'CMS / Panel Admin', included: true },
-      { text: language.value === 'EN' ? 'Custom backend / API' : 'Custom Backend / API', included: true },
       { text: language.value === 'EN' ? 'Priority support' : 'Prioritas Dukungan', included: true },
+      { text: language.value === 'EN' ? 'Custom UI Design (Figma)' : 'Desain UI Custom (Figma)', included: true },
+      { text: language.value === 'EN' ? 'E-commerce / Payment Integration' : 'Integrasi E-commerce / Pembayaran', included: true },
+      { text: language.value === 'EN' ? 'Custom backend / API' : 'Custom Backend / API', included: true },
     ],
   },
 ]);
@@ -185,8 +225,15 @@ const buildWALink = (plan) => {
 @media (min-width: 768px) {
   .pricing-track {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
     width: 100%;
+  }
+}
+
+@media (min-width: 1280px) {
+  .pricing-track {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -197,7 +244,7 @@ const buildWALink = (plan) => {
   background: #1E293B;
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 20px;
-  padding: 28px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   position: relative;
