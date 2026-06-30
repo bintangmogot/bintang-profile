@@ -191,6 +191,32 @@ import { language } from '../store.js';
 
 const steps = computed(() => [
     {
+        navTitle: "Web Theme",
+        title: language.value === 'EN' ? "Armodafinil Australia Theme" : "Tema Web Armodafinil Australia",
+        description: language.value === 'EN' 
+            ? "A custom web theme developed for Armodafinil Australia. Features a responsive layout and clean UI tailored for an e-commerce platform."
+            : "Tema web kustom yang dikembangkan untuk Armodafinil Australia. Menampilkan layout responsif dan antarmuka yang bersih untuk platform e-commerce.",
+        longDescription: language.value === 'EN'
+            ? "A custom web theme developed for Armodafinil Australia. Features a responsive layout, modern design, and clean UI tailored for an e-commerce platform. Built to ensure fast loading times and a seamless shopping experience for customers."
+            : "Tema web kustom yang dikembangkan untuk Armodafinil Australia. Menampilkan layout responsif, desain modern, dan antarmuka yang bersih khusus untuk platform e-commerce. Dibangun untuk memastikan waktu muat yang cepat dan pengalaman belanja yang mulus bagi pelanggan.",
+        media: "https://res.cloudinary.com/workstation-/image/upload/v1782790051/profile-bintang/dark/banner-armodafinil-australia.png",
+        type: "image",
+        githubLink: "",
+        liveLink: "https://armodafinil-australia.com/",
+        techStack: ["WordPress", "WooCommerce", "PHP", "Tailwind CSS"],
+        features: language.value === 'EN' ? [
+            "Responsive Web Design",
+            "E-commerce UI",
+            "Fast Loading Speed",
+            "Modern Aesthetics"
+        ] : [
+            "Desain Web Responsif",
+            "Antarmuka E-commerce",
+            "Kecepatan Muat Cepat",
+            "Estetika Modern"
+        ]
+    },
+    {
         navTitle: "Frontend",
         title: language.value === 'EN' ? "Cinematic Slide Deck: Capluk Portfolio" : "Website Presentasi Sinematik: Portofolio Capluk",
         description: language.value === 'EN' 

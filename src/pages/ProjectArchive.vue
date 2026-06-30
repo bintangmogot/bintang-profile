@@ -291,6 +291,30 @@ const techIcons = {
 const archiveProjects = computed(() => [
   {
     year: '2026',
+    title: language.value === 'EN' ? 'Armodafinil Australia Theme' : 'Tema Web Armodafinil Australia',
+    madeAt: 'Freelance',
+    techStack: ["WordPress", "WooCommerce", "PHP", "Tailwind CSS"],
+    linkDisplay: 'armodafinil-australia.com',
+    liveLink: 'https://armodafinil-australia.com/',
+    githubLink: '',
+    media: 'https://res.cloudinary.com/workstation-/image/upload/v1782790051/profile-bintang/dark/banner-armodafinil-australia.png',
+    longDescription: language.value === 'EN' 
+      ? 'A custom web theme developed for Armodafinil Australia. Features a responsive layout, modern design, and clean UI tailored for an e-commerce platform. Built to ensure fast loading times and a seamless shopping experience for customers.'
+      : 'Tema web kustom yang dikembangkan untuk Armodafinil Australia. Menampilkan layout responsif, desain modern, dan antarmuka yang bersih khusus untuk platform e-commerce. Dibangun untuk memastikan waktu muat yang cepat dan pengalaman belanja yang mulus bagi pelanggan.',
+    features: language.value === 'EN' ? [
+      "Responsive Web Design",
+      "E-commerce UI",
+      "Fast Loading Speed",
+      "Modern Aesthetics"
+    ] : [
+      "Desain Web Responsif",
+      "Antarmuka E-commerce",
+      "Kecepatan Muat Cepat",
+      "Estetika Modern"
+    ],
+  },
+  {
+    year: '2026',
     title: language.value === 'EN' ? 'Cinematic Slide Deck: Capluk Portfolio' : 'Website Presentasi Sinematik: Portofolio Capluk',
     madeAt: 'Freelance',
     techStack: ['Next.js', 'Tailwind', 'GSAP', 'TypeScript'],
