@@ -8,13 +8,13 @@
 
         <div class="flex flex-col md:flex-row items-start max-w-7xl mx-auto relative md:gap-8 lg:gap-12">
             <!-- SISI KIRI (Sticky): MD ke atas -->
-            <div class="hidden md:flex w-full md:w-1/2 sticky top-16 h-[90vh] flex-col justify-start py-6 z-20 px-6 md:px-0">
+            <div class="hidden md:flex w-full md:w-5/12 sticky top-16 h-[90vh] flex-col justify-start py-4 z-20 px-6 md:px-0">
                 <div class="flex flex-col">
-                    <h2 class="text-5xl lg:text-7xl font-extrabold text-white tracking-tight leading-none">{{ language === 'EN' ? "Featured" : "Sorotan" }}</h2>
-                    <h3 class="text-xl lg:text-2xl font-semibold text-primary mt-3">{{ language === 'EN' ? "Projects & Experience" : "Proyek & Pengalaman" }}</h3>
+                    <h2 class="text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-none">{{ language === 'EN' ? "Featured" : "Sorotan" }}</h2>
+                    <h3 class="text-lg lg:text-xl font-semibold text-primary mt-2">{{ language === 'EN' ? "Projects & Experience" : "Proyek & Pengalaman" }}</h3>
                     
                     <!-- Line Nav -->
-                    <nav class="mt-4 space-y-1">
+                    <nav class="mt-3 space-y-0">
                         <button 
                             v-for="(step, index) in steps" 
                             :key="index"
@@ -36,7 +36,7 @@
                 </div>
 
                 <!-- Sticky Media Container (5:4 Ratio) -->
-                <div class="aspect-5/4 w-full overflow-hidden rounded-2xl bg-slate-900 shadow-2xl relative group/media border border-white/5 mt-9">
+                <div class="aspect-5/4 w-full overflow-hidden rounded-2xl bg-slate-900 shadow-2xl relative group/media border border-white/5 mt-4">
                     <transition name="fade" mode="out-in" style="transition-duration: 200ms;">
                         <div :key="activeIndex" class="w-full h-full">
                             <video 
@@ -60,7 +60,7 @@
 
             <!-- SISI KANAN: Scrollable Content -->
             <!-- Mobile (<md): Horizontal Scroll | Tablet/Desktop (>=md): Vertical Stack -->
-            <div class="w-full md:w-1/2 flex md:block items-stretch overflow-x-auto md:overflow-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory md:snap-none px-6 md:px-0 gap-6">
+            <div class="w-full md:w-7/12 flex md:block items-stretch overflow-x-auto md:overflow-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory md:snap-none px-6 md:px-0 gap-6">
                 <div 
                     v-for="(step, index) in steps" 
                     :key="index"
