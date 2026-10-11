@@ -12,20 +12,20 @@
                 <div class="flex flex-col">
                     <h2 class="text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-none">{{ language === 'EN' ? "Featured" : "Sorotan" }}</h2>
                     <h3 class="text-lg lg:text-xl font-semibold text-primary mt-2">{{ language === 'EN' ? "Projects & Experience" : "Proyek & Pengalaman" }}</h3>
-                    
+
                     <!-- Line Nav -->
-                    <nav class="mt-3 space-y-0">
-                        <button 
-                            v-for="(step, index) in steps" 
+                    <nav class="mt-3 grid grid-cols-2 gap-x-3">
+                        <button
+                            v-for="(step, index) in steps"
                             :key="index"
                             @click="scrollToStep(index)"
-                            class="group flex items-center py-2 outline-none cursor-pointer"
+                            class="group flex items-center py-2 focus-visible:outline-2 focus-visible:outline-primary cursor-pointer"
                         >
-                            <span 
-                                class="mr-4 h-px transition-all duration-300"
-                                :class="activeIndex === index ? 'w-16 bg-white' : 'w-8 bg-slate-600 group-hover:w-16 group-hover:bg-slate-200'"
+                            <span
+                                class="mr-3 h-px shrink-0 transition-all duration-300"
+                                :class="activeIndex === index ? 'w-8 bg-white' : 'w-4 bg-slate-600 group-hover:w-8 group-hover:bg-slate-200'"
                             ></span>
-                            <span 
+                            <span
                                 class="text-xs font-bold uppercase tracking-widest transition-colors duration-300"
                                 :class="activeIndex === index ? 'text-primary' : 'text-slate-500 group-hover:text-slate-200'"
                             >
@@ -35,49 +35,49 @@
                     </nav>
                 </div>
 
-                <!-- Sticky Media Container (5:4 Ratio) -->
-                <div class="aspect-5/4 w-full overflow-hidden rounded-2xl bg-slate-900 shadow-2xl relative group/media border border-white/5 mt-4">
+                <!-- Original illustrated cover, 8:5 ratio -->
+                <div class="aspect-8/5 w-full overflow-hidden rounded-2xl bg-slate-900 shadow-2xl relative group/media border border-white/5 mt-4">
                     <transition name="fade" mode="out-in" style="transition-duration: 200ms;">
                         <div :key="activeIndex" class="w-full h-full">
-                            <video 
+                            <video
                                 v-if="steps[activeIndex].type === 'video'"
-                                :src="steps[activeIndex].media" 
-                                autoplay muted loop 
+                                :src="steps[activeIndex].media"
+                                autoplay muted loop
                                 class="w-full h-full object-cover transition-all duration-700 group-hover/media:scale-101">
                             </video>
-                            <img 
-                                v-else 
-                                :src="steps[activeIndex].media" 
-                                class="w-full h-full object-cover transition-all duration-700 group-hover/media:scale-101" 
-                                alt="Project Preview"
+                            <img
+                                v-else
+                                :src="steps[activeIndex].thumbnail" :style="{ objectFit: steps[activeIndex].coverFit || 'cover' }"
+                                class="w-full h-full object-cover transition-all duration-700 group-hover/media:scale-101"
+                                :alt="steps[activeIndex].title"
                                 style="text-align: center;"
                             />
                         </div>
                     </transition>
-                    <div class="absolute inset-0 bg-primary/10 pointer-events-none"></div>
+
                 </div>
             </div>
 
             <!-- SISI KANAN: Scrollable Content -->
             <!-- Mobile (<md): Horizontal Scroll | Tablet/Desktop (>=md): Vertical Stack -->
             <div class="w-full md:w-7/12 flex md:block items-stretch overflow-x-auto md:overflow-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory md:snap-none px-6 md:px-0 gap-6">
-                <div 
-                    v-for="(step, index) in steps" 
+                <div
+                    v-for="(step, index) in steps"
                     :key="index"
                     :id="'step-' + index"
                     :data-index="index"
                     class="step-item flex-none w-[85vw] sm:w-[70vw] md:w-full snap-center md:snap-align-none min-h-[40vh] md:min-h-[80vh] xl:min-h-screen flex flex-col justify-center py-6 xl:pt-[160px]"
                 >
                     <!-- CARD PROJECT -->
-                    <div 
+                    <div
                         @click="openModal(step)"
-                        class="group/card relative flex flex-col p-4 sm:p-8 rounded-4xl transition-all duration-200 cursor-pointer 
-                               bg-white/3 border border-white/5 hover:border-primary/40 
+                        class="group/card relative flex flex-col p-4 sm:p-8 rounded-4xl transition-all duration-200 cursor-pointer
+                               bg-white/3 border border-white/5 hover:border-primary/40
                                hover:bg-white/5 hover:backdrop-blur-md hover:shadow-2xl overflow-hidden h-full min-h-[580px] md:min-h-[400px]"
                     >
                         <!-- Mobile Media (Muncul hanya jika di bawah md) -->
-                        <div class="md:hidden aspect-5/4 w-full rounded-2xl overflow-hidden mb-6 border border-white/10 shadow-lg">
-                             <img :src="step.media" class="w-full h-full object-cover" :alt="step.title" />
+                        <div class="md:hidden aspect-8/5 w-full rounded-2xl overflow-hidden mb-6 border border-white/10 shadow-lg">
+                             <img :src="step.thumbnail" :style="{ objectFit: step.coverFit || 'cover' }" class="w-full h-full object-cover" :alt="step.title" width="800" height="500" loading="lazy" />
                         </div>
 
                         <div class="space-y-4">
@@ -98,15 +98,16 @@
                             <div class="pt-2">
                                 <h3 class="text-xs font-bold text-primary uppercase tracking-[0.2em] mb-2">{{ step.navTitle }}</h3>
                                 <h3 class="text-2xl sm:text-3xl font-bold text-white group-hover/card:text-primary transition-colors tracking-tight">{{ step.title }}</h3>
+                                <p v-if="step.status" class="text-xs text-slate-300 mt-3">{{ step.status }}</p>
                             </div>
 
                             <p class="text-slate-400 leading-relaxed text-sm sm:text-lg line-clamp-2 group-hover/card:text-white transition-colors">
                                 {{ step.description }}
                             </p>
-                        
+
                             <div class="flex flex-wrap gap-3 mt-4">
-                                <span 
-                                    v-for="tech in step.techStack" 
+                                <span
+                                    v-for="tech in step.techStack"
                                     :key="tech"
                                     class="px-3 py-1 text-xs font-bold rounded-full bg-primary/10 text-primary border border-primary/20"
                                 >
@@ -123,7 +124,7 @@
         <transition name="modal-fade">
             <div v-if="isModalOpen" class="fixed inset-0 z-100 flex items-center justify-center p-4 md:p-8">
                 <div @click="closeModal" class="absolute inset-0 bg-dark-bg/95 backdrop-blur-2xl"></div>
-                
+
                 <div class="bg-slate-900 border border-white/10 rounded-4xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative z-10 shadow-2xl custom-scrollbar transition-all duration-500">
                     <button @click="closeModal" class="fixed md:absolute top-6 right-6 p-3 rounded-full bg-white/5 hover:bg-white/10 text-white z-20 outline-none backdrop-blur-md">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -132,8 +133,8 @@
                     <div class="flex flex-col lg:flex-row">
                         <!-- Left: Media -->
                         <div class="lg:w-1/2 p-6 lg:p-10 lg:sticky lg:top-0 lg:h-fit">
-                            <div class="aspect-5/4 rounded-2xl overflow-hidden border border-white/5 shadow-2xl" style="text-align: center;">
-                                <img :src="selectedProject.media" class="w-full h-full object-cover" :alt="selectedProject.title">
+                            <div class="rounded-2xl overflow-hidden border border-white/5 shadow-2xl" style="text-align: center;">
+                                <img :src="selectedProject.media" class="w-full h-auto" :alt="selectedProject.title">
                             </div>
                         </div>
 
@@ -141,15 +142,15 @@
                         <div class="lg:w-1/2 p-6 lg:p-10 lg:pl-0 flex flex-col justify-center">
                             <h3 class="text-xs font-bold text-primary uppercase tracking-[0.2em] mb-2">{{ selectedProject.navTitle }}</h3>
                             <h2 class="text-2xl md:text-4xl font-extrabold text-white mb-6 leading-tight">{{ selectedProject.title }}</h2>
-                            
+
                             <p class="text-slate-300 text-lg leading-relaxed mb-8 whitespace-pre-line">
                                 {{ selectedProject.longDescription }}
                             </p>
 
                             <p v-if="selectedProject.isPrivate" class="text-slate-500 text-xs italic opacity-60 mb-8 -mt-4">
-                                {{ language === 'EN' 
-                                    ? "* Note: This project's source code is private due to client confidentiality or internal policies." 
-                                    : "* Catatan: Kode sumber proyek ini bersifat pribadi karena kerahasiaan klien atau kebijakan internal." 
+                                {{ language === 'EN'
+                                    ? "* Note: This project's source code is private due to client confidentiality or internal policies."
+                                    : "* Catatan: Kode sumber proyek ini bersifat pribadi karena kerahasiaan klien atau kebijakan internal."
                                 }}
                             </p>
 
@@ -178,7 +179,7 @@
                 </div>
             </div>
         </transition>
-        <a href="/projects" target="_blank" class="px-8 py-4 mt-8 md:-mt-[20vh] xl:mt-8 mx-6 md:mx-0 bg-primary text-slate-900 hover:bg-sky-400 font-bold rounded-xl transition-transform flex self-center items-center justify-center gap-2 text-sm uppercase tracking-wider">
+        <a href="/projects" target="_blank" class="px-8 py-4 mt-8 mx-6 md:mx-auto w-auto md:w-fit bg-primary text-slate-900 hover:bg-sky-400 font-bold rounded-xl transition-transform flex self-center items-center justify-center gap-2 text-sm uppercase tracking-wider">
             {{ language === 'EN' ? "More Projects" : "Proyek Lainnya" }}
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
         </a>
@@ -188,38 +189,14 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { language } from '../store.js';
+import { additionalProjects, withThumbnail } from '../data/portfolio.js';
 
 const steps = computed(() => [
-    {
-        navTitle: "Web Theme",
-        title: language.value === 'EN' ? "Armodafinil Australia Theme" : "Tema Web Armodafinil Australia",
-        description: language.value === 'EN' 
-            ? "A custom web theme developed for Armodafinil Australia. Features a responsive layout and clean UI tailored for an e-commerce platform."
-            : "Tema web kustom yang dikembangkan untuk Armodafinil Australia. Menampilkan layout responsif dan antarmuka yang bersih untuk platform e-commerce.",
-        longDescription: language.value === 'EN'
-            ? "A custom web theme developed for Armodafinil Australia. Features a responsive layout, modern design, and clean UI tailored for an e-commerce platform. Built to ensure fast loading times and a seamless shopping experience for customers."
-            : "Tema web kustom yang dikembangkan untuk Armodafinil Australia. Menampilkan layout responsif, desain modern, dan antarmuka yang bersih khusus untuk platform e-commerce. Dibangun untuk memastikan waktu muat yang cepat dan pengalaman belanja yang mulus bagi pelanggan.",
-        media: "https://res.cloudinary.com/workstation-/image/upload/v1782790051/profile-bintang/dark/banner-armodafinil-australia.png",
-        type: "image",
-        githubLink: "",
-        liveLink: "https://armodafinil-australia.com/",
-        techStack: ["WordPress", "WooCommerce", "PHP", "Tailwind CSS"],
-        features: language.value === 'EN' ? [
-            "Responsive Web Design",
-            "E-commerce UI",
-            "Fast Loading Speed",
-            "Modern Aesthetics"
-        ] : [
-            "Desain Web Responsif",
-            "Antarmuka E-commerce",
-            "Kecepatan Muat Cepat",
-            "Estetika Modern"
-        ]
-    },
+    ...additionalProjects(language.value).filter(project => ['dotlinetattu', 'obsidian-tracker', 'session-desk', 'front-office'].includes(project.id)),
     {
         navTitle: "Frontend",
         title: language.value === 'EN' ? "Cinematic Slide Deck: Capluk Portfolio" : "Website Presentasi Sinematik: Portofolio Capluk",
-        description: language.value === 'EN' 
+        description: language.value === 'EN'
             ? "A cinematic, single-page portfolio for an Indonesian Creative Director. Features a custom 'Liquid UI' system with glassmorphism and real-time blur, built using Next.js, Tailwind CSS, and GSAP."
             : "Portofolio sinematik satu halaman untuk seorang Creative Director. Dilengkapi sistem 'Liquid UI' kustom dengan efek glassmorphism dan blur real-time, dibangun menggunakan Next.js, Tailwind CSS, dan GSAP.",
         longDescription: language.value === 'EN'
@@ -229,7 +206,7 @@ const steps = computed(() => [
         type: "image",
         githubLink: "",
         isPrivate: true,
-        liveLink: "https://portfolio-capluk.vercel.app/",
+        liveLink: "https://capluk.mataquestudio.com/",
         techStack: ["Next.js", "Tailwind CSS", "GSAP", "TypeScript"],
         features: language.value === 'EN' ? [
             "Horizontal Slide Navigation",
@@ -246,7 +223,7 @@ const steps = computed(() => [
     {
         navTitle: "Full-Stack",
         title: language.value === 'EN' ? "Personal Trainer Website: Coach Yohanes (ongoing)" : "Website Personal Trainer: Coach Yohanes (berjalan)",
-        description: language.value === 'EN' 
+        description: language.value === 'EN'
             ? "Personal Training & Nutrition Management System for Coach Yohan. A professional fullstack platform featuring dynamic meal tracking, calendar booking, and e-commerce tailored for the fitness industry in Bali. Built with Vue 3, Laravel 11, and Tailwind CSS."
             : "Sistem Manajemen Latihan & Nutrisi Pribadi. Platform fullstack profesional dengan pelacakan makanan dinamis, pemesanan kalender, dan e-commerce yang disesuaikan untuk industri kebugaran di Bali. Dibangun dengan Vue 3, Laravel 11, dan Tailwind CSS.",
         longDescription: language.value === 'EN'
@@ -254,8 +231,8 @@ const steps = computed(() => [
             : "Platform full-stack ini aku desain untuk seorang pelatih di Canggu, Bali yang kewalahan menangani pesanan karena dilakukan manual via WhatsApp.\n\nDimulai sebagai landing page konversi tinggi untuk menampilkan kredensial, sistem ini sedang dikembangkan menjadi platform lengkap: termasuk pelacak nutrisi 'Build Your Own Plate' (dengan kalkulator makro real-time), sistem booking kalender, dan e-commerce untuk suplemen gym.\n\nBagian frontend dibangun dengan Vue 3 dan Tailwind CSS untuk pengalaman premium yang responsif, sedangkan backend-nya berjalan di Laravel 11 dengan PostgreSQL.",
         media: "https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/coach",
         type: "image",
-        githubLink: "https://github.com/bintangmogot/fitness-management-app",
-        liveLink: "https://gym-yohanes.vercel.app/",
+        githubLink: "",
+        liveLink: "https://coachyohanes.com/",
         techStack: ["Vue.js", "Vite", "Tailwind CSS", "DaisyUI", "JavaScript"],
         features: language.value === 'EN' ? [
             "Conversion-Optimized Landing Page",
@@ -313,13 +290,13 @@ const steps = computed(() => [
             : "Aku mengembangkan platform digital terintegrasi yang menggabungkan profil perusahaan profesional dengan E-commerce LMS yang fungsional.\n\nWebsite ini berfungsi ganda: memperkenalkan visi misi serta menyediakan tempat belanja kursus online dari tim Amikom Center. Aku mengimplementasikan sistem yang memungkinkan pendaftaran dan pembelian kelas kursus, yang disesuaikan untuk akademisi dan para profesional.",
         media: "https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/amikom",
         type: "image",
-        githubLink: "", 
+        githubLink: "",
         liveLink: "https://amikomcenter.com/",
         techStack: ["WordPress", "Elementor Pro", "LMS Plugins", "WooCommerce", "Figma"],
         features: language.value === 'EN' ? [
-            "LMS Course Marketplace", 
-            "E-commerce Integration", 
-            "Corporate Profile", 
+            "LMS Course Marketplace",
+            "E-commerce Integration",
+            "Corporate Profile",
             "Responsive UI Implementation"
         ] : [
             "LMS Course Marketplace",
@@ -340,12 +317,12 @@ const steps = computed(() => [
         media: "https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/xiao",
         type: "image",
         githubLink: "https://github.com/bintangmogot/XiaoCoin",
-        liveLink: "https://xiao-coin.vercel.app/",
+        liveLink: "https://xiaocoin.netlify.app/",
         techStack: ["HTML5", "CSS3", "JavaScript", "Bootstrap"],
         features: language.value === 'EN' ? [
-            "Multi-Project Consistency", 
-            "Tokenomics Display", 
-            "Roadmap Sections", 
+            "Multi-Project Consistency",
+            "Tokenomics Display",
+            "Roadmap Sections",
             "Fully Responsive Design"
         ] : [
             "Konsistensi Semua Proyek",
@@ -354,7 +331,7 @@ const steps = computed(() => [
             "Fully Responsive Design"
         ]
     }
-]);
+].map(withThumbnail));
 
 const activeIndex = ref(0);
 let observer = null;

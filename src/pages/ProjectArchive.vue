@@ -9,6 +9,7 @@
           Bintang Aprilian
         </router-link>
         <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight">{{ language === 'EN' ? "All Projects" : "Semua Proyek" }}</h1>
+        <p class="text-slate-400 mt-5 max-w-xl leading-relaxed">{{ language === 'EN' ? 'Client work, practical tools, and personal experiments. Open a project to explore the details.' : 'Karya klien, alat praktis, dan eksperimen pribadi. Buka proyek untuk melihat detailnya.' }}</p>
       </div>
 
       <!-- ===== TABLE ===== -->
@@ -35,6 +36,11 @@
           :key="'coding-' + index"
           @click="openDetail(project)"
           class="archive-row group"
+          tabindex="0"
+          role="button"
+          :aria-label="`${language === 'EN' ? 'View project' : 'Lihat proyek'}: ${project.title}`"
+          @keydown.enter.self="openDetail(project)"
+          @keydown.space.self.prevent="openDetail(project)"
         >
           <!-- Year -->
           <div class="archive-cell year-cell">
@@ -44,10 +50,14 @@
 
           <!-- Project -->
           <div class="archive-cell project-cell">
+            <img :src="project.thumbnail" :style="{ objectFit: project.coverFit || 'cover' }" alt="" class="project-thumbnail" width="800" height="500" loading="lazy" />
+            <div class="project-copy">
             <span class="project-name">
               {{ project.title }}
               <svg v-if="project.liveLink" class="inline-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
             </span>
+            <span v-if="project.status" class="project-status">{{ project.status }}</span>
+            </div>
           </div>
 
           <!-- Made at (hidden on mobile) -->
@@ -90,6 +100,11 @@
           :key="'wp-' + index"
           @click="openDetail(project)"
           class="archive-row group"
+          tabindex="0"
+          role="button"
+          :aria-label="`${language === 'EN' ? 'View project' : 'Lihat proyek'}: ${project.title}`"
+          @keydown.enter.self="openDetail(project)"
+          @keydown.space.self.prevent="openDetail(project)"
         >
           <!-- Year -->
           <div class="archive-cell year-cell">
@@ -99,10 +114,14 @@
 
           <!-- Project -->
           <div class="archive-cell project-cell">
+            <img :src="project.thumbnail" :style="{ objectFit: project.coverFit || 'cover' }" alt="" class="project-thumbnail" width="800" height="500" loading="lazy" />
+            <div class="project-copy">
             <span class="project-name">
               {{ project.title }}
               <svg v-if="project.liveLink" class="inline-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
             </span>
+            <span v-if="project.status" class="project-status">{{ project.status }}</span>
+            </div>
           </div>
 
           <!-- Made at (hidden on mobile) -->
@@ -145,6 +164,11 @@
           :key="'others-' + index"
           @click="openDetail(project)"
           class="archive-row group"
+          tabindex="0"
+          role="button"
+          :aria-label="`${language === 'EN' ? 'View project' : 'Lihat proyek'}: ${project.title}`"
+          @keydown.enter.self="openDetail(project)"
+          @keydown.space.self.prevent="openDetail(project)"
         >
           <!-- Year -->
           <div class="archive-cell year-cell">
@@ -154,10 +178,14 @@
 
           <!-- Project -->
           <div class="archive-cell project-cell">
+            <img :src="project.thumbnail" :style="{ objectFit: project.coverFit || 'cover' }" alt="" class="project-thumbnail" width="800" height="500" loading="lazy" />
+            <div class="project-copy">
             <span class="project-name">
               {{ project.title }}
               <svg v-if="project.liveLink" class="inline-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
             </span>
+            <span v-if="project.status" class="project-status">{{ project.status }}</span>
+            </div>
           </div>
 
           <!-- Made at (hidden on mobile) -->
@@ -211,8 +239,10 @@
           <div class="modal-body">
             <!-- Media -->
             <div v-if="selectedProject?.media" class="media-wrapper">
-              <img :src="selectedProject.media" :alt="selectedProject?.title" class="media-img" />
+              <img :src="selectedProject.media" :style="{ objectFit: selectedProject.coverFit || 'cover' }" :alt="selectedProject?.title" class="media-img" />
             </div>
+
+            <span v-if="selectedProject?.status" class="project-status mt-4">{{ selectedProject.status }}</span>
 
             <!-- Meta -->
             <div class="flex items-center gap-3 mt-6 mb-4">
@@ -275,6 +305,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { language } from '../store.js';
+import { additionalProjects, withThumbnail } from '../data/portfolio.js';
 
 const techIcons = {
   'Vue 3': '<path d="M24,1.61H14.06L12,5.16,9.94,1.61H0L12,22.39ZM12,14.08,5.16,2.23H9.59L12,6.41l2.41-4.18h4.43Z" transform="translate(0 -1.61)"/>',
@@ -289,37 +320,14 @@ const techIcons = {
 };
 
 const archiveProjects = computed(() => [
-  {
-    year: '2026',
-    title: language.value === 'EN' ? 'Armodafinil Australia Theme' : 'Tema Web Armodafinil Australia',
-    madeAt: 'Freelance',
-    techStack: ["WordPress", "WooCommerce", "PHP", "Tailwind CSS"],
-    linkDisplay: 'armodafinil-australia.com',
-    liveLink: 'https://armodafinil-australia.com/',
-    githubLink: '',
-    media: 'https://res.cloudinary.com/workstation-/image/upload/v1782790051/profile-bintang/dark/banner-armodafinil-australia.png',
-    longDescription: language.value === 'EN' 
-      ? 'A custom web theme developed for Armodafinil Australia. Features a responsive layout, modern design, and clean UI tailored for an e-commerce platform. Built to ensure fast loading times and a seamless shopping experience for customers.'
-      : 'Tema web kustom yang dikembangkan untuk Armodafinil Australia. Menampilkan layout responsif, desain modern, dan antarmuka yang bersih khusus untuk platform e-commerce. Dibangun untuk memastikan waktu muat yang cepat dan pengalaman belanja yang mulus bagi pelanggan.',
-    features: language.value === 'EN' ? [
-      "Responsive Web Design",
-      "E-commerce UI",
-      "Fast Loading Speed",
-      "Modern Aesthetics"
-    ] : [
-      "Desain Web Responsif",
-      "Antarmuka E-commerce",
-      "Kecepatan Muat Cepat",
-      "Estetika Modern"
-    ],
-  },
+  ...additionalProjects(language.value),
   {
     year: '2026',
     title: language.value === 'EN' ? 'Cinematic Slide Deck: Capluk Portfolio' : 'Website Presentasi Sinematik: Portofolio Capluk',
     madeAt: 'Freelance',
     techStack: ['Next.js', 'Tailwind', 'GSAP', 'TypeScript'],
-    linkDisplay: 'portfolio-capluk.vercel.app',
-    liveLink: 'https://portfolio-capluk.vercel.app/',
+    linkDisplay: 'capluk.mataquestudio.com',
+    liveLink: 'https://capluk.mataquestudio.com/',
     githubLink: '',
     media: 'https://res.cloudinary.com/workstation-/image/upload/q_auto/f_auto/v1775991363/capluk-portfolio/capluk-main.png',
     longDescription: language.value === 'EN' 
@@ -333,9 +341,9 @@ const archiveProjects = computed(() => [
     title: language.value === 'EN' ? 'Personal Trainer Website: Coach Yohanes (Ongoing)' : 'Website Personal Trainer: Coach Yohanes (Berjalan)',
     madeAt: 'Freelance',
     techStack: ['Vue 3', 'Tailwind', 'DaisyUI', 'Laravel', 'MySQL'],
-    linkDisplay: 'coach-yohanes.app',
-    liveLink: 'https://gym-yohanes.vercel.app',
-    githubLink: 'https://github.com/bintangmogot/gym-yohanes',
+    linkDisplay: 'coachyohanes.com',
+    liveLink: 'https://coachyohanes.com',
+    githubLink: '',
     media: 'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/coach',
     longDescription: language.value === 'EN' 
       ? "A personal trainer in Canggu, Bali, had a growing roster of international clients, but no digital system to match. Training bookings were handled via WhatsApp, meal plans were shared through Instagram stories, and client transformations were buried in phone galleries.\n\nI designed and built this full-stack platform to solve that. Starting as a high-conversion landing page showcasing credentials, testimonials, and training packages, the system is progressively evolving into a complete fitness management suite.\n\nThis suite features an interactive 'Build Your Own Plate' nutrition tracker with real-time macro calculations, a calendar-based session booking system with admin approval workflows, and an integrated e-commerce store for gym supplements and gear. The frontend is built with Vue 3 Composition API and Tailwind CSS 4 for a premium, responsive experience, while the backend runs on Laravel 11 serving a RESTful API with PostgreSQL." 
@@ -371,8 +379,8 @@ const archiveProjects = computed(() => [
     title: language.value === 'EN' ? '$PAO Narrative Landing Page' : 'Landing Page Naratif $PAO',
     madeAt: 'Freelance',
     techStack: ['HTML5', 'CSS3', 'Bootstrap'],
-    linkDisplay: 'pao-coin.app',
-    liveLink: 'https://pao-coin-nine.vercel.app/',
+    linkDisplay: 'paocoin.netlify.app',
+    liveLink: 'https://paocoin.netlify.app/',
     githubLink: 'https://github.com/bintangmogot/GreenWickCoin',
     media: 'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/pao',
     longDescription: language.value === 'EN' ? 'An engaging, narrative-driven landing page for PAO, built using Bootstrap.\n\nFocused on presenting a unique brand story through professional layout design and clear step-by-step instructional sections for user onboarding.' : 'Sebuah halaman landing berbasis naratif untuk koin $PAO, dengan menggunakan elemen Bootstrap.\n\nSitus ini dibangun dengan menonjolkan desain visual bercerita dan panduan langkah per langkah untuk memberi panduan pada pelanggan.',
@@ -383,8 +391,8 @@ const archiveProjects = computed(() => [
       title: language.value === 'EN' ? '$Green Wick Interactive Website' : 'Website Interaktif $Green Wick',
       madeAt: 'Freelance',
       techStack: ['HTML5', 'CSS3', 'Bootstrap'],
-      linkDisplay: 'green-wick-coin.app',
-      liveLink: 'https://green-wick-coin.vercel.app/',
+      linkDisplay: 'greencoin-pied.vercel.app',
+      liveLink: 'https://greencoin-pied.vercel.app/',
       githubLink: 'https://github.com/bintangmogot/GreenWickCoin',
       media: 'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/greenwick',
       longDescription: language.value === 'EN' ? 'A custom landing page for the Green Wick project featuring interactive web elements and CSS animations.\n\nImplemented a unique web-based mini-game concept to increase user engagement and time-on-page.' : 'Landing page interaktif memukau khusus untuk proyek Green Wick Web3 yang menampilkan berbagai elemen CSS dan animasi yang merespons user.\n\nDitambahkan konsep mini-game unik untuk mendorong retensi kunjungan website para calon pelanggan atau member komunitas.',
@@ -395,8 +403,8 @@ const archiveProjects = computed(() => [
       title: language.value === 'EN' ? '$Xiao Portfolio & Gallery Page' : 'Halaman Galeri Web Desain $Xiao',
       madeAt: 'Freelance',
       techStack: ['HTML5', 'CSS3', 'Bootstrap'],
-      linkDisplay: 'xiao-coin.app',
-      liveLink: 'https://xiao-coin.vercel.app/',
+      linkDisplay: 'xiaocoin.netlify.app',
+      liveLink: 'https://xiaocoin.netlify.app/',
       githubLink: 'https://github.com/bintangmogot/GreenWickCoin',
       media: 'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/xiao',
       longDescription: language.value === 'EN' ? 'A multipurpose landing page for Xiao, focusing on media-heavy content and partner integrations.\n\nFeatures an optimized image gallery and a clean, responsive grid system to display professional partnerships.' : 'Landing page khusus website perkenalan kripto coin proyek $Xiao, dengan mengutamakan optimalisasi gambar media digital tanpa merusak kecepatan respon website.\n\nMenampilkan grid mitra kerja sponsor dan antarmuka grid image gallery untuk portfolio kerja dan roadmap proyek startup kripto tersebut.',
@@ -407,8 +415,8 @@ const archiveProjects = computed(() => [
       title: language.value === 'EN' ? '$ZEN COIN Landing Page' : 'Landing Page $ZEN COIN',
       madeAt: 'Freelance',
       techStack: ['HTML5', 'CSS3', 'Tailwind CSS', 'JavaScript', 'Tone.js'],
-      linkDisplay: 'zen-coin.app',
-      liveLink: 'https://zen-coin.vercel.app/',
+      linkDisplay: 'zencoin.netlify.app',
+      liveLink: 'https://zencoin.netlify.app/',
       githubLink: 'https://github.com/bintangmogot/zen-coin',
       media: 'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/zen-coin_1',
       longDescription: language.value === 'EN' ? 'A multipurpose landing page for $ZEN COIN, focusing on media-heavy content and partner integrations.\n\nFeatures an optimized image gallery and a clean, responsive grid system to display professional partnerships.' : 'Halaman khusus dan Landing page untuk proyek startup mata uang digital $ZEN COIN yang sangat memanjakan para penikmat interface elegan ala estetik zen dan spiritual kultur timur.\n\nWebsite dilengkapi fitur Tone Audio Javascript khusus animasi dan 3D coin render grid untuk kenyamanan dan kesan profesional tingkat lanjut.',
@@ -455,8 +463,8 @@ const archiveProjects = computed(() => [
       title: 'Website Profile: Shiro Gym (Ongoing)',
       madeAt: 'Personal',
       techStack: ['Vue 3', 'Tailwind', 'Vite', 'GSAP'],
-      linkDisplay: 'shiro-gym.vercel.app',
-      liveLink: 'https://shiro-gym.vercel.app/',
+      linkDisplay: 'shirogym.vercel.app',
+      liveLink: 'https://shirogym.vercel.app/',
       githubLink: 'https://github.com/bintangmogot/shiro-gym',
       media: 'https://res.cloudinary.com/workstation-/image/upload/v1775996722/shiro-gym/header-shiro.png',
       longDescription: language.value === 'EN' 
@@ -466,7 +474,7 @@ const archiveProjects = computed(() => [
       category: 'Others',
       isPersonal: true
     },
-  ]);
+  ].map(withThumbnail));
 
 const codingProjects = computed(() => archiveProjects.value.filter(p => !p.techStack.includes('WordPress') && !p.isPersonal && p.category !== 'Others'));
 const wordpressProjects = computed(() => archiveProjects.value.filter(p => p.techStack.includes('WordPress') && !p.isPersonal && p.category !== 'Others'));
@@ -500,9 +508,17 @@ const closeModal = () => {
 .archive-header,
 .archive-row {
   display: grid;
-  grid-template-columns: 80px 1fr 160px 1fr 200px;
+  grid-template-columns: 56px minmax(260px, 1.6fr) 100px minmax(120px, 1fr) 150px;
   align-items: center;
   gap: 0 16px;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .archive-header, .archive-row {
+    grid-template-columns: 50px minmax(240px, 1.6fr) minmax(120px, 1fr);
+  }
+  .made-at-cell, .link-cell,
+  .archive-header > div:nth-child(3), .archive-header > div:nth-child(5) { display: none; }
 }
 
 .archive-header {
@@ -599,6 +615,16 @@ const closeModal = () => {
   font-weight: 500;
 }
 
+/* Original illustrated project covers */
+.project-cell { gap: 14px; }
+.project-thumbnail { width: 104px; height: 65px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(255,255,255,.12); flex-shrink: 0; }
+.project-copy { min-width: 0; }
+.project-status { display: inline-block; color: #a9c4d3; font-size: 11px; margin-top: 7px; }
+.archive-row:focus-visible { outline: 2px solid #0ea5e9; outline-offset: 4px; }
+@media (max-width: 767px) {
+  .project-thumbnail { width: 100%; height: auto; aspect-ratio: 8 / 5; margin-bottom: 10px; }
+  .project-cell { align-items: stretch; }
+}
 /* Project Cell */
 .project-name {
   font-size: 15px;

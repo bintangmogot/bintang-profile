@@ -282,18 +282,26 @@ const categories = computed(() => [
         role: 'Frontend & Web Developer',
         period: language.value === 'EN' ? '2024 - Present' : '2024 - Sekarang',
         description: language.value === 'EN' 
-          ? 'Taking on freelance projects across various industries: from personal trainer websites with Vue.js to restaurant management systems with Laravel and multi-client landing pages.'
-          : 'Aku mengerjakan beragam proyek freelance, mulai dari website instruktur gym menggunakan Vue, sistem restoran dengan Laravel, hingga landing page untuk berbagai klien.',
+          ? 'I build websites and web applications for clients in Indonesia and overseas, across fitness, creative services, hospitality, and online businesses. My work spans responsive company profiles and portfolios, WordPress websites, booking platforms, and practical tools for daily business operations.'
+          : 'Aku membangun website dan aplikasi web untuk klien lokal Indonesia maupun luar negeri, di bidang kebugaran, jasa kreatif, hospitality, dan bisnis online. Proyekku mencakup profil perusahaan dan portofolio responsif, website WordPress, platform booking, serta alat untuk operasional bisnis sehari-hari.',
         bullets: language.value === 'EN' ? [
-          'Built a personal trainer portfolio website (Coach Yohanes) using Vue.js, Vite, Tailwind CSS, and DaisyUI for a client in Bali. Now in progress to add tons of features with Laravel, such as admin panel, macro nutrition counter for meal plan order, and booking system for personal trainer.',
-          'Built a Company Profile Website for Papua Multi Event Company using Wordpress with Elementor Pro.',
-          'Created responsive multi-project landing pages (Greenwick, PAO, Xiao) using HTML, CSS, JavaScript, and Bootstrap.',
+          'Delivered websites for local and international clients, adapting the design and functionality to each business and its audience.',
+          'Built Dotlinetattu, a tattoo studio website with a work gallery, custom and flash tattoo bookings, deposit payments, and booking administration.',
+          'Created Capluk’s creative portfolio with Next.js and GSAP, featuring cinematic navigation and an interactive presentation of motion design and film work.',
+          'Developed fitness-studio tools including Obsidian Tracker, Session Desk, and the Front Office App for equipment maintenance, client session credits, and staff workflow guidance.',
+          'Built Coach Yohanes’s personal trainer website with Vue.js. Further development covers Laravel-backed booking, nutrition tools, and administration features.',
+          'Built Papua Multi Event’s company profile with WordPress and Elementor, alongside custom WordPress work for overseas clients.',
+          'Created responsive landing pages for Green Wick, PAO, Xiao, and Zen Coin using HTML, CSS, and JavaScript, with project-specific layouts and interactions.',
         ] : [
-          'Membuat website untuk pelatih personal (Coach Yohanes) dengan Vue.js. Sedang berlanjut integrasi sistem order rencana makanan, dan booking jadwal via Laravel.',
-          'Membangun profil dari Papua Multi Event dengan WordPress.',
-          'Mendesain landing page interaktif bergaya modern untuk proyek crypto Greenwick, PAO dan Xiao.'
+          'Menyelesaikan website untuk klien lokal dan internasional, dengan desain dan fungsi yang disesuaikan dengan kebutuhan bisnis serta penggunanya.',
+          'Membangun Dotlinetattu, website studio tato dengan galeri karya, booking tato custom dan flash, pembayaran deposit, serta administrasi booking.',
+          'Membuat portofolio kreatif Capluk dengan Next.js dan GSAP, menggunakan navigasi sinematik dan presentasi interaktif untuk karya motion design dan film.',
+          'Mengembangkan alat operasional studio kebugaran: Obsidian Tracker, Session Desk, dan Front Office App untuk perawatan alat, kredit sesi klien, serta panduan kerja staf.',
+          'Membangun website personal trainer Coach Yohanes dengan Vue.js. Pengembangan lanjutan mencakup booking berbasis Laravel, alat nutrisi, dan fitur administrasi.',
+          'Membangun profil perusahaan Papua Multi Event dengan WordPress dan Elementor, serta mengerjakan website WordPress kustom untuk klien luar negeri.',
+          'Membuat landing page responsif untuk Green Wick, PAO, Xiao, dan Zen Coin menggunakan HTML, CSS, dan JavaScript, dengan layout serta interaksi sesuai setiap proyek.'
         ],
-        skills: ['Vue.js', 'Laravel', 'WordPress', 'Bootstrap', 'JavaScript'],
+        skills: ['Vue.js', 'Next.js', 'Laravel', 'WordPress', 'Supabase', 'Tailwind CSS', 'GSAP', 'JavaScript'],
         photos: ['https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/bu_liek',
           'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/coach',
           'https://res.cloudinary.com/workstation-/image/upload/f_auto,q_auto/profile-bintang/dark/pao',

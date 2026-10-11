@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+<title id="title">BINTANG CODES — project cover</title><desc id="desc">Original illustrated cover for developer / portfolio.</desc>
+<rect width="800" height="500" fill="#111e2a"/>
+<path d="M480 0H800V500H480Z" fill="#172733"/>
+<path d="M40 58H760M40 443H760M480 58V443" stroke="#e7e8df" stroke-opacity=".15"/>
+<circle cx="51" cy="38" r="5" fill="#53b7dd"/>
+<text x="67" y="43" fill="#b6c3cb" font-family="Arial,sans-serif" font-size="12" letter-spacing="2.4">BINTANG CODES / SELECTED WORK</text>
+<text x="42" y="220" fill="#f0eee6" font-family="Arial,sans-serif" font-size="51" font-weight="700" letter-spacing="-1.5">BINTANG</text>
+<text x="42" y="278" fill="#53b7dd" font-family="Arial,sans-serif" font-size="51" font-weight="700" letter-spacing="-1.5">CODES</text>
+<rect x="43" y="319" width="44" height="3" fill="#53b7dd"/>
+<text x="43" y="355" fill="#b6c3cb" font-family="Arial,sans-serif" font-size="11" letter-spacing="1.3">DEVELOPER / PORTFOLIO</text>
+<g transform="translate(463 21) scale(.89)" fill="none" stroke="#53b7dd" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><rect x="35" y="82" width="300" height="252" rx="16"/><path d="M35 127H335M64 105H67M84 105H87M104 105H107M124 185L82 224 124 263M246 185L288 224 246 263M204 168L164 280"/></g>
+<text x="42" y="471" fill="#80939f" font-family="Arial,sans-serif" font-size="11" letter-spacing="2">DESIGN &amp; DEVELOPMENT</text>
+<path d="M720 463H754M747 456L754 463 747 470" stroke="#53b7dd" stroke-width="2" fill="none"/>
+</svg>

@@ -36,9 +36,11 @@
         <div class="bento-cell bento-photo slide-from-right">
           <div class="w-full h-full relative overflow-hidden rounded-2xl bg-slate-800">
             <img
-              src="https://res.cloudinary.com/workstation-/image/upload/v1772202237/profile-bintang/3x4_-_Ink_BG_W.png" 
+              src="/images/profile/bintang-surya.jpg"
               alt="Bintang Surya"
-              class="w-full h-full object-cover object-top"
+              class="w-full h-full object-cover object-[45%_65%] scale-135 origin-[45%_65%]"
+              loading="lazy"
+              decoding="async"
             />
             <!-- Overlay name -->
             <div class="absolute bottom-0 inset-x-0 bg-linear-to-t from-slate-900/90 to-transparent p-5">

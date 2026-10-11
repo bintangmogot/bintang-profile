@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+<title id="title">OBSIDIAN TRACKER — project cover</title><desc id="desc">Original illustrated cover for equipment / maintenance.</desc>
+<rect width="800" height="500" fill="#111e2a"/>
+<path d="M480 0H800V500H480Z" fill="#172733"/>
+<path d="M40 58H760M40 443H760M480 58V443" stroke="#e7e8df" stroke-opacity=".15"/>
+<circle cx="51" cy="38" r="5" fill="#a6cead"/>
+<text x="67" y="43" fill="#b6c3cb" font-family="Arial,sans-serif" font-size="12" letter-spacing="2.4">BINTANG CODES / SELECTED WORK</text>
+<text x="42" y="220" fill="#f0eee6" font-family="Arial,sans-serif" font-size="51" font-weight="700" letter-spacing="-1.5">OBSIDIAN</text>
+<text x="42" y="278" fill="#a6cead" font-family="Arial,sans-serif" font-size="51" font-weight="700" letter-spacing="-1.5">TRACKER</text>
+<rect x="43" y="319" width="44" height="3" fill="#a6cead"/>
+<text x="43" y="355" fill="#b6c3cb" font-family="Arial,sans-serif" font-size="11" letter-spacing="1.3">EQUIPMENT / MAINTENANCE</text>
+<g transform="translate(463 21) scale(.89)" fill="none" stroke="#a6cead" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><rect x="40" y="70" width="285" height="280" rx="18"/><path d="M40 130H325M85 103H125"/><circle cx="118" cy="205" r="35"/><path d="M99 205L112 218 137 190M185 180H280M185 205H255M185 230H270M85 280H275M85 308H210"/></g>
+<text x="42" y="471" fill="#80939f" font-family="Arial,sans-serif" font-size="11" letter-spacing="2">DESIGN &amp; DEVELOPMENT</text>
+<path d="M720 463H754M747 456L754 463 747 470" stroke="#a6cead" stroke-width="2" fill="none"/>
+</svg>

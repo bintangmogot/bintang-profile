@@ -54,7 +54,20 @@ A dedicated `/projects` route featuring a sortable, Brittany Chiang-inspired arc
 - 5-column grid layout (Year, Project, Made At, Built With, Link)
 - Click-to-open slide-in detail panel with media preview, long description, tech stack, key features, and CTA buttons
 - Mobile-responsive with stacked card layout
-- 9+ projects documented with live demo links
+- 19 selected projects with existing covers preserved, custom covers for new entries, detail panels, and intentionally omitted private links
+
+### Project covers and selected work
+
+Original SVG covers for projects without existing artwork live in `public/images/projects/`. Regenerate them with
+`node scripts/generate-project-covers.mjs`. These are illustrated project covers;
+existing project covers remain in the homepage, archive thumbnails, and detail panels.
+
+The seven additional projects are maintained in `src/data/portfolio.js` and shared
+between the homepage and archive. Client pharmacy projects are excluded from the
+portfolio selection. Private operational apps have no public demo or source link.
+
+`public/_redirects` provides the SPA fallback for direct `/projects` navigation
+on Netlify. The production routing fix takes effect after the updated build is deployed.
 
 
 ### 🎨 Design & UX Highlights

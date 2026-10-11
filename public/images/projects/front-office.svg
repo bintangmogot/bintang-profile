@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+<title id="title">FRONT OFFICE — project cover</title><desc id="desc">Original illustrated cover for studio knowledge / workflows.</desc>
+<rect width="800" height="500" fill="#111e2a"/>
+<path d="M480 0H800V500H480Z" fill="#172733"/>
+<path d="M40 58H760M40 443H760M480 58V443" stroke="#e7e8df" stroke-opacity=".15"/>
+<circle cx="51" cy="38" r="5" fill="#c6c1a0"/>
+<text x="67" y="43" fill="#b6c3cb" font-family="Arial,sans-serif" font-size="12" letter-spacing="2.4">BINTANG CODES / SELECTED WORK</text>
+<text x="42" y="220" fill="#f0eee6" font-family="Arial,sans-serif" font-size="51" font-weight="700" letter-spacing="-1.5">FRONT</text>
+<text x="42" y="278" fill="#c6c1a0" font-family="Arial,sans-serif" font-size="51" font-weight="700" letter-spacing="-1.5">OFFICE</text>
+<rect x="43" y="319" width="44" height="3" fill="#c6c1a0"/>
+<text x="43" y="355" fill="#b6c3cb" font-family="Arial,sans-serif" font-size="11" letter-spacing="1.3">STUDIO KNOWLEDGE / WORKFLOWS</text>
+<g transform="translate(463 21) scale(.89)" fill="none" stroke="#c6c1a0" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><rect x="70" y="65" width="225" height="300" rx="16"/><rect x="127" y="46" width="110" height="38" rx="10" fill="#172733"/><path d="M100 135L110 146 129 124M155 138H260M100 205L110 216 129 194M155 208H240"/><rect x="101" y="267" width="25" height="25" rx="4"/><path d="M155 278H260M155 302H220"/></g>
+<text x="42" y="471" fill="#80939f" font-family="Arial,sans-serif" font-size="11" letter-spacing="2">DESIGN &amp; DEVELOPMENT</text>
+<path d="M720 463H754M747 456L754 463 747 470" stroke="#c6c1a0" stroke-width="2" fill="none"/>
+</svg>
