@@ -25,7 +25,7 @@ export const additionalProjects = (lang = 'EN') => {
       description: en ? 'A shared front-desk and coach tool for tracking client visits, session credits, and activity history.' : 'Alat bersama untuk front desk dan pelatih dalam mencatat kunjungan, kredit sesi, dan riwayat aktivitas.',
       techStack: ['JavaScript', 'CSS', 'Supabase', 'Web Push'],
       features: en ? ['Front-desk visit and credit management', 'Coach-specific read-only views', 'Dated activity and balance history', 'Mobile-first interface'] : ['Pengelolaan kunjungan dan kredit sesi', 'Tampilan baca untuk masing-masing pelatih', 'Riwayat aktivitas dan saldo bertanggal', 'Antarmuka untuk ponsel'],
-      liveLink: 'https://obs-pt-session-tracker.vercel.app/', githubLink: '', isPrivate: true,
+      liveLink: 'https://bintangcodes.site/', githubLink: '', isPrivate: true,
     },
     {
       id: 'front-office', year: '2026', madeAt: 'Independent', navTitle: 'Front office',
