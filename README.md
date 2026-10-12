@@ -39,13 +39,36 @@ As a freelance developer, having scattered work across different platforms (Link
 
 | Section | Description |
 |---|---|
-| **Hero Section** | Full-screen intro with name, role, tagline, and decorative SVG sketches. Responsive typography using CSS `clamp()`. |
+| **Hero Section** | Playable Leaf Village with an original Naruto vector sprite, keyboard/touch movement, click-to-walk navigation, four discovery stops, and direct portfolio links. |
 | **Bento Grid About** | An asymmetric bento-style grid showcasing bio, profile photo, location (with availability status), GitHub link, tech stack icons, and key stats (10+ projects, 3+ years). |
 | **Experience Timeline** | Two-level tabbed interface (Website Developer / Work & Education) with company tabs, bullet-point descriptions, a "View Details" modal with photo galleries, skills tags, and certification links. |
 | **Blog Tabs** | Filterable blog/article grid with category tabs (All / Frontend / Web Apps / CMS). Animated card transitions with tech stack badges and hover effects. |
 | **Scrollytelling Projects** | Scroll-driven project showcase using Intersection Observer API. Desktop: sticky sidebar with navigation + media preview. Mobile: horizontal card carousel. Click to open full detail modal. |
 | **Pricing Plans** | Three-tier pricing cards (Starter / Professional / Enterprise) with feature comparison. Each card links to a pre-filled WhatsApp message for instant contact. |
 | **Contact Footer** | Email CTA, social media links (GitHub, Instagram, WhatsApp, LinkedIn), and copyright. |
+
+### Playable village hero
+
+Use WASD or arrow keys as soon as the hero loads, without clicking first. Movement
+is enabled while the village is visible and leaves text fields and controls
+elsewhere on the page alone. Press E near a location to
+open its profile, projects, experience, or contact panel. Clicking a building or
+the location buttons walks Naruto there along a route around obstacles. Clicking
+a clear path sets a walking destination. Mobile includes a camera that follows
+the player and directional controls. Discovery progress lasts for the current visit.
+
+The game pauses outside the viewport and when the page is hidden. Reduced-motion
+preferences disable the sprite bounce and smooth navigation scrolling. Direct
+links let visitors access the portfolio without playing.
+
+An unmarked western clearing has a small orange-leaf clue. Walking into it reveals
+Naruto's "I want to be Hokage!" speech bubble and a Leaf headband badge. The reveal
+opens once per hero load, keeps regular location progress separate, and can be
+closed to continue walking. Its speech animation respects reduced motion.
+
+Run `node scripts/test-village-game.mjs` to check routing, collision bounds, and
+consistent movement speed. Scene artwork lives in `LeafVillageScene.vue`, gameplay
+and bilingual content in `VillageHero.vue`, and navigation in `src/data/village-game.js`.
 
 ### 📂 Project Archive Page
 
